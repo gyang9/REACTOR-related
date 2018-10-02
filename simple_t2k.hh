@@ -133,11 +133,13 @@ using namespace RooFit;
     void SetBinning(TH1D* binHist) ;
     void SetFissionFraction(TH1D* fissionHist) ;
     void SetMatrixName(TString matrixName);
+    void SetModelList(std::vector<TString>);
 
     TMatrixD* prepareCovMatrix(TH2D* conv, TVectorD* vec, Double_t syst) const;
 
     std::vector<TH1D*> prepareData() ;
     std::vector<TH1D*> preparePrediction(RooListProxy* _pulls) const;
+    //std::vector<TH1D*> preparePrediction(RooListProxy* _pulls, std::vector<TString> modelList) const;
 
     TMatrixD* prepareT2kCovMatrix(TMatrixD* covM_t2k, TVectorD* fVec_t2k) const;
     TMatrixD* prepareT2kCovMatrix(TMatrixD* covM_t2k, TVectorD* fVec_t2k, Int_t nBins) const;
@@ -306,6 +308,8 @@ using namespace RooFit;
     RooArgList _parlist;
     RooListProxy* _pulls;
 
+    std::vector<TH1D*> GetCurrentPrediction();
+    std::vector<TH1D*> GetCurrentData();
 
    TH2D* conv;
    TH1D* nueAfter;
@@ -359,6 +363,8 @@ using namespace RooFit;
    TH1D* predDYB;
    TH1D* predRENO;
    TH1D* predNEOS;
+
+   std::vector<TString> modelList;
 
    std::vector<TH1D*> dataList;
 

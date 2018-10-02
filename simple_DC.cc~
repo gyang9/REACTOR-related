@@ -29,11 +29,11 @@ using namespace std;
   _pulls     = new RooListProxy("_pulls","_pulls",this);
   RooRealVar* Par1 = new RooRealVar("s12","par1",TMath::ASin(TMath::Sqrt(0.85))/2.,0,100);
   RooRealVar* Par2 = new RooRealVar("s23","par2",TMath::ASin(TMath::Sqrt(0.95))/2.,0,100);
-  RooRealVar* Par3 = new RooRealVar("s14","par3",0.1,0,100);
+  RooRealVar* Par3 = new RooRealVar("s13","par3",0.1,0,100);
   RooRealVar* Par4 = new RooRealVar("delta","par4",-1.5,-10,10);
   RooRealVar* Par5 = new RooRealVar("dm21","par5",0.000075,-10,10);
   RooRealVar* Par6 = new RooRealVar("dm32","par6",0.00238,-10,10);
-  RooRealVar* Par7 = new RooRealVar("dm41","par7",0.00244,-10,10);
+  RooRealVar* Par7 = new RooRealVar("dm31","par7",0.00244,-10,10);
   RooRealVar* Par8 = new RooRealVar("numuX","par8",1,0.,100);
   RooRealVar* Par9 = new RooRealVar("nueX","par9",1,0.,100);
   RooRealVar* Par10 = new RooRealVar("numuSel","par10",1,0.,100);
@@ -275,10 +275,10 @@ Double_t Sterile ::FillEv( RooListProxy* _pulls ) const
 
    for(Int_t i=0;i<nBins;i++){   
          Double_t thisE = (((RooAbsReal*)_pulls->at(8))->getVal()-1.) + ((RooAbsReal*)_pulls->at(7))->getVal() * predDC->GetBinCenter(i+1);
-         (*fVec)[i]               = predDC->GetBinContent(i+1) * this->surv_Prob( (thisE) , _pulls, 400)  ;
-	 (*fVec)[nBins + i]       = predDYB->GetBinContent(i+1) * this->surv_Prob( (thisE) , _pulls, 560)  ;
-         (*fVec)[2 * nBins + i]   = predRENO->GetBinContent(i+1) * this->surv_Prob( (thisE) , _pulls, 410.6)  ;
-         (*fVec)[3 * nBins + i]   = predNEOS->GetBinContent(i+1) * this->surv_Prob( (thisE) , _pulls, 20)  ;
+         (*fVec)[i]               = predDC->GetBinContent(i+1) * this->surv_Prob( (thisE+0.78) , _pulls, 400)  ;
+	 (*fVec)[nBins + i]       = predDYB->GetBinContent(i+1) * this->surv_Prob( (thisE+0.78) , _pulls, 400)  ;
+         (*fVec)[2 * nBins + i]   = predRENO->GetBinContent(i+1) * this->surv_Prob( (thisE+0.78) , _pulls, 400)  ;
+         (*fVec)[3 * nBins + i]   = predNEOS->GetBinContent(i+1) * this->surv_Prob( (thisE+0.78) , _pulls, 400)  ;
          tempVec[0] -> SetBinContent(i+1, (*fVec)[i]);
 	 tempVec[1] -> SetBinContent(i+1, (*fVec)[nBins + i]);
 	 tempVec[2] -> SetBinContent(i+1, (*fVec)[2 * nBins + i]);
@@ -355,49 +355,25 @@ for(Int_t i=0;i<11;i++){
 std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls) const
 {
 
-  TGraph* meuller235;
-  TGraph* meuller238;
-  TGraph* meuller239;
-  TGraph* meuller241;
+  TGraph* meuller235 = new TGraph("data/mueller235.txt", "%lg %*lg %lg %*lg %*lg %*lg %*lg %*lg", "");
+  TGraph* meuller238 = new TGraph("data/mueller238.txt", "%lg %lg %*lg %*lg %*lg", "");
+  TGraph* meuller239 = new TGraph("data/mueller239241.txt", "%lg %*lg %lg %*lg %*lg %*lg %*lg", "");
+  TGraph* meuller241 = new TGraph("data/mueller239241.txt", "%lg %*lg %*lg %*lg %*lg %lg %*lg", "");
 
-  if(modelList.at(0)=="data/mueller235.txt") 
-	  meuller235 = new TGraph(modelList.at(0), "%lg %*lg %lg %*lg %*lg %*lg %*lg %*lg", "");
-  else
-	  meuller235 = new TGraph(modelList.at(0), "%lg %lg %*lg", "");
-
-  if(modelList.at(1)=="data/mueller238.txt")
-	  meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg %*lg %*lg", "");
-  else
-	  meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg", "");
-
-  if(modelList.at(2)=="data/mueller239241.txt")
-  	  meuller239 = new TGraph(modelList.at(2), "%lg %*lg %lg %*lg %*lg %*lg %*lg", "");
-  else
-	  meuller239 = new TGraph(modelList.at(2), "%lg %lg %*lg", "");
-
-  if(modelList.at(3)=="data/mueller239241.txt")
-  	  meuller241 = new TGraph(modelList.at(3), "%lg %*lg %*lg %*lg %*lg %lg %*lg", "");
-  else
-	  meuller241 = new TGraph(modelList.at(3), "%lg %lg %*lg", "");
-
-
-  //TGraph* IBDXsec = new TGraph("data/IBDXsec.dat");
-  TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
-
-  double rateFactor = 1000;
+  double rateFactor = 10000;
   std::cout<<"entered into preparePrediction "<<std::endl;
   for(Int_t i=0;i<33;i++){
 
     //std::cout<<"bin edge and fission fraction "<<i<<" "<<binEdge[i]<<" "<<fissionFraction[i]<<" "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
     //std::cout<<"fission rates: "<<meuller235->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller238->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller239->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller241->Eval((binEdge[i]+binEdge[i+1])/2.)<<std::endl;
 
-    predDC -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) *  rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
+    predDC -> SetBinContent( i+1, rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
      
-    predDYB -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
+    predDYB -> SetBinContent( i+1, rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
 
-    predRENO -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[8] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[9] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[10] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[11] ));
+    predRENO -> SetBinContent( i+1, rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[8] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[9] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[10] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[11] ));
 
-    predNEOS -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[12] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[13] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[14] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[15] ));
+    predNEOS -> SetBinContent( i+1, rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[12] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[13] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[14] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[15] ));
 
   }
 
@@ -420,15 +396,13 @@ std::vector<TH1D*> Sterile:: prepareData()
   TGraph* gradataRENO = new TGraph("data/dataRENO.txt", "%*lg %lg %lg", "");
   TGraph* gradataNEOS = new TGraph("data/dataNEOS.txt", "%*lg %lg %lg", "");
 
-  for(Int_t i=0;i<predDC->GetNbinsX();i++)
-  {
-    dataDC -> SetBinContent(i+1, predDC->GetBinContent(i+1) * gradataDC->Eval(predDC->GetBinCenter(i+1)+0.78) );
-    dataDYB -> SetBinContent(i+1,  predDYB->GetBinContent(i+1) * gradataDYB->Eval(predDYB->GetBinCenter(i+1)+0.78) );
-    dataRENO -> SetBinContent(i+1,  predRENO->GetBinContent(i+1) * gradataRENO->Eval(predRENO->GetBinCenter(i+1)+0.78) );
-    dataNEOS -> SetBinContent(i+1,  predNEOS->GetBinContent(i+1) * gradataNEOS->Eval(predNEOS->GetBinCenter(i+1)+0.78) );
+  for(Int_t i=0;i<predDC->GetNbinsX();i++){
+    dataDC -> SetBinContent(i+1, predDC->GetBinContent(i+1) * gradataDC->Eval(predDC->GetBinCenter(i+1)) );
+    dataDYB -> SetBinContent(i+1,  predDYB->GetBinContent(i+1) * gradataDYB->Eval(predDYB->GetBinCenter(i+1)) );
+    dataRENO -> SetBinContent(i+1,  predRENO->GetBinContent(i+1) * gradataRENO->Eval(predRENO->GetBinCenter(i+1)) );
+    dataNEOS -> SetBinContent(i+1,  predNEOS->GetBinContent(i+1) * gradataNEOS->Eval(predNEOS->GetBinCenter(i+1)) );
   }
 
-  std::vector<TH1D*> dataList;
   dataList.push_back(dataDC);
   dataList.push_back(dataDYB);
   dataList.push_back(dataRENO);
@@ -437,6 +411,171 @@ std::vector<TH1D*> Sterile:: prepareData()
   return dataList;
 
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+int main(int argc, char**argv){
+
+
+RooFitResult* res;
+Sterile * rep = new Sterile ("_rep");
+  char formula[10];
+
+std::cout<<"start to run "<<std::endl;
+
+rep->setAtmBaseline(0);
+rep->setDensity(0);
+TH1D* vecInput1 = new TH1D("","",11,0,11);
+TH1D* vecInput2 = new TH1D("","",11,0,11);
+//vecInput1->Print();
+
+vecInput1 ->SetBinContent(1, TMath::ASin(TMath::Sqrt(0.85))/2.);
+vecInput1 ->SetBinContent(2,TMath::ASin(TMath::Sqrt(0.95))/2.);
+vecInput1 ->SetBinContent(3,0.1);
+vecInput1 ->SetBinContent(4,-1.5);
+vecInput1 ->SetBinContent(5,0.000075);
+vecInput1 ->SetBinContent(6,0.00238);
+vecInput1 ->SetBinContent(7,0.00244);
+vecInput1 ->SetBinContent(8,1);
+vecInput1 ->SetBinContent(9,1);
+vecInput1 ->SetBinContent(10,1);
+vecInput1 ->SetBinContent(11,1);
+
+vecInput2 ->SetBinContent(1,TMath::ASin(TMath::Sqrt(0.85+0.021))/2.-TMath::ASin(TMath::Sqrt(0.85))/2.);
+vecInput2 ->SetBinContent(2,2);
+vecInput2 ->SetBinContent(3,100);
+vecInput2 ->SetBinContent(4,2);
+vecInput2 ->SetBinContent(5,0.0000018);
+vecInput2 ->SetBinContent(6,0.0001);
+vecInput2 ->SetBinContent(7,0.00009);
+vecInput2 ->SetBinContent(8,0.009);
+vecInput2 ->SetBinContent(9,0.03);
+vecInput2 ->SetBinContent(10,0.04); 
+vecInput2 ->SetBinContent(11,0.027);
+
+std::cout<<"'ve set some inputs "<<std::endl;
+
+TH1D* binHist = new TH1D("","",34,0,34);
+for(Int_t i=0;i<34;i++){
+  binHist->SetBinContent(i+1, 0.5 + 0.25*i);
+}
+
+TH1D* fissionHist = new TH1D("","",16,0,16);
+double fissionList[16]={0.49,0.09,0.35,0.07,    0.501,0.073,0.353,0.072,    0.679,0.072,0.215,0.035,      0.679,0.072,0.215,0.035};
+for(Int_t i=0;i<16;i++){
+  fissionHist->SetBinContent(i+1, fissionList[i]);
+}
+
+rep->SetMatrixName("data/ReactorMatrixND_shape_rho0_NU.root");
+rep->SetBinning(binHist);
+rep->SetFissionFraction(fissionHist);
+
+std::cout<<"'ve set some more inputs "<<std::endl;
+
+rep->preparePrediction(rep->getPullList());
+rep->prepareData();
+
+rep->setPull(vecInput1); 
+rep->setPullUnc(vecInput2);
+rep->addSK(true);
+
+rep->setNBins(200);
+rep->setTime(6);
+
+std::cout<<"ended up with setting us basic stuff "<<std::endl;
+
+rep->FillEv(rep->getPullList());
+
+std::cout<<"'ve set some more & more inputs "<<std::endl;
+
+RooArgList list("list");
+list.add(*rep);
+  sprintf(formula,"%s","@0");
+RooFormulaVar* fcn = new RooFormulaVar("fit","fit",formula,list);
+
+//rep->getParVar(3)->setVal(2.5);
+rep->getParVar(2)->setConstant(false);
+rep->getParVar(6)->setConstant(false);
+
+rep->getParVar(0)->setConstant(true);
+rep->getParVar(1)->setConstant(true);
+rep->getParVar(3)->setConstant(true);
+rep->getParVar(4)->setConstant(true);
+rep->getParVar(5)->setConstant(true);
+rep->getParVar(7)->setConstant(true);
+rep->getParVar(8)->setConstant(true);
+rep->getParVar(9)->setConstant(true);
+rep->getParVar(10)->setConstant(true);
+rep->getParVar(11)->setConstant(true);
+rep->getParVar(12)->setConstant(true);
+rep->getParVar(13)->setConstant(true);
+rep->getParVar(14)->setConstant(true);
+rep->getParVar(15)->setConstant(true);
+rep->getParVar(16)->setConstant(false);
+rep->getParVar(17)->setConstant(false);
+rep->getParVar(18)->setConstant(false);
+rep->getParVar(19)->setConstant(false);
+rep->getParVar(20)->setConstant(false);
+rep->getParVar(21)->setConstant(false);
+rep->getParVar(22)->setConstant(false);
+rep->getParVar(23)->setConstant(false);
+rep->getParVar(24)->setConstant(false);
+rep->getParVar(25)->setConstant(false);
+rep->getParVar(26)->setConstant(false);
+rep->getParVar(27)->setConstant(false);
+rep->getParVar(28)->setConstant(false);
+rep->getParVar(29)->setConstant(false);
+rep->getParVar(30)->setConstant(false);
+rep->getParVar(31)->setConstant(false);
+rep->getParVar(32)->setConstant(false);
+rep->getParVar(33)->setConstant(false);
+rep->getParVar(34)->setConstant(false);
+rep->getParVar(35)->setConstant(false);
+rep->getParVar(36)->setConstant(false);
+rep->getParVar(37)->setConstant(false);
+rep->getParVar(38)->setConstant(false);
+rep->getParVar(39)->setConstant(false);
+rep->getParVar(40)->setConstant(false);
+rep->getParVar(41)->setConstant(false);
+rep->getParVar(42)->setConstant(false);
+rep->getParVar(43)->setConstant(false);
+rep->getParVar(44)->setConstant(false);
+
+//    for(Int_t nn= 0; nn< npts ; ++nn) {
+
+//rep->setNBins(binSetup );
+//rep->setTime(atof(argv[5]));
+
+RooMinuit m(*fcn);
+m.setStrategy(2);
+ Double_t callsEDM[2] = {10500., 1.e-6};
+ Int_t irf = 0;
+
+ gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
+m.migrad();
+//m.hesse();
+m.minos(); 
+res = m.save();
+double bestFit = res->minNll(); 
+
+std::cout<<"result list: "<<std::endl;
+std::cout<<"chi2: "<<bestFit <<std::endl;
+
+  double bb =  rep->getParVar(2)->getAsymErrorLo();
+  double dd =  rep->getParVar(2)->getAsymErrorHi();
+
+cout<<"errors are "<<bb<<" "<<dd<<endl;
+
+for(Int_t i=0;i<11;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
+
+  int aa = (atof(argv[5])+0.000001)*100;
+
+  cout<<atoi(argv[2])<<" "<<aa<<" "<<dd<<endl; 
+
+//  }
+}
+
 
 
 Double_t Sterile ::getPar(int i) {
@@ -531,20 +670,3 @@ void Sterile::SetMatrixName(TString matrixName)
 {
 fileName = matrixName;
 }
-
-void Sterile::SetModelList(std::vector<TString> mlist)
-{
-modelList = mlist;
-}
-
-std::vector<TH1D*> Sterile:: GetCurrentPrediction()
-{
-return this->preparePrediction(this->getPullList());
-}
-
-std::vector<TH1D*> Sterile:: GetCurrentData()
-{
-return this->prepareData();
-}
-
-

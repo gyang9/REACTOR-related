@@ -73,6 +73,19 @@ using namespace std;
 
  std::cout<<"'ve set some more inputs "<<std::endl;
 
+ std::vector<TString> mList;
+ TString r235 = "data/mueller235.txt";
+ TString r238 = "data/mueller238.txt";
+ TString r239 = "data/mueller239241.txt";
+ TString r241 = "data/mueller239241.txt";
+
+ mList.push_back(r235);
+ mList.push_back(r238); 
+ mList.push_back(r239);
+ mList.push_back(r241);
+
+ rep->SetModelList(mList);
+
  rep->preparePrediction(rep->getPullList());
  rep->prepareData();
 
@@ -108,70 +121,86 @@ using namespace std;
  rep->getParVar(9)->setConstant(true);
  rep->getParVar(10)->setConstant(true);
  rep->getParVar(11)->setConstant(true);
+
  rep->getParVar(12)->setConstant(true);
  rep->getParVar(13)->setConstant(true);
  rep->getParVar(14)->setConstant(true);
  rep->getParVar(15)->setConstant(true);
- rep->getParVar(16)->setConstant(false);
- rep->getParVar(17)->setConstant(false);
- rep->getParVar(18)->setConstant(false);
- rep->getParVar(19)->setConstant(false);
- rep->getParVar(20)->setConstant(false);
- rep->getParVar(21)->setConstant(false);
- rep->getParVar(22)->setConstant(false);
- rep->getParVar(23)->setConstant(false);
- rep->getParVar(24)->setConstant(false);
- rep->getParVar(25)->setConstant(false);
- rep->getParVar(26)->setConstant(false);
- rep->getParVar(27)->setConstant(false);
- rep->getParVar(28)->setConstant(false);
- rep->getParVar(29)->setConstant(false);
- rep->getParVar(30)->setConstant(false);
+ rep->getParVar(16)->setConstant(true);
+ rep->getParVar(17)->setConstant(true);
+ rep->getParVar(18)->setConstant(true);
+ rep->getParVar(19)->setConstant(true);
+ rep->getParVar(20)->setConstant(true);
+ rep->getParVar(21)->setConstant(true);
+ rep->getParVar(22)->setConstant(true);
+ rep->getParVar(23)->setConstant(true);
+ rep->getParVar(24)->setConstant(true);
+ rep->getParVar(25)->setConstant(true);
+ rep->getParVar(26)->setConstant(true);
+ rep->getParVar(27)->setConstant(true);
+ rep->getParVar(28)->setConstant(true);
+ rep->getParVar(29)->setConstant(true);
+ rep->getParVar(30)->setConstant(true);
  rep->getParVar(31)->setConstant(false);
  rep->getParVar(32)->setConstant(false);
  rep->getParVar(33)->setConstant(false);
- rep->getParVar(34)->setConstant(false);
- rep->getParVar(35)->setConstant(false);
- rep->getParVar(36)->setConstant(false);
- rep->getParVar(37)->setConstant(false);
- rep->getParVar(38)->setConstant(false);
- rep->getParVar(39)->setConstant(false);
- rep->getParVar(40)->setConstant(false);
- rep->getParVar(41)->setConstant(false);
- rep->getParVar(42)->setConstant(false);
- rep->getParVar(43)->setConstant(false);
- rep->getParVar(44)->setConstant(false);
+ rep->getParVar(34)->setConstant(true);
+ rep->getParVar(35)->setConstant(true);
+ rep->getParVar(36)->setConstant(true);
+ rep->getParVar(37)->setConstant(true);
+ rep->getParVar(38)->setConstant(true);
+ rep->getParVar(39)->setConstant(true);
+ rep->getParVar(40)->setConstant(true);
+ rep->getParVar(41)->setConstant(true);
+ rep->getParVar(42)->setConstant(true);
+ rep->getParVar(43)->setConstant(true);
+ rep->getParVar(44)->setConstant(true);
 
  //    for(Int_t nn= 0; nn< npts ; ++nn) {
 
  //rep->setNBins(binSetup );
  //rep->setTime(atof(argv[5]));
-
+/*
  RooMinuit m(*fcn);
  m.setStrategy(2);
-  Double_t callsEDM[2] = {10500., 1.e-6};
-  Int_t irf = 0;
+ Double_t callsEDM[2] = {10500., 1.e-6};
+ Int_t irf = 0;
 
-  gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
+ gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
  m.migrad();
  //m.hesse();
  m.minos(); 
  res = m.save();
  double bestFit = res->minNll(); 
+*/
+ std::vector<TH1D*> outPrediction = rep->GetCurrentPrediction();
+ std::vector<TH1D*> outData = rep->GetCurrentData();
 
- std::cout<<"result list: "<<std::endl;
- std::cout<<"chi2: "<<bestFit <<std::endl;
+ TFile* outputFile = new TFile("outputFigs.root","RECREATE");
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outPrediction[%d]",i));
+   outData[i]->Write(Form("outData[%d]",i));
+ }
 
-   double bb =  rep->getParVar(2)->getAsymErrorLo();
-   double dd =  rep->getParVar(2)->getAsymErrorHi();
+ outputFile->Close();
 
- cout<<"errors are "<<bb<<" "<<dd<<endl;
+ std::cout<<"size of output prediction list "<<outPrediction.size()<<std::endl;
+ std::cout<<"size of output data list "<<outData.size()<<std::endl;
 
- for(Int_t i=0;i<11;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
+ //std::cout<<"result list: "<<std::endl;
+ //std::cout<<"chi2: "<<bestFit <<std::endl;
 
-   int aa = (atof(argv[5])+0.000001)*100;
+ double bb =  rep->getParVar(2)->getAsymErrorLo();
+ double dd =  rep->getParVar(2)->getAsymErrorHi();
 
-   cout<<atoi(argv[2])<<" "<<aa<<" "<<dd<<endl; 
+ //cout<<"errors are "<<bb<<" "<<dd<<endl;
+
+ //for(Int_t i=0;i<11;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
+
+ int aa = (atof(argv[5])+0.000001)*100;
+
+ //cout<<atoi(argv[2])<<" "<<aa<<" "<<dd<<endl; 
 
  //  }
  }
