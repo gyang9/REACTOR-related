@@ -356,6 +356,10 @@ using namespace RooFit;
    Bool_t withSK ;
 
    TString fileName;
+   TString fileNameRENO;
+   TString fileNameNEOS;
+   TString fileNameDC;
+   TString fileNameDYB;
    double fissionFraction[100];
    double binEdge[100];
 

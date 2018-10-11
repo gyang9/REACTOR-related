@@ -196,16 +196,16 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   TFile fMatrixRENO(fileNameRENO);
   TFile fMatrixNEOS(fileNameNEOS);
 
-  TMatrixD* fracMatDC = (TMatrixD*)fMatrix.Get("frac_approx");
+  TMatrixD* fracMatDC = (TMatrixD*)fMatrixDC.Get("frac_approx");
   fracMatDC->ResizeTo(nBins,nBins);
 
-  TMatrixD* fracMatDYB = (TMatrixD*)fMatrix.Get("hCorrelation_0.25MeV");
+  TMatrixD* fracMatDYB = (TMatrixD*)fMatrixDYB.Get("hCorrelation_0.25MeV");
   fracMatDYB->ResizeTo(nBins,nBins);
 
-  TMatrixD* fracMatRENO = (TMatrixD*)fMatrix.Get("hCorrelation_0.25MeV");
+  TMatrixD* fracMatRENO = (TMatrixD*)fMatrixRENO.Get("hCorrelation_0.25MeV");
   fracMatRENO->ResizeTo(nBins,nBins);
 
-  TMatrixD* fracMatNEOS = (TMatrixD*)fMatrix.Get("hCorrelation_0.25MeV");
+  TMatrixD* fracMatNEOS = (TMatrixD*)fMatrixNEOS.Get("hCorrelation_0.25MeV");
   fracMatNEOS->ResizeTo(nBins,nBins);  
   
   // Reactor flux error vector from DYB paper : arXiv. 1607.05378
@@ -220,7 +220,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   TVectorD* errList = new TVectorD(nBins);
   for(Int_t i = 0; i< nBins; i++)
   {
-      (*errList)[i] = errList_all[i];
+      (*errList)[i] = errlist_all[i];
   }
 
   TMatrixD* outMat = new TMatrixD(4 * nBins , 4 * nBins);
@@ -264,10 +264,10 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   {
     for(Int_t j = nBins*3 ;j< nBins*4; j++) 
     {
-	if((*fracMatRENO)(nBins + nBins + nBins+4, nBins + nBins + nBins+4) > 0.5)
-            (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*errList)[i-nBins-nBins-nBins] * (*errList)[j-nBins-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];
+	if((*fracMatNEOS)(nBins + nBins + nBins+4, nBins + nBins + nBins+4) > 0.5)
+            (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*errList)[i-nBins-nBins-nBins] * (*errList)[j-nBins-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];
         else	    
-      	    (*outMat)(i,j) = (*fracMat)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
+      	    (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
     }
   }
 
@@ -600,5 +600,3 @@ std::vector<TH1D*> Sterile:: GetCurrentData()
 {
 return this->prepareData();
 }
-
-
