@@ -67,7 +67,11 @@ using namespace std;
    fissionHist->SetBinContent(i+1, fissionList[i]);
  }
 
- rep->SetMatrixName("data/ReactorMatrixND_shape_rho0_NU.root");
+ rep->SetMatrixNameDC("data/ReactorMatrixND_shape_rho0_NU.root");
+ rep->SetMatrixNameDYB("data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameRENO("data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameNEOS("data/NEOSCorrelationMatrix.root");
+
  rep->SetBinning(binHist);
  rep->SetFissionFraction(fissionHist);
 

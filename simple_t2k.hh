@@ -132,7 +132,11 @@ using namespace RooFit;
 
     void SetBinning(TH1D* binHist) ;
     void SetFissionFraction(TH1D* fissionHist) ;
-    void SetMatrixName(TString matrixName);
+    void SetMatrixNameDYB(TString matrixNameDYB);
+    void SetMatrixNameDC(TString matrixNameDC);
+    void SetMatrixNameRENO(TString matrixNameRENO);
+    void SetMatrixNameNEOS(TString matrixNameNEOS);
+
     void SetModelList(std::vector<TString>);
 
     TMatrixD* prepareCovMatrix(TH2D* conv, TVectorD* vec, Double_t syst) const;

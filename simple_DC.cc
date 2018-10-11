@@ -191,10 +191,37 @@ Sterile ::~Sterile ()
 TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
 {
 
-  TFile fMatrix(fileName);
+  TFile fMatrixDC(fileNameDC);
+  TFile fMatrixDYB(fileNameDYB);
+  TFile fMatrixRENO(fileNameRENO);
+  TFile fMatrixNEOS(fileNameNEOS);
 
-  TMatrixD* fracMat = (TMatrixD*)fMatrix.Get("frac_approx");
-  fracMat->ResizeTo(nBins,nBins);
+  TMatrixD* fracMatDC = (TMatrixD*)fMatrix.Get("frac_approx");
+  fracMatDC->ResizeTo(nBins,nBins);
+
+  TMatrixD* fracMatDYB = (TMatrixD*)fMatrix.Get("hCorrelation_0.25MeV");
+  fracMatDYB->ResizeTo(nBins,nBins);
+
+  TMatrixD* fracMatRENO = (TMatrixD*)fMatrix.Get("hCorrelation_0.25MeV");
+  fracMatRENO->ResizeTo(nBins,nBins);
+
+  TMatrixD* fracMatNEOS = (TMatrixD*)fMatrix.Get("hCorrelation_0.25MeV");
+  fracMatNEOS->ResizeTo(nBins,nBins);  
+  
+  // Reactor flux error vector from DYB paper : arXiv. 1607.05378
+  double errlist_all[100]={0.042,0.03,0.025,0.022,0.021,0.019,0.017,0.015,0.015,0.0155,
+	  		   0.017,0.018,0.02,0.022,0.025,0.029,0.033,0.035,0.037,0.041,
+  			   0.052,0.065,0.072
+  			  };
+  double errlist_flux[100]={0.01,0.01,0.09,0.09,0.09,0.09,0.09,0.09,0.09,0.01,
+	  		    0.01,0.01,0.01,0.011,0.013,0.014,0.015,0.016,0.018,
+			    0.02,0.022,0.025  
+  			   };
+  TVectorD* errList = new TVectorD(nBins);
+  for(Int_t i = 0; i< nBins; i++)
+  {
+      (*errList)[i] = errList_all[i];
+  }
 
   TMatrixD* outMat = new TMatrixD(4 * nBins , 4 * nBins);
 
@@ -203,7 +230,10 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
     for(Int_t j =0 ;j<nBins; j++) 
     { 
       //std::cout<<(*fracMat)(i,j)<<std::endl; 
-      (*outMat)(i,j) = (*fracMat)(i,j) * (*fVec)[i] * (*fVec)[j];
+        if((*fracMatDC)(4,4) > 0.5 )
+            (*outMat)(i,j) = (*fracMatDC)(i,j) * (*errList)[i] * (*errList)[j] * (*fVec)[i] * (*fVec)[j];
+	else      
+	    (*outMat)(i,j) = (*fracMatDC)(i,j) * (*fVec)[i] * (*fVec)[j];
     }
   }
 
@@ -211,7 +241,10 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   {
     for(Int_t j = nBins ;j< 2 *nBins; j++) 
     {
-      (*outMat)(i,j) = (*fracMat)(i-nBins,j-nBins) * (*fVec)[i] * (*fVec)[j];
+	if((*fracMatDYB)(nBins+4,nBins+4) > 0.5)
+	    (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*errList)[i-nBins] * (*errList)[j-nBins]  * (*fVec)[i] * (*fVec)[j];
+	else
+            (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*fVec)[i] * (*fVec)[j];
     }
   }
   //std::cout<<"in middle of matrix preparation "<<std::endl;
@@ -220,7 +253,10 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   {
     for(Int_t j = nBins+nBins ;j < nBins*3; j++) 
     {
-      (*outMat)(i,j) = (*fracMat)(i-nBins-nBins,j-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
+	if((*fracMatRENO)(nBins + nBins+4, nBins + nBins+4) > 0.5)
+	    (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*errList)[i-nBins-nBins] * (*errList)[j-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];		
+	else
+       	    (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
     }
   }
 
@@ -228,7 +264,10 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   {
     for(Int_t j = nBins*3 ;j< nBins*4; j++) 
     {
-      (*outMat)(i,j) = (*fracMat)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
+	if((*fracMatRENO)(nBins + nBins + nBins+4, nBins + nBins + nBins+4) > 0.5)
+            (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*errList)[i-nBins-nBins-nBins] * (*errList)[j-nBins-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];
+        else	    
+      	    (*outMat)(i,j) = (*fracMat)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
     }
   }
 
@@ -387,18 +426,18 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls) const
   double rateFactor = 1000;
   std::cout<<"entered into preparePrediction "<<std::endl;
   for(Int_t i=0;i<33;i++){
-
+    if((binEdge[i]+binEdge[i+1])/2.>1.8){
     //std::cout<<"bin edge and fission fraction "<<i<<" "<<binEdge[i]<<" "<<fissionFraction[i]<<" "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
     //std::cout<<"fission rates: "<<meuller235->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller238->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller239->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller241->Eval((binEdge[i]+binEdge[i+1])/2.)<<std::endl;
 
-    predDC -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) *  rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
+      predDC -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) *  rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
      
-    predDYB -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
+      predDYB -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
 
-    predRENO -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[8] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[9] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[10] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[11] ));
+      predRENO -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[8] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[9] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[10] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[11] ));
 
-    predNEOS -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[12] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[13] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[14] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[15] ));
-
+      predNEOS -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[12] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[13] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[14] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[15] ));
+    }
   }
 
   std::cout<<"in the middle of preparePrediction "<<std::endl;
@@ -527,9 +566,24 @@ for(Int_t i=0; i< fissionHist->GetNbinsX();i++)
 fissionFraction[i] = fissionHist->GetBinContent(i+1);
 }
 
-void Sterile::SetMatrixName(TString matrixName)
+void Sterile::SetMatrixNameDC(TString matrixName)
 {
-fileName = matrixName;
+fileNameDC = matrixName;
+}
+
+void Sterile::SetMatrixNameDYB(TString matrixName)
+{
+fileNameDYB = matrixName;
+}
+
+void Sterile::SetMatrixNameNEOS(TString matrixName)
+{
+fileNameNEOS = matrixName;
+}
+
+void Sterile::SetMatrixNameRENO(TString matrixName)
+{
+fileNameRENO = matrixName;
 }
 
 void Sterile::SetModelList(std::vector<TString> mlist)
