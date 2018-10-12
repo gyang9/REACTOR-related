@@ -197,16 +197,48 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   TFile fMatrixNEOS(fileNameNEOS);
 
   TMatrixD* fracMatDC = (TMatrixD*)fMatrixDC.Get("frac_approx");
-  fracMatDC->ResizeTo(nBins,nBins);
+  for(Int_t i=0;i<nBins;i++)
+  {
+      for(Int_t j=0;j<nBins;j++)
+      {
+          (*fracMatDC)(i,j) = (*fracMatDC)(i+2,j+2);
+      }
+  }
+  fracMatDC->ResizeTo(nBins , nBins);
 
-  TMatrixD* fracMatDYB = (TMatrixD*)fMatrixDYB.Get("hCorrelation_0.25MeV");
+  TMatrixD* fracMatDYB = new TMatrixD(100,100);
+  TH2D* fracTH2DYB = (TH2D*)fMatrixDYB.Get("hCorrelation_0.25MeV");
+  for(Int_t i=0;i<fracTH2DYB->GetNbinsX();i++)
+  {
+      for(Int_t j=0;j<fracTH2DYB->GetNbinsY();j++)
+      {
+          (*fracMatDYB)(i,j) = fracTH2DYB->GetBinContent(i+1,j+1);
+      }
+  }
   fracMatDYB->ResizeTo(nBins,nBins);
 
-  TMatrixD* fracMatRENO = (TMatrixD*)fMatrixRENO.Get("hCorrelation_0.25MeV");
+  TMatrixD* fracMatRENO = new TMatrixD(100,100);
+  TH2D* fracTH2RENO = (TH2D*)fMatrixRENO.Get("hCorrelation_0.25MeV");
+  for(Int_t i=0;i<fracTH2RENO->GetNbinsX();i++)
+  {
+      for(Int_t j=0;j<fracTH2RENO->GetNbinsY();j++)
+      {
+          (*fracMatRENO)(i,j) = fracTH2RENO->GetBinContent(i+1,j+1);
+      }
+  }
   fracMatRENO->ResizeTo(nBins,nBins);
 
-  TMatrixD* fracMatNEOS = (TMatrixD*)fMatrixNEOS.Get("hCorrelation_0.25MeV");
-  fracMatNEOS->ResizeTo(nBins,nBins);  
+  TMatrixD* fracMatNEOS = new TMatrixD(100,100);
+  TH2D* fracTH2NEOS = (TH2D*)fMatrixNEOS.Get("hCorrelation_0.25MeV");
+  for(Int_t i=0;i<fracTH2NEOS->GetNbinsX();i++)
+  {
+      for(Int_t j=0;j<fracTH2NEOS->GetNbinsY();j++)
+      {
+          (*fracMatNEOS)(i,j) = fracTH2NEOS->GetBinContent(i+1,j+1);
+      }
+  }
+  fracMatNEOS->ResizeTo(nBins,nBins);
+
   
   // Reactor flux error vector from DYB paper : arXiv. 1607.05378
   double errlist_all[100]={0.042,0.03,0.025,0.022,0.021,0.019,0.017,0.015,0.015,0.0155,
@@ -241,7 +273,9 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   {
     for(Int_t j = nBins ;j< 2 *nBins; j++) 
     {
-	if((*fracMatDYB)(nBins+4,nBins+4) > 0.5)
+	//std::cout<<"in loading second matrix "<<std::endl;
+	//std::cout<<(*fracMatDYB)(0,0)<<std::endl;
+	if((*fracMatDYB)(4,4) > 0.5)
 	    (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*errList)[i-nBins] * (*errList)[j-nBins]  * (*fVec)[i] * (*fVec)[j];
 	else
             (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*fVec)[i] * (*fVec)[j];
@@ -253,7 +287,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   {
     for(Int_t j = nBins+nBins ;j < nBins*3; j++) 
     {
-	if((*fracMatRENO)(nBins + nBins+4, nBins + nBins+4) > 0.5)
+	if((*fracMatRENO)(4,4) > 0.5)
 	    (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*errList)[i-nBins-nBins] * (*errList)[j-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];		
 	else
        	    (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
@@ -264,7 +298,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   {
     for(Int_t j = nBins*3 ;j< nBins*4; j++) 
     {
-	if((*fracMatNEOS)(nBins + nBins + nBins+4, nBins + nBins + nBins+4) > 0.5)
+	if((*fracMatNEOS)(4,4) > 0.5)
             (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*errList)[i-nBins-nBins-nBins] * (*errList)[j-nBins-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];
         else	    
       	    (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
@@ -337,7 +371,8 @@ Double_t Sterile ::FillEv( RooListProxy* _pulls ) const
         tempDat[3] -> SetBinContent(i+1, (*fData)[3 * nBins + i]);
    }
    //std::cout<<"data ready also "<<std::endl;
- 
+
+   // scale to same total rate, doing shape only analysis 
    double scaling1 = tempDat[0]->Integral() / tempVec[0]->Integral();
    double scaling2 = tempDat[1]->Integral() / tempVec[1]->Integral();
    double scaling3 = tempDat[2]->Integral() / tempVec[2]->Integral();
@@ -423,20 +458,24 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls) const
   //TGraph* IBDXsec = new TGraph("data/IBDXsec.dat");
   TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
 
-  double rateFactor = 1000;
+  double rateFactorDC = 5000;
+  double rateFactorDYB = 5000;
+  double rateFactorRENO = 5000;
+  double rateFactorNEOS = 5000;
+
   std::cout<<"entered into preparePrediction "<<std::endl;
   for(Int_t i=0;i<33;i++){
     if((binEdge[i]+binEdge[i+1])/2.>1.8){
     //std::cout<<"bin edge and fission fraction "<<i<<" "<<binEdge[i]<<" "<<fissionFraction[i]<<" "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
     //std::cout<<"fission rates: "<<meuller235->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller238->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller239->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller241->Eval((binEdge[i]+binEdge[i+1])/2.)<<std::endl;
 
-      predDC -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) *  rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
+      predDC -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) *  rateFactorDC * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
      
-      predDYB -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
+      predDYB -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactorDYB * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
 
-      predRENO -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[8] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[9] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[10] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[11] ));
+      predRENO -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactorRENO * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[8] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[9] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[10] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[11] ));
 
-      predNEOS -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactor * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[12] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[13] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[14] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[15] ));
+      predNEOS -> SetBinContent( i+1,  IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactorNEOS * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[12] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[13] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[14] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[15] ));
     }
   }
 
@@ -461,10 +500,10 @@ std::vector<TH1D*> Sterile:: prepareData()
 
   for(Int_t i=0;i<predDC->GetNbinsX();i++)
   {
-    dataDC -> SetBinContent(i+1, predDC->GetBinContent(i+1) * gradataDC->Eval(predDC->GetBinCenter(i+1)+0.78) );
-    dataDYB -> SetBinContent(i+1,  predDYB->GetBinContent(i+1) * gradataDYB->Eval(predDYB->GetBinCenter(i+1)+0.78) );
-    dataRENO -> SetBinContent(i+1,  predRENO->GetBinContent(i+1) * gradataRENO->Eval(predRENO->GetBinCenter(i+1)+0.78) );
-    dataNEOS -> SetBinContent(i+1,  predNEOS->GetBinContent(i+1) * gradataNEOS->Eval(predNEOS->GetBinCenter(i+1)+0.78) );
+    dataDC -> SetBinContent(i+1, predDC->GetBinContent(i+1) * gradataDC->Eval(predDC->GetBinCenter(i+1)-0.8) );
+    dataDYB -> SetBinContent(i+1,  predDYB->GetBinContent(i+1) * gradataDYB->Eval(predDYB->GetBinCenter(i+1)-0.8) );
+    dataRENO -> SetBinContent(i+1,  predRENO->GetBinContent(i+1) * gradataRENO->Eval(predRENO->GetBinCenter(i+1)-0.8) );
+    dataNEOS -> SetBinContent(i+1,  predNEOS->GetBinContent(i+1) * gradataNEOS->Eval(predNEOS->GetBinCenter(i+1)-0.8) );
   }
 
   std::vector<TH1D*> dataList;

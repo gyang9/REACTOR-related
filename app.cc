@@ -56,6 +56,7 @@ using namespace std;
 
  std::cout<<"'ve set some inputs "<<std::endl;
 
+ // binned from 0.5-9 MeV with bin width of 0.25 MeV
  TH1D* binHist = new TH1D("","",34,0,34);
  for(Int_t i=0;i<34;i++){
    binHist->SetBinContent(i+1, 0.5 + 0.25*i);
@@ -112,8 +113,8 @@ using namespace std;
  RooFormulaVar* fcn = new RooFormulaVar("fit","fit",formula,list);
 
  //rep->getParVar(3)->setVal(2.5);
- rep->getParVar(2)->setConstant(false);
- rep->getParVar(6)->setConstant(false);
+ rep->getParVar(2)->setConstant(true);
+ rep->getParVar(6)->setConstant(true);
 
  rep->getParVar(0)->setConstant(true);
  rep->getParVar(1)->setConstant(true);
@@ -126,57 +127,46 @@ using namespace std;
  rep->getParVar(10)->setConstant(true);
  rep->getParVar(11)->setConstant(true);
 
- rep->getParVar(12)->setConstant(true);
- rep->getParVar(13)->setConstant(true);
- rep->getParVar(14)->setConstant(true);
- rep->getParVar(15)->setConstant(true);
- rep->getParVar(16)->setConstant(true);
- rep->getParVar(17)->setConstant(true);
- rep->getParVar(18)->setConstant(true);
- rep->getParVar(19)->setConstant(true);
- rep->getParVar(20)->setConstant(true);
- rep->getParVar(21)->setConstant(true);
- rep->getParVar(22)->setConstant(true);
- rep->getParVar(23)->setConstant(true);
- rep->getParVar(24)->setConstant(true);
- rep->getParVar(25)->setConstant(true);
- rep->getParVar(26)->setConstant(true);
- rep->getParVar(27)->setConstant(true);
- rep->getParVar(28)->setConstant(true);
- rep->getParVar(29)->setConstant(true);
- rep->getParVar(30)->setConstant(true);
- rep->getParVar(31)->setConstant(false);
- rep->getParVar(32)->setConstant(false);
- rep->getParVar(33)->setConstant(false);
- rep->getParVar(34)->setConstant(true);
- rep->getParVar(35)->setConstant(true);
- rep->getParVar(36)->setConstant(true);
- rep->getParVar(37)->setConstant(true);
- rep->getParVar(38)->setConstant(true);
- rep->getParVar(39)->setConstant(true);
- rep->getParVar(40)->setConstant(true);
- rep->getParVar(41)->setConstant(true);
- rep->getParVar(42)->setConstant(true);
- rep->getParVar(43)->setConstant(true);
- rep->getParVar(44)->setConstant(true);
+ rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
+ rep->getParVar(13)->setConstant(true);  // 0.75 - 1
+ rep->getParVar(14)->setConstant(true);  // 1 - 1.25
+ rep->getParVar(15)->setConstant(true);  // 1.25 - 1.5
+ rep->getParVar(16)->setConstant(true);  // 1.5 - 1.75
+ rep->getParVar(17)->setConstant(true);  // 1.75 - 2
+ rep->getParVar(18)->setConstant(false);  // 2 - 2.25
+ rep->getParVar(19)->setConstant(false);  // 2.25 - 2.5
+ rep->getParVar(20)->setConstant(false);  // 2.5 - 2.75
+ rep->getParVar(21)->setConstant(false);  // 2.75 - 3
+ rep->getParVar(22)->setConstant(false);  // 3 - 3.25
+ rep->getParVar(23)->setConstant(false);  // 3.25 - 3.5
+ rep->getParVar(24)->setConstant(false);  // 3.5 - 3.75
+ rep->getParVar(25)->setConstant(false);  // 3.75 - 4
+ rep->getParVar(26)->setConstant(false);  // 4 - 4.25
+ rep->getParVar(27)->setConstant(false);  // 4.25 - 4.5
+ rep->getParVar(28)->setConstant(false);  // 4.5 - 4.75
+ rep->getParVar(29)->setConstant(false);  // 4.75 - 5
+ rep->getParVar(30)->setConstant(false);  // 5 - 5.25
+ rep->getParVar(31)->setConstant(false);  // 5.25 - 5.5
+ rep->getParVar(32)->setConstant(false);  // 5.5 - 5.75
+ rep->getParVar(33)->setConstant(false);  // 5.75 - 6
+ rep->getParVar(34)->setConstant(false);  // 6 - 6.25
+ rep->getParVar(35)->setConstant(false);  // 6.25 - 6.5
+ rep->getParVar(36)->setConstant(false);  // 6.5 - 6.75
+ rep->getParVar(37)->setConstant(false);  // 6.75 - 7
+ rep->getParVar(38)->setConstant(false);  // 7 - 7.25
+ rep->getParVar(39)->setConstant(false);  // 7.25 - 7.5
+ rep->getParVar(40)->setConstant(false);  // 7.5 - 7.75
+ rep->getParVar(41)->setConstant(false);  // 7.75 - 8
+ rep->getParVar(42)->setConstant(true);  // 8 - 8.25
+ rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
+ rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
+ rep->getParVar(44)->setConstant(true);  // 8.75 - 9
 
  //    for(Int_t nn= 0; nn< npts ; ++nn) {
 
  //rep->setNBins(binSetup );
  //rep->setTime(atof(argv[5]));
-/*
- RooMinuit m(*fcn);
- m.setStrategy(2);
- Double_t callsEDM[2] = {10500., 1.e-6};
- Int_t irf = 0;
 
- gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
- m.migrad();
- //m.hesse();
- m.minos(); 
- res = m.save();
- double bestFit = res->minNll(); 
-*/
  std::vector<TH1D*> outPrediction = rep->GetCurrentPrediction();
  std::vector<TH1D*> outData = rep->GetCurrentData();
 
@@ -188,6 +178,46 @@ using namespace std;
  }
 
  outputFile->Close();
+ 
+ ofstream outText;
+ outText.open("scan2D.txt");
+
+ for(Int_t iDM=0;iDM<100;iDM++)
+ {
+     for(Int_t iST=0;iST<100;iST++)
+     {
+	rep->getParVar(2)->setVal(5 * TMath::Exp(-iDM*0.05));
+	rep->getParVar(6)->setVal(TMath::Exp(-iST*0.05));
+	rep->getParVar(2)->setConstant(true);
+ 	rep->getParVar(6)->setConstant(true);
+ 	RooMinuit m(*fcn);
+ 	m.setStrategy(2);
+ 	Double_t callsEDM[2] = {10500., 1.e-6};
+ 	Int_t irf = 0;
+
+ 	gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
+ 	m.migrad();
+ 	//m.hesse();
+ 	//m.minos(); 
+ 	res = m.save();
+ 	double bestFit = res->minNll(); 
+	outText<<iDM<<" "<<iST<<" "<<bestFit<<std::endl;
+     }
+ }
+
+ outPrediction = rep->GetCurrentPrediction();
+ outData = rep->GetCurrentData();
+ 
+ std::cout<<"list of reactor pulls : "<<std::endl;
+ for(Int_t i=18;i<41;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
+
+ TFile* outputFile2 = new TFile("outputFigs2.root","RECREATE");
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outFit[%d]",i));	 
+ }
+
+ outputFile2->Close();
 
  std::cout<<"size of output prediction list "<<outPrediction.size()<<std::endl;
  std::cout<<"size of output data list "<<outData.size()<<std::endl;
