@@ -28,11 +28,11 @@ using namespace std;
 
   _pulls     = new RooListProxy("_pulls","_pulls",this);
   RooRealVar* Par1 = new RooRealVar("s12","par1",TMath::ASin(TMath::Sqrt(0.85))/2.,0,100);
-  RooRealVar* Par2 = new RooRealVar("s23","par2",TMath::ASin(TMath::Sqrt(0.95))/2.,0,100);
+  RooRealVar* Par2 = new RooRealVar("s23","par2",0,0,100); // TMath::ASin(TMath::Sqrt(0.95))/2.,0,100);
   RooRealVar* Par3 = new RooRealVar("s14","par3",0.1,0,100);
   RooRealVar* Par4 = new RooRealVar("delta","par4",-1.5,-10,10);
   RooRealVar* Par5 = new RooRealVar("dm21","par5",0.000075,-10,10);
-  RooRealVar* Par6 = new RooRealVar("dm32","par6",0.00238,-10,10);
+  RooRealVar* Par6 = new RooRealVar("dm32","par6",0,-10,10); // 0.00238,-10,10);
   RooRealVar* Par7 = new RooRealVar("dm41","par7",0.00244,-10,10);
   RooRealVar* Par8 = new RooRealVar("numuX","par8",1,0.,100);
   RooRealVar* Par9 = new RooRealVar("nueX","par9",1,0.,100);
@@ -434,22 +434,22 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls) const
   TGraph* meuller239;
   TGraph* meuller241;
 
-  if(modelList.at(0)=="data/mueller235.txt") 
+  if(modelList.at(0)=="/disk01/usr5/gyang/REACTOR-related/data/mueller235.txt") 
 	  meuller235 = new TGraph(modelList.at(0), "%lg %*lg %lg %*lg %*lg %*lg %*lg %*lg", "");
   else
 	  meuller235 = new TGraph(modelList.at(0), "%lg %lg %*lg", "");
 
-  if(modelList.at(1)=="data/mueller238.txt")
+  if(modelList.at(1)=="/disk01/usr5/gyang/REACTOR-related/data/mueller238.txt")
 	  meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg %*lg %*lg", "");
   else
 	  meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg", "");
 
-  if(modelList.at(2)=="data/mueller239241.txt")
+  if(modelList.at(2)=="/disk01/usr5/gyang/REACTOR-related/data/mueller239241.txt")
   	  meuller239 = new TGraph(modelList.at(2), "%lg %*lg %lg %*lg %*lg %*lg %*lg", "");
   else
 	  meuller239 = new TGraph(modelList.at(2), "%lg %lg %*lg", "");
 
-  if(modelList.at(3)=="data/mueller239241.txt")
+  if(modelList.at(3)=="/disk01/usr5/gyang/REACTOR-related/data/mueller239241.txt")
   	  meuller241 = new TGraph(modelList.at(3), "%lg %*lg %*lg %*lg %*lg %lg %*lg", "");
   else
 	  meuller241 = new TGraph(modelList.at(3), "%lg %lg %*lg", "");
@@ -458,10 +458,11 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls) const
   //TGraph* IBDXsec = new TGraph("data/IBDXsec.dat");
   TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
 
-  double rateFactorDC = 5000;
-  double rateFactorDYB = 5000;
-  double rateFactorRENO = 5000;
-  double rateFactorNEOS = 5000;
+  // at peak, DC 15,000  DYB 80,000  RENO 1,200  NEOS 24,750  ; with factor = 5,000, peaked with 1,400, thus scaling as following: 
+  double rateFactorDC = 5000 * (15./1.4);
+  double rateFactorDYB = 5000 * (80./1.4);
+  double rateFactorRENO = 5000 * (12./14.);
+  double rateFactorNEOS = 5000 * (24.75/1.4);
 
   std::cout<<"entered into preparePrediction "<<std::endl;
   for(Int_t i=0;i<33;i++){
@@ -493,10 +494,10 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls) const
 std::vector<TH1D*> Sterile:: prepareData() 
 {
 
-  TGraph* gradataDC   = new TGraph("data/dataDC.txt", "%*lg %lg %lg", "");
-  TGraph* gradataDYB  = new TGraph("data/dataDYB.txt", "%*lg %lg %lg", "");
-  TGraph* gradataRENO = new TGraph("data/dataRENO.txt", "%*lg %lg %lg", "");
-  TGraph* gradataNEOS = new TGraph("data/dataNEOS.txt", "%*lg %lg %lg", "");
+  TGraph* gradataDC   = new TGraph("/disk01/usr5/gyang/REACTOR-related/data/dataDC.txt", "%*lg %lg %lg", "");
+  TGraph* gradataDYB  = new TGraph("/disk01/usr5/gyang/REACTOR-related/data/dataDYB.txt", "%*lg %lg %lg", "");
+  TGraph* gradataRENO = new TGraph("/disk01/usr5/gyang/REACTOR-related/data/dataRENO.txt", "%*lg %lg %lg", "");
+  TGraph* gradataNEOS = new TGraph("/disk01/usr5/gyang/REACTOR-related/data/dataNEOS.txt", "%*lg %lg %lg", "");
 
   for(Int_t i=0;i<predDC->GetNbinsX();i++)
   {
