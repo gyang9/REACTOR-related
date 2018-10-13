@@ -171,5 +171,22 @@
   legend->AddEntry(fit3,"Best fit","l");
   legend->Draw();
 
+  double aa,bb,cc;
+  TH2D* hContour = new TH2D("","",50,1,50,50,1,50);
+
+  ifrsteram inContour;
+  inContour.open("result/scan2D.txt");
+  while(! in.eof())
+  {
+      inContour>>aa>>bb>>cc;
+      //double dM = 5 * TMath::Exp(-aa*0.1);
+      //double dS = TMath::Exp(-bb*0.1);
+      hContour->Fill(bb+1,aa+1,cc);
+  }
+ 
+  new TCanvas();
+  pred3->GetXaxis()->SetTitle("Neutrino ener");
+  pred3->GetYaxis()->SetTitle("Events/ (0.25 MeV)");  
+  inContour->Draw("colz");
 
 }

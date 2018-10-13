@@ -31,24 +31,24 @@ using namespace std;
  //vecInput1->Print();
 
  vecInput1 ->SetBinContent(1, TMath::ASin(TMath::Sqrt(0.85))/2.);
- vecInput1 ->SetBinContent(2,TMath::ASin(TMath::Sqrt(0.95))/2.);
- vecInput1 ->SetBinContent(3,0.1);
+ vecInput1 ->SetBinContent(2, 0); //TMath::ASin(TMath::Sqrt(0.95))/2.);
+ vecInput1 ->SetBinContent(3, 0); //0.1);
  vecInput1 ->SetBinContent(4,-1.5);
  vecInput1 ->SetBinContent(5,0.000075);
- vecInput1 ->SetBinContent(6,0.00238);
- vecInput1 ->SetBinContent(7,0.00244);
+ vecInput1 ->SetBinContent(6, 0 ); //0.00238);
+ vecInput1 ->SetBinContent(7, 0 ); //0.00244);
  vecInput1 ->SetBinContent(8,1);
  vecInput1 ->SetBinContent(9,1);
  vecInput1 ->SetBinContent(10,1);
  vecInput1 ->SetBinContent(11,1);
 
  vecInput2 ->SetBinContent(1,TMath::ASin(TMath::Sqrt(0.85+0.021))/2.-TMath::ASin(TMath::Sqrt(0.85))/2.);
- vecInput2 ->SetBinContent(2,2);
+ vecInput2 ->SetBinContent(2, 100); //2);
  vecInput2 ->SetBinContent(3,100);
  vecInput2 ->SetBinContent(4,2);
  vecInput2 ->SetBinContent(5,0.0000018);
- vecInput2 ->SetBinContent(6,0.0001);
- vecInput2 ->SetBinContent(7,0.00009);
+ vecInput2 ->SetBinContent(6, 100); //0.0001);
+ vecInput2 ->SetBinContent(7, 100); //0.00009);
  vecInput2 ->SetBinContent(8,0.009);
  vecInput2 ->SetBinContent(9,0.03);
  vecInput2 ->SetBinContent(10,0.04); 
@@ -68,10 +68,10 @@ using namespace std;
    fissionHist->SetBinContent(i+1, fissionList[i]);
  }
 
- rep->SetMatrixNameDC("data/ReactorMatrixND_shape_rho0_NU.root");
- rep->SetMatrixNameDYB("data/NEOSCorrelationMatrix.root");
- rep->SetMatrixNameRENO("data/NEOSCorrelationMatrix.root");
- rep->SetMatrixNameNEOS("data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameDC("/disk01/usr5/gyang/REACTOR-related/data/ReactorMatrixND_shape_rho0_NU.root");
+ rep->SetMatrixNameDYB("/disk01/usr5/gyang/REACTOR-related/data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameRENO("/disk01/usr5/gyang/REACTOR-related/data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameNEOS("/disk01/usr5/gyang/REACTOR-related/data/NEOSCorrelationMatrix.root");
 
  rep->SetBinning(binHist);
  rep->SetFissionFraction(fissionHist);
@@ -79,10 +79,10 @@ using namespace std;
  std::cout<<"'ve set some more inputs "<<std::endl;
 
  std::vector<TString> mList;
- TString r235 = "data/mueller235.txt";
- TString r238 = "data/mueller238.txt";
- TString r239 = "data/mueller239241.txt";
- TString r241 = "data/mueller239241.txt";
+ TString r235 = "/disk01/usr5/gyang/REACTOR-related/data/mueller235.txt";
+ TString r238 = "/disk01/usr5/gyang/REACTOR-related/data/mueller238.txt";
+ TString r239 = "/disk01/usr5/gyang/REACTOR-related/data/mueller239241.txt";
+ TString r241 = "/disk01/usr5/gyang/REACTOR-related/data/mueller239241.txt";
 
  mList.push_back(r235);
  mList.push_back(r238); 
@@ -170,26 +170,30 @@ using namespace std;
  std::vector<TH1D*> outPrediction = rep->GetCurrentPrediction();
  std::vector<TH1D*> outData = rep->GetCurrentData();
 
- TFile* outputFile = new TFile("outputFigs.root","RECREATE");
+ TFile* outputFile = new TFile("/disk01/usr5/gyang/REACTOR-related/result/outputFigs.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)
  {
-   outPrediction[i]->Write(Form("outPrediction[%d]",i));
-   outData[i]->Write(Form("outData[%d]",i));
+   outPrediction[i]->Write(Form("/disk01/usr5/gyang/REACTOR-related/result/outPrediction[%d]",i));
+   outData[i]->Write(Form("/disk01/usr5/gyang/REACTOR-related/result/outData[%d]",i));
  }
 
  outputFile->Close();
  
  ofstream outText;
- outText.open("scan2D.txt");
+ outText.open(Form("/disk01/usr5/gyang/REACTOR-related/result/scan2D_%d_%d.txt",atoi(argv[1]), atoi(argv[2]) ));
 
- for(Int_t iDM=0;iDM<100;iDM++)
- {
-     for(Int_t iST=0;iST<100;iST++)
-     {
-	rep->getParVar(2)->setVal(5 * TMath::Exp(-iDM*0.05));
-	rep->getParVar(6)->setVal(TMath::Exp(-iST*0.05));
-	rep->getParVar(2)->setConstant(true);
- 	rep->getParVar(6)->setConstant(true);
+ double iDM = atof(argv[1]);
+ double iST = atof(argv[2]);
+ //for(Int_t iDM=0;iDM<50;iDM++)
+ //{
+     //for(Int_t iST=0;iST<50;iST++)
+     //{
+	rep->getParVar(2)->setVal(5 * TMath::Exp(-iDM*0.1));
+	rep->getParVar(6)->setVal(TMath::Exp(-iST*0.1));
+	//rep->getParVar(2)->setVal(0);
+	//rep->getParVar(6)->setVal(0);
+	//rep->getParVar(3)->setConstant(true);
+ 	//rep->getParVar(7)->setConstant(true);
  	RooMinuit m(*fcn);
  	m.setStrategy(2);
  	Double_t callsEDM[2] = {10500., 1.e-6};
@@ -201,9 +205,9 @@ using namespace std;
  	//m.minos(); 
  	res = m.save();
  	double bestFit = res->minNll(); 
-	outText<<iDM<<" "<<iST<<" "<<bestFit<<std::endl;
-     }
- }
+	outText<<atoi(argv[1])<<" "<<atoi(argv[2])<<" "<<bestFit<<std::endl;
+     //}
+ //}
 
  outPrediction = rep->GetCurrentPrediction();
  outData = rep->GetCurrentData();
@@ -211,7 +215,7 @@ using namespace std;
  std::cout<<"list of reactor pulls : "<<std::endl;
  for(Int_t i=18;i<41;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
 
- TFile* outputFile2 = new TFile("outputFigs2.root","RECREATE");
+ TFile* outputFile2 = new TFile("/disk01/usr5/gyang/REACTOR-related/result/outputFigs2.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)
  {
    outPrediction[i]->Write(Form("outFit[%d]",i));	 
