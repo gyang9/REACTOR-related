@@ -171,8 +171,13 @@
   legend->AddEntry(fit3,"Best fit","l");
   legend->Draw();
 
+  for(int i=49;i>=0;i--){bin_x[49-i]=TMath::Power(10.,(-3.*i*2/100.));}
+  for(int i=0;i<50;i++){bin_y[i]=TMath::Power(10,(-4 + 5.*i*2/100.));}
+
   double aa,bb,cc;
-  TH2D* hContour = new TH2D("","",50,1,50,50,1,50);
+  TH2D* p1_CL = new TH2D("p1_CL","p1_CL",100,bin_x,100,bin_y);
+  TH2D* p2_CL = new TH2D("p2_CL","p2_CL",100,bin_x,100,bin_y);
+  TH2D* p3_CL = new TH2D("p3_CL","p3_CL",100,bin_x,100,bin_y);
 
   ifrsteram inContour;
   inContour.open("result/scan2D.txt");
@@ -181,12 +186,31 @@
       inContour>>aa>>bb>>cc;
       //double dM = 5 * TMath::Exp(-aa*0.1);
       //double dS = TMath::Exp(-bb*0.1);
-      hContour->Fill(bb+1,aa+1,cc);
+      p1_CL->Fill(100-bb,100-aa,cc);
+      p2_CL->Fill(100-bb,100-aa,cc);
+      p3_CL->Fill(100-bb,100-aa,cc);
   }
  
+   double conto[1];
+   conto[0] = 1;
+   p1_CL->SetContour(1,conto);
+   p1_CL->SetLineWidth(2);
+
+   double conto2[1];
+   conto2[0] = 4;
+   p2_CL->SetContour(1,conto2);
+   p2_CL->SetLineWidth(2);
+   p2_CL->SetLineColor(2);
+
+   double conto3[1];
+   conto3[0] = 9;
+   p3_CL->SetContour(1,conto3);
+   p3_CL->SetLineWidth(2);
+   p3_CL->SetLineColor(4);
+
   new TCanvas();
-  pred3->GetXaxis()->SetTitle("Neutrino ener");
-  pred3->GetYaxis()->SetTitle("Events/ (0.25 MeV)");  
-  inContour->Draw("colz");
+  p1_CL->GetXaxis()->SetTitle("sin#theta_{s}");
+  p1_CL->GetYaxis()->SetTitle("#Delta m^{2}_{s}");  
+  p1_CL->Draw("cont3");
 
 }
