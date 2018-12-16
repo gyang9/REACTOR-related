@@ -103,7 +103,7 @@ using namespace RooFit;
 
     RooFormulaVar* Chi2() ;
 
-    Double_t FillEv(RooListProxy* _pulls) const ;
+    Double_t FillEv(RooListProxy* _pulls) const;
 
     Double_t ExtraPull(RooListProxy* _pulls) const;
 
@@ -141,8 +141,9 @@ using namespace RooFit;
 
     TMatrixD* prepareCovMatrix(TH2D* conv, TVectorD* vec, Double_t syst) const;
 
-    std::vector<TH1D*> prepareData() ;
-    std::vector<TH1D*> preparePrediction(RooListProxy* _pulls) const;
+    std::vector<TH1D*> prepareData(std::vector<TH1D*> tempPredLis) const;
+    //std::vector<TH1D*> preparePrediction(RooListProxy* _pulls) const;
+    std::vector<TH1D*> preparePrediction(RooListProxy* _pulls, bool Iosc ) const;
     //std::vector<TH1D*> preparePrediction(RooListProxy* _pulls, std::vector<TString> modelList) const;
 
     TMatrixD* prepareT2kCovMatrix(TMatrixD* covM_t2k, TVectorD* fVec_t2k) const;
@@ -313,74 +314,89 @@ using namespace RooFit;
     RooListProxy* _pulls;
 
     std::vector<TH1D*> GetCurrentPrediction();
-    std::vector<TH1D*> GetCurrentData();
+    std::vector<TH1D*> GetCurrentData(std::vector<TH1D*> pred);
 
-   TH2D* conv;
-   TH1D* nueAfter;
-   TH1D* nueBefore;
-   TH1D* numuTrue;
+    TF1* GetIBDXsecFormula() const;
+    TGraph* GetIBDXsecPoints() const;
+    std::vector<TH1D*> GetFluxPrediction(RooListProxy* _pulls, bool Iosc) ;
 
-   Double_t _syst;
-   Double_t _dm2CV;
-   Double_t _dm2Unc;
+    TMatrixD* ConversionMatrix(TString inputFile, TString inputTree);
+    TH2D* GetConversionHist() const {return fHist;}
+    TMatrixD* GetConversionMatrix() const {return fMatrix;}
+    TH1D* folding(TH1D* input) const;
 
-   Double_t _Density;
-   Double_t _AtmBaseline;
-   Double_t _time;
-   Double_t _Bins;
-   Double_t _Corr1;
-   Double_t _Corr2;
-   Double_t _Corr3;
-   Double_t _Corr4;
-   Double_t dataSet;
-   Bool_t _dataSwitch;
+    TH2D* fHist;
+    TMatrixD* fMatrix;
+    TMatrixD* uMatrix;
+    TMatrixD* unfoldingMatrix;
 
-   TVectorD* pullCV; 
-   TVectorD* pullUnc;
-   TVectorD* fData_t2k;
-   TVectorD* fData_sk;
-   TVectorD* fData_JUNO;
+    TH2D* conv;
+    TH1D* nueAfter;
+    TH1D* nueBefore;
+    TH1D* numuTrue;
 
-   TVectorD* fVec_t2k;
-   TVectorD* fVec_t2k_nd;
-   TVectorD* fVec_sk;
-   TVectorD* fVec_JUNO;
-   TVectorD* fVecShadow_JUNO;
+    Double_t _syst;
+    Double_t _dm2CV;
+    Double_t _dm2Unc;
 
-   TVectorD* MCDelegate;
-   TVectorD* dataDelegate;
+    Double_t _Density;
+    Double_t _AtmBaseline;
+    Double_t _time;
+    Double_t _Bins;
+    Double_t _Corr1;
+    Double_t _Corr2;
+    Double_t _Corr3;
+    Double_t _Corr4;
+    Double_t dataSet;
+    Bool_t _dataSwitch;
 
-   TH1D* hData_JUNO;
-   TH1D* hShadow_JUNO;
-   
-   Bool_t withSK ;
+    TVectorD* pullCV; 
+    TVectorD* pullUnc;
+    TVectorD* fData_t2k;
+    TVectorD* fData_sk;
+    TVectorD* fData_JUNO;
 
-   TString fileName;
-   TString fileNameRENO;
-   TString fileNameNEOS;
-   TString fileNameDC;
-   TString fileNameDYB;
-   double fissionFraction[100];
-   double binEdge[100];
+    TVectorD* fVec_t2k;
+    TVectorD* fVec_t2k_nd;
+    TVectorD* fVec_sk;
+    TVectorD* fVec_JUNO;
+    TVectorD* fVecShadow_JUNO;
+ 
+    TVectorD* MCDelegate;
+    TVectorD* dataDelegate;
 
-   TH1D* dataDC;
-   TH1D* dataDYB;
-   TH1D* dataRENO;
-   TH1D* dataNEOS;
-   TH1D* predDC;
-   TH1D* predDYB;
-   TH1D* predRENO;
-   TH1D* predNEOS;
+    TH1D* hData_JUNO;
+    TH1D* hShadow_JUNO;
+    
+    Bool_t withSK ;
 
-   std::vector<TString> modelList;
+    TString fileName;
+    TString fileNameRENO;
+    TString fileNameNEOS;
+    TString fileNameDC;
+    TString fileNameDYB;
+    double fissionFraction[100];
+    double binEdge[100];
+    Int_t  _nBins;
 
-   std::vector<TH1D*> dataList;
+    TH1D* dataDC;
+    TH1D* dataDYB;
+    TH1D* dataRENO;
+    TH1D* dataNEOS;
+    //TH1D* predDC;
+    //TH1D* predDYB;
+    //TH1D* predRENO;
+    //TH1D* predNEOS;
+
+    std::vector<TString> modelList;
+
+    std::vector<TH1D*> dataList;
 
     //  private:
    
-  virtual  Double_t evaluate() const ;
+   virtual  Double_t evaluate() const ;
 
-  protected:
+   protected:
 
 
   };

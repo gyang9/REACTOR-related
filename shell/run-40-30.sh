@@ -1,10 +1,11 @@
 #!/bin/bash
 
-source ~/my_setup.sh
-#export ATMPD_ROOT=/disk01/usr5/gyang/ap16c
-#export SKOFL_ROOT=/disk01/usr5/gyang/16c
-#export LD_LIBRARY_PATH=/disk01/usr5/gyang/ap16c/lib://disk01/usr5/gyang/16c/lib:/lib:/home/skofl/sklib_gcc4.8.5/root_v5.34.36/lib::/lib:/disk01/usr5/gyang/ap16c/lib://disk01/usr5/gyang/16c/lib:/lib:/home/skofl/sklib_gcc4.8.5/root_v5.34.36/lib::/lib:/disk01/usr5/gyang/ap16c/lib://disk01/usr5/gyang/16c/lib:/lib:/home/skofl/sklib_gcc4.8.5/root_v5.34.36/lib::/lib:/disk01/usr5/gyang/ap16c/lib://disk01/usr5/gyang/16c/lib:/lib:/home/skofl/sklib_gcc4.8.5/root_v5.34.36/lib::/lib:/usr/local/lib:/home/skofl/sklib_gcc4.8.5/cern/2005/lib:/home/skofl/sklib_gcc4.8.5/cern/2005/lib:/home/skofl/sklib_gcc4.8.5/cern/2005/lib:/home/skofl/sklib_gcc4.8.5/cern/2005/lib
+source ~/work/my_setup.sh
+#export ATMPD_ROOT=
+#export SKOFL_ROOT=
+#export LD_LIBRARY_PATH=/home/guang/work/geant4.10.04.p02/builddir/BuildProducts/lib:/home/guang/Downloads/root-6.14.02/builddir/lib:/home/guang/work/geant4.10.04.p02/builddir/BuildProducts/lib:/home/guang/work/geant4.10.04.p02/builddir/BuildProducts/lib:/home/guang/work/geant4.10.04.p02/builddir/BuildProducts/lib:/home/guang/Downloads/root-6.14.02/builddir/lib
 
 #source /disk01/usr5/gyang/REACTOR-related/makeApp
-/disk01/usr5/gyang/REACTOR-related/app 40 30
+#/disk01/usr5/gyang/REACTOR-related/app 40 30
+./app 40 30
 
