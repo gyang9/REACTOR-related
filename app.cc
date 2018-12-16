@@ -49,16 +49,19 @@ using namespace std;
  vecInput2 ->SetBinContent(5,0.0000018);
  vecInput2 ->SetBinContent(6, 100); //0.0001);
  vecInput2 ->SetBinContent(7, 100); //0.00009);
- vecInput2 ->SetBinContent(8,0.009);
- vecInput2 ->SetBinContent(9,0.03);
+ //vecInput2 ->SetBinContent(8,0.009);
+ //vecInput2 ->SetBinContent(9,0.03);
+ vecInput2 ->SetBinContent(8, 100);
+ vecInput2 ->SetBinContent(9, 100);
  vecInput2 ->SetBinContent(10,0.04); 
  vecInput2 ->SetBinContent(11,0.027);
 
  std::cout<<"'ve set some inputs "<<std::endl;
 
  // binned from 0.5-9 MeV with bin width of 0.25 MeV
- TH1D* binHist = new TH1D("","",34,0,34);
- for(Int_t i=0;i<34;i++){
+ int nBins = 30;
+ TH1D* binHist = new TH1D("","",nBins+1,0,nBins+1);
+ for(Int_t i=0;i<nBins+1;i++){
    binHist->SetBinContent(i+1, 0.5 + 0.25*i);
  }
 
@@ -68,21 +71,25 @@ using namespace std;
    fissionHist->SetBinContent(i+1, fissionList[i]);
  }
 
- rep->SetMatrixNameDC("/disk01/usr5/gyang/REACTOR-related/data/ReactorMatrixND_shape_rho0_NU.root");
- rep->SetMatrixNameDYB("/disk01/usr5/gyang/REACTOR-related/data/NEOSCorrelationMatrix.root");
- rep->SetMatrixNameRENO("/disk01/usr5/gyang/REACTOR-related/data/NEOSCorrelationMatrix.root");
- rep->SetMatrixNameNEOS("/disk01/usr5/gyang/REACTOR-related/data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameDC("data/ReactorMatrixND_shape_rho0_NU.root");
+ rep->SetMatrixNameDYB("data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameRENO("data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameNEOS("data/NEOSCorrelationMatrix.root");
 
  rep->SetBinning(binHist);
  rep->SetFissionFraction(fissionHist);
 
- std::cout<<"'ve set some more inputs "<<std::endl;
+ TMatrixD* cfMatrix = rep->ConversionMatrix("data/FinalFitIBDTree_DCIV_ND.root","FinalFitIBDTree");
+ //rep->ConversionMatrix("data/FinalFitIBDTree_DCIV_ND.root","FinalFitIBDTree");
+ //TH2D* fHist = rep->GetConversionMatrix();
+
+ //std::cout<<"'ve set some more inputs, conversiont matrix summation is : "<<fHist->Integral()<<std::endl;
 
  std::vector<TString> mList;
- TString r235 = "/disk01/usr5/gyang/REACTOR-related/data/mueller235.txt";
- TString r238 = "/disk01/usr5/gyang/REACTOR-related/data/mueller238.txt";
- TString r239 = "/disk01/usr5/gyang/REACTOR-related/data/mueller239241.txt";
- TString r241 = "/disk01/usr5/gyang/REACTOR-related/data/mueller239241.txt";
+ TString r235 = "data/mueller235.txt";
+ TString r238 = "data/mueller238.txt";
+ TString r239 = "data/mueller239241.txt";
+ TString r241 = "data/mueller239241.txt";
 
  mList.push_back(r235);
  mList.push_back(r238); 
@@ -91,14 +98,15 @@ using namespace std;
 
  rep->SetModelList(mList);
 
- rep->preparePrediction(rep->getPullList());
- rep->prepareData();
+ //rep->preparePrediction(rep->getPullList(), false);
+ std::vector<TH1D*> tempPredList = rep->preparePrediction(rep->getPullList(), false);
+ rep->prepareData(rep->preparePrediction(rep->getPullList(), false));
 
  rep->setPull(vecInput1); 
  rep->setPullUnc(vecInput2);
  rep->addSK(true);
 
- rep->setNBins(200);
+ rep->setNBins(34);
  rep->setTime(6);
 
  std::cout<<"ended up with setting us basic stuff "<<std::endl;
@@ -133,34 +141,44 @@ using namespace std;
  rep->getParVar(15)->setConstant(true);  // 1.25 - 1.5
  rep->getParVar(16)->setConstant(true);  // 1.5 - 1.75
  rep->getParVar(17)->setConstant(true);  // 1.75 - 2
- rep->getParVar(18)->setConstant(false);  // 2 - 2.25
- rep->getParVar(19)->setConstant(false);  // 2.25 - 2.5
- rep->getParVar(20)->setConstant(false);  // 2.5 - 2.75
- rep->getParVar(21)->setConstant(false);  // 2.75 - 3
- rep->getParVar(22)->setConstant(false);  // 3 - 3.25
- rep->getParVar(23)->setConstant(false);  // 3.25 - 3.5
- rep->getParVar(24)->setConstant(false);  // 3.5 - 3.75
- rep->getParVar(25)->setConstant(false);  // 3.75 - 4
- rep->getParVar(26)->setConstant(false);  // 4 - 4.25
- rep->getParVar(27)->setConstant(false);  // 4.25 - 4.5
- rep->getParVar(28)->setConstant(false);  // 4.5 - 4.75
- rep->getParVar(29)->setConstant(false);  // 4.75 - 5
- rep->getParVar(30)->setConstant(false);  // 5 - 5.25
- rep->getParVar(31)->setConstant(false);  // 5.25 - 5.5
- rep->getParVar(32)->setConstant(false);  // 5.5 - 5.75
- rep->getParVar(33)->setConstant(false);  // 5.75 - 6
- rep->getParVar(34)->setConstant(false);  // 6 - 6.25
- rep->getParVar(35)->setConstant(false);  // 6.25 - 6.5
- rep->getParVar(36)->setConstant(false);  // 6.5 - 6.75
- rep->getParVar(37)->setConstant(false);  // 6.75 - 7
- rep->getParVar(38)->setConstant(false);  // 7 - 7.25
- rep->getParVar(39)->setConstant(false);  // 7.25 - 7.5
- rep->getParVar(40)->setConstant(false);  // 7.5 - 7.75
- rep->getParVar(41)->setConstant(false);  // 7.75 - 8
+ rep->getParVar(18)->setConstant(true);  // 2 - 2.25
+ rep->getParVar(19)->setConstant(true);  // 2.25 - 2.5
+ rep->getParVar(20)->setConstant(true);  // 2.5 - 2.75
+ rep->getParVar(21)->setConstant(true);  // 2.75 - 3
+ rep->getParVar(22)->setConstant(true);  // 3 - 3.25
+ rep->getParVar(23)->setConstant(true);  // 3.25 - 3.5
+ rep->getParVar(24)->setConstant(true);  // 3.5 - 3.75
+ rep->getParVar(25)->setConstant(true);  // 3.75 - 4
+ rep->getParVar(26)->setConstant(true);  // 4 - 4.25
+ rep->getParVar(27)->setConstant(true);  // 4.25 - 4.5
+ rep->getParVar(28)->setConstant(true);  // 4.5 - 4.75
+ rep->getParVar(29)->setConstant(true);  // 4.75 - 5
+ rep->getParVar(30)->setConstant(true);  // 5 - 5.25
+ rep->getParVar(31)->setConstant(true);  // 5.25 - 5.5
+ rep->getParVar(32)->setConstant(true);  // 5.5 - 5.75
+ rep->getParVar(33)->setConstant(true);  // 5.75 - 6
+ rep->getParVar(34)->setConstant(true);  // 6 - 6.25
+ rep->getParVar(35)->setConstant(true);  // 6.25 - 6.5
+ rep->getParVar(36)->setConstant(true);  // 6.5 - 6.75
+ rep->getParVar(37)->setConstant(true);  // 6.75 - 7
+ rep->getParVar(38)->setConstant(true);  // 7 - 7.25
+ rep->getParVar(39)->setConstant(true);  // 7.25 - 7.5
+ rep->getParVar(40)->setConstant(true);  // 7.5 - 7.75
+ rep->getParVar(41)->setConstant(true);  // 7.75 - 8
  rep->getParVar(42)->setConstant(true);  // 8 - 8.25
  rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
  rep->getParVar(44)->setConstant(true);  // 8.75 - 9
+
+ // energy scales for four exp.
+ rep->getParVar(45)->setConstant(true);  
+ rep->getParVar(46)->setConstant(true);  
+ rep->getParVar(47)->setConstant(true);  
+ rep->getParVar(48)->setConstant(true);  
+ rep->getParVar(49)->setConstant(true);  
+ rep->getParVar(50)->setConstant(true);  
+ rep->getParVar(51)->setConstant(true);  
+ rep->getParVar(52)->setConstant(true);
 
  //    for(Int_t nn= 0; nn< npts ; ++nn) {
 
@@ -168,19 +186,106 @@ using namespace std;
  //rep->setTime(atof(argv[5]));
 
  std::vector<TH1D*> outPrediction = rep->GetCurrentPrediction();
- std::vector<TH1D*> outData = rep->GetCurrentData();
+ std::vector<TH1D*> outData = rep->GetCurrentData(outPrediction);
 
- TFile* outputFile = new TFile("/disk01/usr5/gyang/REACTOR-related/result/outputFigs.root","RECREATE");
+ TFile* outputFile = new TFile("outputFigs.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)
  {
-   outPrediction[i]->Write(Form("/disk01/usr5/gyang/REACTOR-related/result/outPrediction[%d]",i));
-   outData[i]->Write(Form("/disk01/usr5/gyang/REACTOR-related/result/outData[%d]",i));
+   outPrediction[i]->Write(Form("outPrediction[%d]",i));
+   outData[i]->Write(Form("outData[%d]",i));
  }
+ outputFile -> Close();
+/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ TFile* outputFileOsc = new TFile("outputFigVar1.root","RECREATE"); 
+ double dmVar = 0.1 ;
+ double stVar = 0.1 ;
+ rep->getParVar(2)->setVal(stVar);
+ rep->getParVar(6)->setVal(dmVar); 
+ outPrediction = rep->GetCurrentPrediction();
+ outData = rep->GetCurrentData();
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+ }
+ outputFileOsc -> Close();
 
- outputFile->Close();
- 
+ TFile* outputFileOsc2 = new TFile("outputFigVar2.root","RECREATE");
+ dmVar = 1 ;
+ stVar = 0.1 ;
+ rep->getParVar(2)->setVal(stVar);
+ rep->getParVar(6)->setVal(dmVar); 
+ outPrediction = rep->GetCurrentPrediction();
+ outData = rep->GetCurrentData();
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar, stVar));
+   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i, dmVar,stVar));
+ }
+ outputFileOsc2 -> Close();
+
+ TFile* outputFileOsc3 = new TFile("outputFigVar3.root","RECREATE");
+ dmVar = 10 ;
+ stVar = 0.1 ;
+ rep->getParVar(2)->setVal(stVar);
+ rep->getParVar(6)->setVal(dmVar); 
+ outPrediction = rep->GetCurrentPrediction();
+ outData = rep->GetCurrentData();
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar ));
+ }
+ outputFileOsc3 -> Close();
+
+ TFile* outputFileOsc4 = new TFile("outputFigVar4.root","RECREATE");
+ dmVar = 0.1 ;
+ stVar = 0.01 ;
+ rep->getParVar(2)->setVal(stVar);
+ rep->getParVar(6)->setVal(dmVar); 
+ outPrediction = rep->GetCurrentPrediction();
+ outData = rep->GetCurrentData();
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar ));
+ }
+ outputFileOsc4 -> Close();
+
+ TFile* outputFileOsc5 = new TFile("outputFigVar5.root","RECREATE");
+ dmVar = 1 ;
+ stVar = 0.01 ;
+ rep->getParVar(2)->setVal(stVar);
+ rep->getParVar(6)->setVal(dmVar);
+ outPrediction = rep->GetCurrentPrediction();
+ outData = rep->GetCurrentData();
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+ }
+ outputFileOsc5 -> Close();
+
+ TFile* outputFileOsc6 = new TFile("outputFigVar6.root","RECREATE");
+ dmVar = 10 ;
+ stVar = 0.01 ;
+ rep->getParVar(2)->setVal(stVar);
+ rep->getParVar(6)->setVal(dmVar); 
+ outPrediction = rep->GetCurrentPrediction();
+ outData = rep->GetCurrentData();
+ for(Int_t i=0;i<outPrediction.size();i++)
+ {
+   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+ }
+ outputFileOsc6 -> Close();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
  ofstream outText;
- outText.open(Form("/disk01/usr5/gyang/REACTOR-related/result/scan2D_%d_%d.txt",atoi(argv[1]), atoi(argv[2]) ));
+ outText.open(Form("result/scan2D_%d_%d.txt",atoi(argv[1]), atoi(argv[2]) ));
 
  double iDM = atof(argv[1]);
  double iST = atof(argv[2]);
@@ -188,12 +293,15 @@ using namespace std;
  //{
      //for(Int_t iST=0;iST<50;iST++)
      //{
-	rep->getParVar(2)->setVal(5 * TMath::Exp(-iDM*0.1));
-	rep->getParVar(6)->setVal(TMath::Exp(-iST*0.1));
+        // means that s2t14 0.001 - 1 and dm2 0.01 - 10
+        rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
+        rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 5.*iDM*2/100.)));
 	//rep->getParVar(2)->setVal(0);
 	//rep->getParVar(6)->setVal(0);
-	//rep->getParVar(3)->setConstant(true);
- 	//rep->getParVar(7)->setConstant(true);
+	rep->getParVar(2)->setConstant(false);
+ 	rep->getParVar(6)->setConstant(false);
+	rep->getParVar(7)->setConstant(true);
+	rep->getParVar(8)->setConstant(true);
  	RooMinuit m(*fcn);
  	m.setStrategy(2);
  	Double_t callsEDM[2] = {10500., 1.e-6};
@@ -210,12 +318,12 @@ using namespace std;
  //}
 
  outPrediction = rep->GetCurrentPrediction();
- outData = rep->GetCurrentData();
+ //outData = rep->GetCurrentData(outPrediction);
  
  std::cout<<"list of reactor pulls : "<<std::endl;
  for(Int_t i=18;i<41;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
 
- TFile* outputFile2 = new TFile("/disk01/usr5/gyang/REACTOR-related/result/outputFigs2.root","RECREATE");
+ TFile* outputFile2 = new TFile("outputFigs2.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)
  {
    outPrediction[i]->Write(Form("outFit[%d]",i));	 
@@ -236,7 +344,7 @@ using namespace std;
 
  //for(Int_t i=0;i<11;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
 
- int aa = (atof(argv[5])+0.000001)*100;
+ //int aa = (atof(argv[5])+0.000001)*100;
 
  //cout<<atoi(argv[2])<<" "<<aa<<" "<<dd<<endl; 
 
