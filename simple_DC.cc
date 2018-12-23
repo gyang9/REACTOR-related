@@ -629,7 +629,7 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
   // at peak, DC 15,000  DYB 80,000  RENO 1,200  NEOS 24,750  ; with factor = 5,000, peaked with 1,400, thus scaling as following: 
   double rateFactorDC = 5000 * (15./1.4);
   double rateFactorDYB = 5000 * (80./1.4);
-  double rateFactorRENO = 5000 * (12./14.);
+  double rateFactorRENO = 5000 * (12./14.) * (165./12.);
   double rateFactorNEOS = 5000 * (24.75/1.4);
 
   std::cout<<"important binning check in preparePrediction; "<<_nBins<<" "<<binEdge[0]<<" "<<binEdge[_nBins]<<std::endl;
