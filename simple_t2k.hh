@@ -113,6 +113,12 @@ using namespace RooFit;
     void setAtmBaseline(Double_t AtmBaseline) ;
     void setDensity(Double_t Density) ;
 
+    void setBaselineDYB(Double_t bl) ;
+    void setBaselineDC(Double_t bl) ;
+    void setBaselineRENO(Double_t bl) ;
+    void setBaselineNEOS(Double_t bl) ;
+    void setBaselinePROS(Double_t bl) ;
+
     void setNBins(Double_t Bins) ;
     void setTime(Double_t time) ;
     void setCorr1(Double_t Corr1) ;
@@ -136,6 +142,7 @@ using namespace RooFit;
     void SetMatrixNameDC(TString matrixNameDC);
     void SetMatrixNameRENO(TString matrixNameRENO);
     void SetMatrixNameNEOS(TString matrixNameNEOS);
+    void SetMatrixNamePROS(TString matrixNamePROS);
 
     void SetModelList(std::vector<TString>);
 
@@ -325,6 +332,10 @@ using namespace RooFit;
     TMatrixD* GetConversionMatrix() const {return fMatrix;}
     TH1D* folding(TH1D* input) const;
 
+    void fitSingleExp(TString input);
+
+    void ifEqualIso(bool iso = false);
+
     TH2D* fHist;
     TMatrixD* fMatrix;
     TMatrixD* uMatrix;
@@ -375,14 +386,24 @@ using namespace RooFit;
     TString fileNameNEOS;
     TString fileNameDC;
     TString fileNameDYB;
+    TString fileNamePROS;
     double fissionFraction[100];
     double binEdge[100];
     Int_t  _nBins;
+    TString singleExp;
+    double baselineDC;
+    double baselineDYB;
+    double baselineRENO;
+    double baselineNEOS;
+    double baselinePROS;
+
+    bool equalIso;
 
     TH1D* dataDC;
     TH1D* dataDYB;
     TH1D* dataRENO;
     TH1D* dataNEOS;
+    TH1D* dataPROS;
     //TH1D* predDC;
     //TH1D* predDYB;
     //TH1D* predRENO;

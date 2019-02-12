@@ -9,7 +9,7 @@ for i in `ls $FOLDER/run-*.sh`
 
 do
     echo $count
-if [[ "$count" -lt "10000" ]]; then
+if [[ "$count" -lt "1000" ]]; then
     echo 'Submitting' $i 'to' $QUEUE 'queue...'
     qsub -eo -o /dev/null -q $QUEUE $i
 
