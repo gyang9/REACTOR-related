@@ -122,7 +122,7 @@ using namespace std;
  RooFormulaVar* fcn = new RooFormulaVar("fit","fit",formula,list);
 
  rep->fitSingleExp(Form("%s",argv[3]));
- rep->ifEqualIso(true);
+ rep->ifEqualIso(false);
 
  rep->setBaselineDYB(560.0);
  rep->setBaselineDC(400.0);
@@ -144,7 +144,7 @@ using namespace std;
  rep->getParVar(9)->setConstant(true);
  rep->getParVar(10)->setConstant(true);
  rep->getParVar(11)->setConstant(true);
-/*
+
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(true);  // 0.75 - 1
  rep->getParVar(14)->setConstant(true);  // 1 - 1.25
@@ -178,8 +178,8 @@ using namespace std;
  rep->getParVar(42)->setConstant(true);  // 8 - 8.25
  rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
- rep->getParVar(44)->setConstant(false);  // 8.75 - 9
-*/
+ rep->getParVar(45)->setConstant(true);  // 8.75 - 9
+/*
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(false);  // 0.75 - 1
  rep->getParVar(14)->setConstant(false);  // 1 - 1.25
@@ -213,7 +213,44 @@ using namespace std;
  rep->getParVar(42)->setConstant(false);  // 8 - 8.25
  rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(false);  // 8.5 - 8.75
- rep->getParVar(44)->setConstant(true);  // 8.75 - 9
+ rep->getParVar(45)->setConstant(true);  // 8.75 - 9
+*/
+/*
+ rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
+ rep->getParVar(13)->setConstant(true);  // 0.75 - 1
+ rep->getParVar(14)->setConstant(true);  // 1 - 1.25
+ rep->getParVar(15)->setConstant(true);  // 1.25 - 1.5
+ rep->getParVar(16)->setConstant(true);  // 1.5 - 1.75
+ rep->getParVar(17)->setConstant(true);  // 1.75 - 2
+ rep->getParVar(18)->setConstant(true);  // 2 - 2.25
+ rep->getParVar(19)->setConstant(true);  // 2.25 - 2.5
+ rep->getParVar(20)->setConstant(false);  // 2.5 - 2.75
+ rep->getParVar(21)->setConstant(false);  // 2.75 - 3
+ rep->getParVar(22)->setConstant(false);  // 3 - 3.25
+ rep->getParVar(23)->setConstant(false);  // 3.25 - 3.5
+ rep->getParVar(24)->setConstant(false);  // 3.5 - 3.75
+ rep->getParVar(25)->setConstant(false);  // 3.75 - 4
+ rep->getParVar(26)->setConstant(false);  // 4 - 4.25
+ rep->getParVar(27)->setConstant(false);  // 4.25 - 4.5
+ rep->getParVar(28)->setConstant(false);  // 4.5 - 4.75
+ rep->getParVar(29)->setConstant(false);  // 4.75 - 5
+ rep->getParVar(30)->setConstant(false);  // 5 - 5.25
+ rep->getParVar(31)->setConstant(false);  // 5.25 - 5.5
+ rep->getParVar(32)->setConstant(false);  // 5.5 - 5.75
+ rep->getParVar(33)->setConstant(false);  // 5.75 - 6
+ rep->getParVar(34)->setConstant(false);  // 6 - 6.25
+ rep->getParVar(35)->setConstant(false);  // 6.25 - 6.5
+ rep->getParVar(36)->setConstant(false);  // 6.5 - 6.75
+ rep->getParVar(37)->setConstant(false);  // 6.75 - 7
+ rep->getParVar(38)->setConstant(false);  // 7 - 7.25
+ rep->getParVar(39)->setConstant(true);  // 7.25 - 7.5
+ rep->getParVar(40)->setConstant(true);  // 7.5 - 7.75
+ rep->getParVar(41)->setConstant(true);  // 7.75 - 8
+ rep->getParVar(42)->setConstant(true);  // 8 - 8.25
+ rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
+ rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
+ rep->getParVar(45)->setConstant(true);  // 8.75 - 9
+*/
 
  // energy scales for four exp.
  rep->getParVar(45)->setConstant(true);  
@@ -245,8 +282,9 @@ using namespace std;
  }
  outputFile -> Close();
  std::cout<<"first thing saved "<<std::endl;
-/*
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
  TFile* outputFileOsc = new TFile("outputFigVar1.root","RECREATE"); 
  double dmVar = 0.1 ;
  double stVar = 0.1 ;
@@ -257,7 +295,7 @@ using namespace std;
  for(Int_t i=0;i<outPrediction.size();i++)
  {
    outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
-   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
  }
  outputFileOsc -> Close();
 
@@ -335,7 +373,7 @@ using namespace std;
 */
 
  ofstream outText;
- outText.open(Form("/disk01/usr5/gyang/REACTOR-related/result/scan2Dnew_DYBNEOSPROSPECT_fission_equalIso_%d_%d.txt",atoi(argv[1]), atoi(argv[2]) ));
+ //outText.open(Form("/disk01/usr5/gyang/REACTOR-related/result/scan2Dnew_DYBNEOSPROSPECT_fission_equalIso_%d_%d.txt",atoi(argv[1]), atoi(argv[2]) ));
 
  double iDM = atof(argv[1]);
  double iST = atof(argv[2]);
@@ -344,12 +382,12 @@ using namespace std;
      //for(Int_t iST=0;iST<50;iST++)
      //{
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
-        rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
-        rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 5.*iDM*2/100.)));
-	//rep->getParVar(2)->setVal(0);
-	//rep->getParVar(6)->setVal(0);
-	rep->getParVar(2)->setConstant(true);
- 	rep->getParVar(6)->setConstant(true);
+        //rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
+        //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 5.*iDM*2/100.)));
+	rep->getParVar(2)->setVal(iST);
+	rep->getParVar(6)->setVal(iDM);
+	rep->getParVar(2)->setConstant(false);
+ 	rep->getParVar(6)->setConstant(false);
 	rep->getParVar(7)->setConstant(true);
 	rep->getParVar(8)->setConstant(true);
  	RooMinuit m(*fcn);
@@ -362,16 +400,38 @@ using namespace std;
  	//m.hesse();
  	//m.minos(); 
  	res = m.save();
- 	double bestFit = res->minNll(); 
-	outText<<atoi(argv[1])<<" "<<atoi(argv[2])<<" "<<bestFit<<std::endl;
+ 	double bestFit = res->minNll();
+        std::cout<<"fit status code is : "<< res->status()<<std::endl;	
+	//status = 0    : OK
+  	//status = 1    : Covariance was mad  epos defined
+   	//status = 2    : Hesse is invalid
+   	//status = 3    : Edm is above max
+   	//status = 4    : Reached call limit
+   	//status = 5    : Any other failure
+	std::cout<<"quiality code of covariance matrix is : "<< res->covQual()<<std::endl;
+	//status = -1 :  not available (inversion failed or Hesse failed)
+        //status =  0 : available but not positive defined
+        //status =  1 : covariance only approximate
+        //status =  2 : full matrix but forced pos def
+        //status =  3 : full accurate matrix
+	//outText<<atoi(argv[1])<<" "<<atoi(argv[2])<<" "<<bestFit<<std::endl;
      //}
  //}
 
+ //////////////////////	
+ //inline Int_t status() const 
+ //inline Int_t covQual() const 
+ //inline Int_t numInvalidNLL() const 
+ //inline Double_t edm() const 
+ //inline Double_t minNll() const 
+ /////////////////////
+
  outPrediction = rep->GetCurrentPrediction();
  //outData = rep->GetCurrentData(outPrediction);
- 
- std::cout<<"list of reactor pulls : "<<std::endl;
- for(Int_t i=18;i<41;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
+
+
+ //std::cout<<"list of reactor pulls : "<<std::endl;
+ //for(Int_t i=18;i<41;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
 
  TFile* outputFile2 = new TFile("outputFigs2.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)

@@ -33,7 +33,7 @@ using namespace std;
   RooRealVar* Par4 = new RooRealVar("delta","par4",-1.5,-10,10);
   RooRealVar* Par5 = new RooRealVar("dm21","par5",0.000075,-10,10);
   RooRealVar* Par6 = new RooRealVar("dm32","par6",0,0,10); // 0.00238,-10,10);
-  RooRealVar* Par7 = new RooRealVar("dm41","par7",0.00244,-10,10);
+  RooRealVar* Par7 = new RooRealVar("dm41","par7",0.00244,0,10);
   RooRealVar* Par8 = new RooRealVar("numuX","par8",1,0.,100);
   RooRealVar* Par9 = new RooRealVar("nueX","par9",1,0.,100);
   RooRealVar* Par10 = new RooRealVar("numuSel","par10",1,0.,100);
@@ -303,7 +303,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   TVectorD* errList = new TVectorD(nBins);
   for(Int_t i = 0; i< nBins; i++)
   {
-      (*errList)[i] = errlist_flux[i];
+      (*errList)[i] = errlist_all[i];
   }
 
   TMatrixD* outMat = new TMatrixD(5 * nBins , 5 * nBins);
@@ -515,13 +515,16 @@ Double_t Sterile ::FillEv( RooListProxy* _pulls ) const
    if (singleExp.Contains("ALL")){
      for(Int_t i=0;i<nBins;i++){ 
      std::cout<<"Adding ALL at one time "<<std::endl;
-        (*fData)[i]             = dataDC->GetBinContent(i+1)   - (*fVec)[i] * scaling1  ;
-        (*fData)[nBins + i]     = dataDYB->GetBinContent(i+1)  - (*fVec)[nBins + i] * scaling2 ;
-	(*fData)[2 * nBins + i] = dataRENO->GetBinContent(i+1) - (*fVec)[2 * nBins + i] * scaling3 ;
-	(*fData)[3 * nBins + i] = dataNEOS->GetBinContent(i+1) - (*fVec)[3 * nBins + i] * scaling4 ;
-        (*fData)[4 * nBins + i] = dataPROS->GetBinContent(i+1) - (*fVec)[4 * nBins + i] * scaling5 ;
+        (*fData)[i]             = TMath::Abs( dataDC->GetBinContent(i+1)   - (*fVec)[i] * scaling1  );
+        (*fData)[nBins + i]     = TMath::Abs( dataDYB->GetBinContent(i+1)  - (*fVec)[nBins + i] * scaling2 );
+	(*fData)[2 * nBins + i] = TMath::Abs( dataRENO->GetBinContent(i+1) - (*fVec)[2 * nBins + i] * scaling3 );
+	(*fData)[3 * nBins + i] = TMath::Abs( dataNEOS->GetBinContent(i+1) - (*fVec)[3 * nBins + i] * scaling4 );
+        (*fData)[4 * nBins + i] = TMath::Abs( dataPROS->GetBinContent(i+1) - (*fVec)[4 * nBins + i] * scaling5 );
+	//std::cout<<(*fData)[i]<<" "<<(*fData)[nBins + i] <<" "<<(*fData)[2 * nBins + i]<<" "<<(*fData)[3 * nBins + i]<<" "<<(*fData)[4 * nBins + i]<<std::endl;
+	//std::cout<<dataDC->GetBinContent(i+1)<<" "<<dataDYB->GetBinContent(i+1)<<" "<<dataRENO->GetBinContent(i+1)<<" "<<dataNEOS->GetBinContent(i+1)<<" "<<dataPROS->GetBinContent(i+1)<<std::endl;
      }
    }
+
    std::cout<<"preparing matrix "<<std::endl;
 
    TMatrixD* covMat = this->prepareCovMatrix(nBins , fVec);
@@ -761,7 +764,7 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
 
       if(equalIso){
 
-        std::cout<<"oscillation probability "<<oscDC<<" "<<oscDYB<<" "<<oscRENO<<" "<<oscNEOS<<" "<<oscPROS<<std::endl;
+        //std::cout<<"oscillation probability "<<oscDC<<" "<<oscDYB<<" "<<oscRENO<<" "<<oscNEOS<<" "<<oscPROS<<std::endl;
         predDC -> SetBinContent( i+1,  oscDC * IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) *  rateFactorDC * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1]*  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2]*  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3]*  ((RooAbsReal*)_pulls->at(i+12))->getVal() ));
 
         predDYB -> SetBinContent( i+1, oscDYB * IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactorDYB * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5]*  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6]*  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7]*  ((RooAbsReal*)_pulls->at(i+12))->getVal() ));
@@ -776,7 +779,7 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
 
       else{
         //std::cout<<"IBDXsec: "<<IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.)<<std::endl;
-        std::cout<<"oscillation probability "<<oscDC<<" "<<oscDYB<<" "<<oscRENO<<" "<<oscNEOS<<" "<<oscPROS<<std::endl;
+        //std::cout<<"oscillation probability "<<oscDC<<" "<<oscDYB<<" "<<oscRENO<<" "<<oscNEOS<<" "<<oscPROS<<std::endl;
         predDC -> SetBinContent( i+1,  oscDC * IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) *  rateFactorDC * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
         //std::cout<<"predDC value in preparePrediction "<<predDC->GetBinContent(i+1)<<" "<<dataDC->GetBinContent(i+1)<<std::endl;
 
@@ -855,6 +858,7 @@ std::vector<TH1D*> Sterile:: prepareData(std::vector<TH1D*> tempPredList) const
     dataRENO -> SetBinContent(i+1,  predRENO->GetBinContent(i+1)  * gradataRENO->Eval(predRENO->GetBinCenter(i+1)) );
     dataNEOS -> SetBinContent(i+1,  predNEOS->GetBinContent(i+1)  * gradataNEOS->Eval(predNEOS->GetBinCenter(i+1)) );
     dataPROS -> SetBinContent(i+1,  predPROS->GetBinContent(i+1)  * gradataPROS->Eval(predPROS->GetBinCenter(i+1)) );
+    std::cout<<predPROS->GetBinContent(i+1)<<" "<<predPROS->GetBinContent(i+1)  * gradataPROS->Eval(predPROS->GetBinCenter(i+1))<<std::endl;
   }
 
   std::vector<TH1D*> dataList;
