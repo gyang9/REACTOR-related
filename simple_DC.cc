@@ -575,7 +575,7 @@ TF1* Sterile:: GetIBDXsecFormula() const
 
 TGraph* Sterile:: GetIBDXsecPoints() const
 {
-  TGraph* IBDXsec = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/IBDXsec.dat");
+  TGraph* IBDXsec = new TGraph("data/IBDXsec.dat");
   //TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
   return IBDXsec;
 }
@@ -590,31 +590,31 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
   TGraph* meuller239;
   TGraph* meuller241;
 
-  if(modelList.at(0)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller235.txt")
+  if(modelList.at(0)==fileLocation+"/data/mueller235.txt")
   //if(modelList.at(0)=="data/huber235.txt")
           meuller235 = new TGraph(modelList.at(0), "%lg %*lg %lg %*lg %*lg %*lg %*lg %*lg", "");
   else
           meuller235 = new TGraph(modelList.at(0), "%lg %lg %*lg", "");
 
-  if(modelList.at(1)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller238.txt")
+  if(modelList.at(1)==fileLocation+"/data/mueller238.txt")
           meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg %*lg %*lg", "");
   else
           meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg", "");
 
-  if(modelList.at(2)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller239241.txt")
+  if(modelList.at(2)==fileLocation+"/data/mueller239241.txt")
   //if(modelList.at(2)=="data/huber239.txt")
           meuller239 = new TGraph(modelList.at(2), "%lg %*lg %lg %*lg %*lg %*lg %*lg", "");
   else
           meuller239 = new TGraph(modelList.at(2), "%lg %lg %*lg", "");
 
-  if(modelList.at(3)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller239241.txt")
+  if(modelList.at(3)==fileLocation+"/data/mueller239241.txt")
   //if(modelList.at(2)=="data/huber241.txt")
           meuller241 = new TGraph(modelList.at(3), "%lg %*lg %*lg %*lg %*lg %lg %*lg", "");
   else
           meuller241 = new TGraph(modelList.at(3), "%lg %lg %*lg", "");
 
 
-  TGraph* IBDXsec = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/IBDXsec.dat");
+  TGraph* IBDXsec = new TGraph(fileLocation+"/data/IBDXsec.dat");
   //TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
 
   // at peak, DC 15,000  DYB 80,000  RENO 1,200  NEOS 24,750  ; with factor = 5,000, peaked with 1,400, thus scaling as following: 
@@ -694,28 +694,28 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
   TGraph* meuller239;
   TGraph* meuller241;
 
-  if(modelList.at(0)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller235.txt")
+  if(modelList.at(0)==fileLocation+"/data/mueller235.txt")
           meuller235 = new TGraph(modelList.at(0), "%lg %*lg %lg %*lg %*lg %*lg %*lg %*lg", "");
   else
           meuller235 = new TGraph(modelList.at(0), "%lg %lg %*lg", "");
 
-  if(modelList.at(1)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller238.txt")
+  if(modelList.at(1)==fileLocation+"/data/mueller238.txt")
           meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg %*lg %*lg", "");
   else
           meuller238 = new TGraph(modelList.at(1), "%lg %lg %*lg", "");
 
-  if(modelList.at(2)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller239241.txt")
+  if(modelList.at(2)==fileLocation+"/data/mueller239241.txt")
           meuller239 = new TGraph(modelList.at(2), "%lg %*lg %lg %*lg %*lg %*lg %*lg", "");
   else
           meuller239 = new TGraph(modelList.at(2), "%lg %lg %*lg", "");
 
-  if(modelList.at(3)=="/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/mueller239241.txt")
+  if(modelList.at(3)==fileLocation+"/data/mueller239241.txt")
           meuller241 = new TGraph(modelList.at(3), "%lg %*lg %*lg %*lg %*lg %lg %*lg", "");
   else
           meuller241 = new TGraph(modelList.at(3), "%lg %lg %*lg", "");
 
 
-  TGraph* IBDXsec = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/IBDXsec.dat");
+  TGraph* IBDXsec = new TGraph(fileLocation+"/data/IBDXsec.dat");
   //TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
   //TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x)*( sqrt((x)*(x)-0.5*0.5))" ,1.8,10);
 
@@ -839,11 +839,11 @@ std::vector<TH1D*> Sterile:: prepareData(std::vector<TH1D*> tempPredList) const
   //dataRENO = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   //dataNEOS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
 
-  TGraph* gradataDC   = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/dataDC.txt", "%*lg %lg %lg", "");
-  TGraph* gradataDYB  = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/dataDYB.txt", "%*lg %lg %lg", "");
-  TGraph* gradataRENO = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/dataRENO.txt", "%*lg %lg %lg", "");
-  TGraph* gradataNEOS = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/dataNEOS.txt", "%*lg %lg %lg", "");
-  TGraph* gradataPROS = new TGraph("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/data/dataPROS.txt", "%*lg %lg %lg", "");
+  TGraph* gradataDC   = new TGraph(fileLocation+"/data/dataDC.txt", "%*lg %lg %lg", "");
+  TGraph* gradataDYB  = new TGraph(fileLocation+"/data/dataDYB.txt", "%*lg %lg %lg", "");
+  TGraph* gradataRENO = new TGraph(fileLocation+"/data/dataRENO.txt", "%*lg %lg %lg", "");
+  TGraph* gradataNEOS = new TGraph(fileLocation+"/data/dataNEOS.txt", "%*lg %lg %lg", "");
+  TGraph* gradataPROS = new TGraph(fileLocation+"/data/dataPROS.txt", "%*lg %lg %lg", "");
 
   TH1D* predDC = tempPredList[0];
   TH1D* predDYB = tempPredList[1];
@@ -1039,6 +1039,11 @@ bool Sterile::GetEqualIso()
 return equalIso;
 }
 
+void Sterile::setFileLocation(TString fileL)
+{
+fileLocation = fileL;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 TMatrixD* Sterile:: ConversionMatrix(TString inputFile, TString inputTree)
 {
@@ -1113,5 +1118,3 @@ for(Int_t i=0;i<uMatrix->GetNrows();i++){
 std::cout<<"folded "<<std::endl;
 return output;
 }
-
-

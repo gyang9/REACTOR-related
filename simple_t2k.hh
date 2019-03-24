@@ -337,6 +337,8 @@ using namespace RooFit;
     void ifEqualIso(bool iso = false);
     bool GetEqualIso();
 
+    void setFileLocation(TString fileL);
+
     TH2D* fHist;
     TMatrixD* fMatrix;
     TMatrixD* uMatrix;
@@ -399,6 +401,7 @@ using namespace RooFit;
     double baselinePROS;
 
     bool equalIso;
+    TString fileLocation;
 
     TH1D* dataDC;
     TH1D* dataDYB;

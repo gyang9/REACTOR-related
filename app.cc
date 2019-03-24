@@ -65,7 +65,8 @@ using namespace std;
    binHist->SetBinContent(i+1, 0.5 + 0.25*i);
  }
 
- TString fileLocation = "/gpfs/projects/McGrewGroup/gyang/REACTOR-related/";
+ TString fileLocation = "/home/guang/work/REACTOR-related/";
+ rep->setFileLocation(fileLocation);
 
  TH1D* fissionHist = new TH1D("","",16,0,16);
  double fissionList[16]={0.49,0.09,0.35,0.07,    0.501,0.073,0.353,0.072,    0.679,0.072,0.215,0.035,      0.679,0.072,0.215,0.035};
@@ -376,9 +377,9 @@ using namespace std;
 
  ofstream outText;
  if (rep->GetEqualIso())
-   outText.open(Form("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/result/scan2Dnew_%s__fission_ISO_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
+   outText.open(Form("result/scan2Dnew_%s_fission_ISO_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
  else
-   outText.open(Form("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/result/scan2Dnew_%s__fission_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
+   outText.open(Form("result/scan2Dnew_%s_fission_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
 
  double iDM = atof(argv[1]);
  double iST = atof(argv[2]);
