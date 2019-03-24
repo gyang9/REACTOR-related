@@ -65,32 +65,34 @@ using namespace std;
    binHist->SetBinContent(i+1, 0.5 + 0.25*i);
  }
 
+ TString fileLocation = "/gpfs/projects/McGrewGroup/gyang/REACTOR-related/";
+
  TH1D* fissionHist = new TH1D("","",16,0,16);
  double fissionList[16]={0.49,0.09,0.35,0.07,    0.501,0.073,0.353,0.072,    0.679,0.072,0.215,0.035,      0.679,0.072,0.215,0.035};
  for(Int_t i=0;i<16;i++){
    fissionHist->SetBinContent(i+1, fissionList[i]);
  }
 
- rep->SetMatrixNameDC("data/ReactorMatrixND_shape_rho0_NU.root");
- rep->SetMatrixNameDYB("data/NEOSCorrelationMatrix.root");
- rep->SetMatrixNameRENO("data/NEOSCorrelationMatrix.root");
- rep->SetMatrixNameNEOS("data/NEOSCorrelationMatrix.root");
- rep->SetMatrixNamePROS("data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameDC(fileLocation+"data/ReactorMatrixND_shape_rho0_NU.root");
+ rep->SetMatrixNameDYB(fileLocation+"data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameRENO(fileLocation+"data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNameNEOS(fileLocation+"data/NEOSCorrelationMatrix.root");
+ rep->SetMatrixNamePROS(fileLocation+"data/NEOSCorrelationMatrix.root");
 
  rep->SetBinning(binHist);
  rep->SetFissionFraction(fissionHist);
 
- TMatrixD* cfMatrix = rep->ConversionMatrix("data/FinalFitIBDTree_DCIV_ND.root","FinalFitIBDTree");
+ TMatrixD* cfMatrix = rep->ConversionMatrix(fileLocation+"data/FinalFitIBDTree_DCIV_ND.root","FinalFitIBDTree");
  //rep->ConversionMatrix("data/FinalFitIBDTree_DCIV_ND.root","FinalFitIBDTree");
  //TH2D* fHist = rep->GetConversionMatrix();
 
  //std::cout<<"'ve set some more inputs, conversiont matrix summation is : "<<fHist->Integral()<<std::endl;
 
  std::vector<TString> mList;
- TString r235 = "data/huber235.txt";
- TString r238 = "data/mueller238.txt";
- TString r239 = "data/huber239.txt";
- TString r241 = "data/huber241.txt";
+ TString r235 = (fileLocation+"data/huber235.txt");
+ TString r238 = (fileLocation+"data/mueller238.txt");
+ TString r239 = (fileLocation+"data/huber239.txt");
+ TString r241 = (fileLocation+"data/huber241.txt");
 
  mList.push_back(r235);
  mList.push_back(r238); 
@@ -176,7 +178,7 @@ using namespace std;
  rep->getParVar(40)->setConstant(true);  // 7.5 - 7.75
  rep->getParVar(41)->setConstant(true);  // 7.75 - 8
  rep->getParVar(42)->setConstant(true);  // 8 - 8.25
- rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
+ rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
  rep->getParVar(45)->setConstant(true);  // 8.75 - 9
 /*
@@ -373,7 +375,10 @@ using namespace std;
 */
 
  ofstream outText;
- //outText.open(Form("/disk01/usr5/gyang/REACTOR-related/result/scan2Dnew_DYBNEOSPROSPECT_fission_equalIso_%d_%d.txt",atoi(argv[1]), atoi(argv[2]) ));
+ if (rep->GetEqualIso())
+   outText.open(Form("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/result/scan2Dnew_%s__fission_ISO_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
+ else
+   outText.open(Form("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/result/scan2Dnew_%s__fission_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
 
  double iDM = atof(argv[1]);
  double iST = atof(argv[2]);
@@ -384,9 +389,9 @@ using namespace std;
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
         //rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
         //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 5.*iDM*2/100.)));
-	rep->getParVar(2)->setVal(iST);
-	rep->getParVar(6)->setVal(iDM);
-	rep->getParVar(2)->setConstant(false);
+	rep->getParVar(2)->setVal(iST/200.);
+	rep->getParVar(6)->setVal(iDM/200.);
+	rep->getParVar(2)->setConstant(true);
  	rep->getParVar(6)->setConstant(false);
 	rep->getParVar(7)->setConstant(true);
 	rep->getParVar(8)->setConstant(true);
@@ -414,7 +419,7 @@ using namespace std;
         //status =  1 : covariance only approximate
         //status =  2 : full matrix but forced pos def
         //status =  3 : full accurate matrix
-	//outText<<atoi(argv[1])<<" "<<atoi(argv[2])<<" "<<bestFit<<std::endl;
+	outText<<atoi(argv[1])<<" "<<atoi(argv[2])<<" "<<bestFit<<std::endl;
      //}
  //}
 

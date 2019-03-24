@@ -335,6 +335,7 @@ using namespace RooFit;
     void fitSingleExp(TString input);
 
     void ifEqualIso(bool iso = false);
+    bool GetEqualIso();
 
     TH2D* fHist;
     TMatrixD* fMatrix;
