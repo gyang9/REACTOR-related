@@ -228,145 +228,146 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
   TFile fMatrixNEOS(fileNameNEOS);
   TFile fMatrixPROS(fileNamePROS);
 
-  TMatrixD* fracMatDC = (TMatrixD*)fMatrixDC.Get("frac_approx");
-  for(Int_t i=0;i<nBins;i++)
-  {
-      for(Int_t j=0;j<nBins;j++)
-      {
-          (*fracMatDC)(i,j) = (*fracMatDC)(i,j);
-      }
-  }
-  fracMatDC->ResizeTo(nBins , nBins);
-
-  TMatrixD* fracMatDYB = new TMatrixD(100,100);
-  TH2D* fracTH2DYB = (TH2D*)fMatrixDYB.Get("hCorrelation_0.25MeV");
-  for(Int_t i=0;i<fracTH2DYB->GetNbinsX();i++)
-  {
-      for(Int_t j=0;j<fracTH2DYB->GetNbinsY();j++)
-      {
-          (*fracMatDYB)(i+2,j+2) = fracTH2DYB->GetBinContent(i+1,j+1);
-      }
-  }
-  fracMatDYB->ResizeTo(nBins,nBins);
-
-  TMatrixD* fracMatRENO = new TMatrixD(100,100);
-  TH2D* fracTH2RENO = (TH2D*)fMatrixRENO.Get("hCorrelation_0.25MeV");
-  for(Int_t i=0;i<fracTH2RENO->GetNbinsX();i++)
-  {
-      for(Int_t j=0;j<fracTH2RENO->GetNbinsY();j++)
-      {
-          (*fracMatRENO)(i+2,j+2) = fracTH2RENO->GetBinContent(i+1,j+1);
-      }
-  }
-  fracMatRENO->ResizeTo(nBins,nBins);
-
-  TMatrixD* fracMatNEOS = new TMatrixD(100,100);
-  TH2D* fracTH2NEOS = (TH2D*)fMatrixNEOS.Get("hCorrelation_0.25MeV");
-  for(Int_t i=0;i<fracTH2NEOS->GetNbinsX();i++)
-  {
-      for(Int_t j=0;j<fracTH2NEOS->GetNbinsY();j++)
-      {
-          (*fracMatNEOS)(i+2,j+2) = fracTH2NEOS->GetBinContent(i+1,j+1);
-      }
-  }
-  fracMatNEOS->ResizeTo(nBins,nBins);
-
-  TMatrixD* fracMatPROS = new TMatrixD(100,100);
-  TH2D* fracTH2PROS = (TH2D*)fMatrixPROS.Get("hCorrelation_0.25MeV");
-  for(Int_t i=0;i<fracTH2PROS->GetNbinsX();i++)
-  {
-      for(Int_t j=0;j<fracTH2PROS->GetNbinsY();j++)
-      {
-          (*fracMatPROS)(i+2,j+2) = fracTH2PROS->GetBinContent(i+1,j+1);
-      }
-  }
-  fracMatPROS->ResizeTo(nBins,nBins);
-
-  (*fracMatDYB)(0,0) = fracTH2DYB->GetBinContent(1,1);
-  (*fracMatDYB)(1,1) = fracTH2DYB->GetBinContent(1,1);
-  (*fracMatRENO)(0,0) = fracTH2RENO->GetBinContent(1,1);
-  (*fracMatRENO)(1,1) = fracTH2RENO->GetBinContent(1,1);
-  (*fracMatNEOS)(0,0) = fracTH2NEOS->GetBinContent(1,1);
-  (*fracMatNEOS)(1,1) = fracTH2NEOS->GetBinContent(1,1);
-  (*fracMatPROS)(0,0) = fracTH2PROS->GetBinContent(1,1);
-  (*fracMatPROS)(1,1) = fracTH2PROS->GetBinContent(1,1);
-
-  // Reactor flux error vector from DYB paper : arXiv. 1607.05378
-  double errlist_all[100]={0.042,0.03,0.025,0.022,0.021,0.019,0.017,0.015,0.015,0.0155,
-	  		   0.017,0.018,0.02,0.022,0.025,0.029,0.033,0.035,0.037,0.041,
-  			   0.052,0.065,0.072
-  			  };
-  double errlist_flux[100]={0.01,0.01,0.09,0.09,0.09,0.09,0.09,0.09,0.09,0.01,
-	  		    0.01,0.01,0.01,0.011,0.013,0.014,0.015,0.016,0.018,
-			    0.02,0.022,0.025  
-  			   };
-  TVectorD* errList = new TVectorD(nBins);
-  for(Int_t i = 0; i< nBins; i++)
-  {
-      (*errList)[i] = errlist_all[i];
-  }
-
   TMatrixD* outMat = new TMatrixD(5 * nBins , 5 * nBins);
 
-  for(Int_t i = 0; i< nBins; i++)
-  {
-    for(Int_t j =0 ;j<nBins; j++) 
-    { 
-      //std::cout<<(*fracMat)(i,j)<<std::endl; 
-        //if((*fracMatDC)(4,4) > 0.5 )
-        //    (*outMat)(i,j) = (*fracMatDC)(i,j) * (*errList)[i] * (*errList)[j] * (*fVec)[i] * (*fVec)[j];
-	//else      
-	    (*outMat)(i,j) = (*fracMatDC)(i,j) * (*fVec)[i] * (*fVec)[j];
-    }
-  }
+  if(inSyst){
 
-  for(Int_t i = nBins; i< 2 * nBins; i++)
-  {
-    for(Int_t j = nBins ;j< 2 *nBins; j++) 
-    {
-	//std::cout<<"in loading second matrix "<<std::endl;
-	//std::cout<<(*fracMatDYB)(0,0)<<std::endl;
-	//if((*fracMatDYB)(4,4) > 0.5)
-	    (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*errList)[i-nBins] * (*errList)[j-nBins]  * (*fVec)[i] * (*fVec)[j];
-	//else
-        //    (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*fVec)[i] * (*fVec)[j];
-    }
-  }
-  //std::cout<<"in middle of matrix preparation "<<std::endl;
+      TMatrixD* fracMatDC = (TMatrixD*)fMatrixDC.Get("frac_approx");
+      for(Int_t i=0;i<nBins;i++)
+      {
+          for(Int_t j=0;j<nBins;j++)
+          {
+              (*fracMatDC)(i,j) = (*fracMatDC)(i,j);
+          }
+      }
+      fracMatDC->ResizeTo(nBins , nBins);
 
-  for(Int_t i = nBins+nBins; i<nBins*3; i++)
-  {
-    for(Int_t j = nBins+nBins ;j < nBins*3; j++) 
-    {
-	//if((*fracMatRENO)(4,4) > 0.5)
-	    (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*errList)[i-nBins-nBins] * (*errList)[j-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];		
-	//else
-       	//    (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
-    }
-  }
+      TMatrixD* fracMatDYB = new TMatrixD(100,100);
+      TH2D* fracTH2DYB = (TH2D*)fMatrixDYB.Get("hCorrelation_0.25MeV");
+      for(Int_t i=0;i<fracTH2DYB->GetNbinsX();i++)
+      {
+          for(Int_t j=0;j<fracTH2DYB->GetNbinsY();j++)
+          {
+              (*fracMatDYB)(i+2,j+2) = fracTH2DYB->GetBinContent(i+1,j+1);
+          }
+      }
+      fracMatDYB->ResizeTo(nBins,nBins);
 
-  for(Int_t i = nBins*3; i< nBins*4; i++)
-  {
-    for(Int_t j = nBins*3 ;j< nBins*4; j++) 
-    {
-	//if((*fracMatNEOS)(4,4) > 0.5)
-            (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*errList)[i-nBins-nBins-nBins] * (*errList)[j-nBins-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];
-        //else	    
-      	//    (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
-    }
-  }
+      TMatrixD* fracMatRENO = new TMatrixD(100,100);
+      TH2D* fracTH2RENO = (TH2D*)fMatrixRENO.Get("hCorrelation_0.25MeV");
+      for(Int_t i=0;i<fracTH2RENO->GetNbinsX();i++)
+      {
+          for(Int_t j=0;j<fracTH2RENO->GetNbinsY();j++)
+          {
+              (*fracMatRENO)(i+2,j+2) = fracTH2RENO->GetBinContent(i+1,j+1);
+          }
+      }
+      fracMatRENO->ResizeTo(nBins,nBins);
 
-  std::cout<<"Doing PROSPECT matrix setup "<<std::endl;
-  for(Int_t i = nBins*4; i< nBins*5; i++)
-  {
-    for(Int_t j = nBins*4 ;j< nBins*5; j++)
-    {
+      TMatrixD* fracMatNEOS = new TMatrixD(100,100);
+      TH2D* fracTH2NEOS = (TH2D*)fMatrixNEOS.Get("hCorrelation_0.25MeV");
+      for(Int_t i=0;i<fracTH2NEOS->GetNbinsX();i++)
+      {
+          for(Int_t j=0;j<fracTH2NEOS->GetNbinsY();j++)
+          {
+              (*fracMatNEOS)(i+2,j+2) = fracTH2NEOS->GetBinContent(i+1,j+1);
+          }
+      }
+      fracMatNEOS->ResizeTo(nBins,nBins);
+
+      TMatrixD* fracMatPROS = new TMatrixD(100,100);
+      TH2D* fracTH2PROS = (TH2D*)fMatrixPROS.Get("hCorrelation_0.25MeV");
+      for(Int_t i=0;i<fracTH2PROS->GetNbinsX();i++)
+      {
+          for(Int_t j=0;j<fracTH2PROS->GetNbinsY();j++)
+          {
+              (*fracMatPROS)(i+2,j+2) = fracTH2PROS->GetBinContent(i+1,j+1);
+          }
+      }
+      fracMatPROS->ResizeTo(nBins,nBins);
+
+      (*fracMatDYB)(0,0) = fracTH2DYB->GetBinContent(1,1);
+      (*fracMatDYB)(1,1) = fracTH2DYB->GetBinContent(1,1);
+      (*fracMatRENO)(0,0) = fracTH2RENO->GetBinContent(1,1);
+      (*fracMatRENO)(1,1) = fracTH2RENO->GetBinContent(1,1);
+      (*fracMatNEOS)(0,0) = fracTH2NEOS->GetBinContent(1,1);
+      (*fracMatNEOS)(1,1) = fracTH2NEOS->GetBinContent(1,1);
+      (*fracMatPROS)(0,0) = fracTH2PROS->GetBinContent(1,1);
+      (*fracMatPROS)(1,1) = fracTH2PROS->GetBinContent(1,1);
+
+      // Reactor flux error vector from DYB paper : arXiv. 1607.05378
+      double errlist_all[100]={0.042,0.03,0.025,0.022,0.021,0.019,0.017,0.015,0.015,0.0155,
+    	  		       0.017,0.018,0.02,0.022,0.025,0.029,0.033,0.035,0.037,0.041,
+  			       0.052,0.065,0.072
+  			      };
+      double errlist_flux[100]={0.01,0.01,0.09,0.09,0.09,0.09,0.09,0.09,0.09,0.01,
+	  		        0.01,0.01,0.01,0.011,0.013,0.014,0.015,0.016,0.018,
+			        0.02,0.022,0.025  
+  			       };
+      TVectorD* errList = new TVectorD(nBins);
+      for(Int_t i = 0; i< nBins; i++)
+      {
+          (*errList)[i] = errlist_all[i];
+      }
+
+      for(Int_t i = 0; i< nBins; i++)
+      {
+        for(Int_t j =0 ;j<nBins; j++) 
+        { 
+            //std::cout<<(*fracMat)(i,j)<<std::endl; 
+            //if((*fracMatDC)(4,4) > 0.5 )
+            //    (*outMat)(i,j) = (*fracMatDC)(i,j) * (*errList)[i] * (*errList)[j] * (*fVec)[i] * (*fVec)[j];
+	    //else      
+	        (*outMat)(i,j) = (*fracMatDC)(i,j) * (*fVec)[i] * (*fVec)[j];
+        }
+      }
+
+      for(Int_t i = nBins; i< 2 * nBins; i++)
+      {
+        for(Int_t j = nBins ;j< 2 *nBins; j++) 
+        {
+	    //std::cout<<"in loading second matrix "<<std::endl;
+	    //std::cout<<(*fracMatDYB)(0,0)<<std::endl;
+	    //if((*fracMatDYB)(4,4) > 0.5)
+	        (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*errList)[i-nBins] * (*errList)[j-nBins]  * (*fVec)[i] * (*fVec)[j];
+	    //else
+            //    (*outMat)(i,j) = (*fracMatDYB)(i-nBins,j-nBins) * (*fVec)[i] * (*fVec)[j];
+        }
+      }
+      //std::cout<<"in middle of matrix preparation "<<std::endl;
+
+      for(Int_t i = nBins+nBins; i<nBins*3; i++)
+      {
+        for(Int_t j = nBins+nBins ;j < nBins*3; j++) 
+        {
+	    //if((*fracMatRENO)(4,4) > 0.5)
+	        (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*errList)[i-nBins-nBins] * (*errList)[j-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];		
+	    //else
+       	    //    (*outMat)(i,j) = (*fracMatRENO)(i-nBins-nBins,j-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
+        }
+      }
+
+      for(Int_t i = nBins*3; i< nBins*4; i++)
+      {
+        for(Int_t j = nBins*3 ;j< nBins*4; j++) 
+        {
+	    //if((*fracMatNEOS)(4,4) > 0.5)
+                (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*errList)[i-nBins-nBins-nBins] * (*errList)[j-nBins-nBins-nBins]  * (*fVec)[i] * (*fVec)[j];
+            //else	    
+      	    //    (*outMat)(i,j) = (*fracMatNEOS)(i-nBins-nBins-nBins,j-nBins-nBins-nBins) * (*fVec)[i] * (*fVec)[j];
+        }
+      }
+
+      std::cout<<"Doing PROSPECT matrix setup "<<std::endl;
+      for(Int_t i = nBins*4; i< nBins*5; i++)
+      {
+        for(Int_t j = nBins*4 ;j< nBins*5; j++)
+        {
 	    //std::cout<<(*fracMatPROS)(i-4*nBins,j-4*nBins)<<" "<<(*errList)[i-4*nBins]<<" "<<(*fVec)[i]<<" "<<(*fVec)[j]<<std::endl;
             (*outMat)(i,j) = (*fracMatPROS)(i-4*nBins,j-4*nBins) * (*errList)[i-4*nBins] * (*errList)[j-4*nBins]  * (*fVec)[i] * (*fVec)[j];
-    }
+        }
+      }
   }
-
-
 
   for(Int_t i = 0; i< nBins*5 ; i++)
   {
@@ -1042,6 +1043,11 @@ return equalIso;
 void Sterile::setFileLocation(TString fileL)
 {
 fileLocation = fileL;
+}
+
+void Sterile::setSysts(bool syst)
+{
+inSyst = syst;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////

@@ -130,6 +130,7 @@ using namespace RooFit;
     void setdm2Unc(Double_t dm2Unc) ;
 
     void setData(RooListProxy* _pulls) const;
+    void setSysts(bool inSyst);
 
     void setPull(TH1D* pullvecCV) ;
     void setPullUnc(TH1D* pullvecUnc) ;
@@ -400,6 +401,7 @@ using namespace RooFit;
     double baselineNEOS;
     double baselinePROS;
 
+    bool inSyst;
     bool equalIso;
     TString fileLocation;
 
