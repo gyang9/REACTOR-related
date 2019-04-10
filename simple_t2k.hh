@@ -337,6 +337,7 @@ using namespace RooFit;
 
     void ifEqualIso(bool iso = false);
     bool GetEqualIso();
+    bool GetSysts();
 
     void setFileLocation(TString fileL);
 
