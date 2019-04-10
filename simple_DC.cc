@@ -619,11 +619,11 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
   //TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
 
   // at peak, DC 15,000  DYB 80,000  RENO 1,200  NEOS 24,750  ; with factor = 5,000, peaked with 1,400, thus scaling as following: 
-  double rateFactorDC = 5000 * (15./1.4);
-  double rateFactorDYB = 5000 * (80./1.4);
-  double rateFactorRENO = 5000 * (12./14.);
-  double rateFactorNEOS = 5000 * (24.75/1.4);
-  double rateFactorPROS = 5000 * (24.75/1.4);
+  double rateFactorDC = 5000 * (15./1.); // 5000 * (15./1.4);
+  double rateFactorDYB = 5000 * (80./1.); // 5000 * (80./1.4);
+  double rateFactorRENO = 5000 * (12./10.); // 5000 * (12./14.);
+  double rateFactorNEOS = 5000 * (24.75/1.); // 5000 * (24.75/1.4);
+  double rateFactorPROS = 5000 * (24.75/1.); // 5000 * (24.75/1.4);
 
   TH1D* predDC = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predDYB = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
@@ -721,11 +721,11 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
   //TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x)*( sqrt((x)*(x)-0.5*0.5))" ,1.8,10);
 
   // at peak, DC 15,000  DYB 80,000  RENO 1,200  NEOS 24,750  ; with factor = 5,000, peaked with 1,400, thus scaling as following: 
-  double rateFactorDC = 5000 * (15./1.4);
-  double rateFactorDYB = 5000 * (80./1.4);
-  double rateFactorRENO = 5000 * (12./14.) * (165./12.);
-  double rateFactorNEOS = 5000 * (24.75/1.4);
-  double rateFactorPROS = 5000 * (2/1.4) * (2.5/2.0); // based on rateFactorDYB
+  double rateFactorDC = 5000 * (15./1.); // 5000 * (15./1.4);
+  double rateFactorDYB = 5000 * (80./1.); // 5000 * (80./1.4);
+  double rateFactorRENO = 5000 * (12./10.) * (165./12.); // 5000 * (12./14.) * (165./12.);
+  double rateFactorNEOS = 5000 * (24.75/1.); // 5000 * (24.75/1.4);
+  double rateFactorPROS = 5000 * (2/1.) * (2.5/2.0); // 5000 * (2/1.4) * (2.5/2.0); // based on rateFactorDYB
 
   std::cout<<"important binning check in preparePrediction; "<<_nBins<<" "<<binEdge[0]<<" "<<binEdge[_nBins]<<std::endl;
   TH1D* predDC = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
@@ -1048,6 +1048,11 @@ fileLocation = fileL;
 void Sterile::setSysts(bool syst)
 {
 inSyst = syst;
+}
+
+bool Sterile::GetSysts()
+{
+return inSyst;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////

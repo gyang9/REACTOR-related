@@ -121,11 +121,16 @@ using namespace std;
 
  RooArgList list("list");
  list.add(*rep);
-   sprintf(formula,"%s","@0");
+ sprintf(formula,"%s","@0");
  RooFormulaVar* fcn = new RooFormulaVar("fit","fit",formula,list);
 
+ // ******************************** Important setup here *************************************
+ // *******************************************************************************************
  rep->fitSingleExp(Form("%s",argv[3]));
  rep->ifEqualIso(false);
+ rep->setSysts(false);
+ // *******************************************************************************************
+ // ******************************************************************************************* 
 
  rep->setBaselineDYB(560.0);
  rep->setBaselineDC(400.0);
@@ -147,7 +152,7 @@ using namespace std;
  rep->getParVar(9)->setConstant(true);
  rep->getParVar(10)->setConstant(true);
  rep->getParVar(11)->setConstant(true);
-
+/*
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(true);  // 0.75 - 1
  rep->getParVar(14)->setConstant(true);  // 1 - 1.25
@@ -182,7 +187,7 @@ using namespace std;
  rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
  rep->getParVar(45)->setConstant(true);  // 8.75 - 9
-/*
+*/
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(false);  // 0.75 - 1
  rep->getParVar(14)->setConstant(false);  // 1 - 1.25
@@ -217,7 +222,7 @@ using namespace std;
  rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(false);  // 8.5 - 8.75
  rep->getParVar(45)->setConstant(true);  // 8.75 - 9
-*/
+
 /*
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(true);  // 0.75 - 1
@@ -287,99 +292,97 @@ using namespace std;
  std::cout<<"first thing saved "<<std::endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
- TFile* outputFileOsc = new TFile("outputFigVar1.root","RECREATE"); 
- double dmVar = 0.1 ;
- double stVar = 0.1 ;
- rep->getParVar(2)->setVal(stVar);
- rep->getParVar(6)->setVal(dmVar); 
- outPrediction = rep->GetCurrentPrediction();
- outData = rep->GetCurrentData();
- for(Int_t i=0;i<outPrediction.size();i++)
- {
-   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
-   outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
- }
- outputFileOsc -> Close();
+ if(true){
+	 
+   TFile* outputFileOsc = new TFile("outputFigVar1.root","RECREATE"); 
+   float dmVar = 0.001 ;
+   float stVar = 0.1 ;
+   rep->getParVar(2)->setVal(stVar);
+   rep->getParVar(6)->setVal(dmVar); 
+   outPrediction = rep->GetCurrentPrediction();
+   outData = rep->GetCurrentData(outPrediction);
+   for(Int_t i=0;i<outPrediction.size();i++)
+   {
+     cout<<"-----------dmVar-------------- "<<dmVar<<endl;
+     outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+     //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   }
+   outputFileOsc -> Close();
 
- TFile* outputFileOsc2 = new TFile("outputFigVar2.root","RECREATE");
- dmVar = 1 ;
- stVar = 0.1 ;
- rep->getParVar(2)->setVal(stVar);
- rep->getParVar(6)->setVal(dmVar); 
- outPrediction = rep->GetCurrentPrediction();
- outData = rep->GetCurrentData();
- for(Int_t i=0;i<outPrediction.size();i++)
- {
-   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar, stVar));
-   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i, dmVar,stVar));
- }
- outputFileOsc2 -> Close();
+   TFile* outputFileOsc2 = new TFile("outputFigVar2.root","RECREATE");
+   dmVar = 0.1 ;
+   stVar = 0.1 ;
+   rep->getParVar(2)->setVal(stVar);
+   rep->getParVar(6)->setVal(dmVar); 
+   outPrediction = rep->GetCurrentPrediction();
+   outData = rep->GetCurrentData(outPrediction);
+   for(Int_t i=0;i<outPrediction.size();i++)
+   {
+     outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar, stVar));
+     //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i, dmVar,stVar));
+   }
+   outputFileOsc2 -> Close();
 
- TFile* outputFileOsc3 = new TFile("outputFigVar3.root","RECREATE");
- dmVar = 10 ;
- stVar = 0.1 ;
- rep->getParVar(2)->setVal(stVar);
- rep->getParVar(6)->setVal(dmVar); 
- outPrediction = rep->GetCurrentPrediction();
- outData = rep->GetCurrentData();
- for(Int_t i=0;i<outPrediction.size();i++)
- {
-   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
-   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar ));
- }
- outputFileOsc3 -> Close();
+   TFile* outputFileOsc3 = new TFile("outputFigVar3.root","RECREATE");
+   dmVar = 1 ;
+   stVar = 0.1 ;
+   rep->getParVar(2)->setVal(stVar);
+   rep->getParVar(6)->setVal(dmVar); 
+   outPrediction = rep->GetCurrentPrediction();
+   outData = rep->GetCurrentData(outPrediction);
+   for(Int_t i=0;i<outPrediction.size();i++)
+   {
+     outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+     //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar ));
+   }
+   outputFileOsc3 -> Close();
 
- TFile* outputFileOsc4 = new TFile("outputFigVar4.root","RECREATE");
- dmVar = 0.1 ;
- stVar = 0.01 ;
- rep->getParVar(2)->setVal(stVar);
- rep->getParVar(6)->setVal(dmVar); 
- outPrediction = rep->GetCurrentPrediction();
- outData = rep->GetCurrentData();
- for(Int_t i=0;i<outPrediction.size();i++)
- {
-   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
-   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar ));
- }
- outputFileOsc4 -> Close();
+   TFile* outputFileOsc4 = new TFile("outputFigVar4.root","RECREATE");
+   dmVar = 0.001 ;
+   stVar = 0.01 ;
+   rep->getParVar(2)->setVal(stVar);
+   rep->getParVar(6)->setVal(dmVar); 
+   outPrediction = rep->GetCurrentPrediction();
+   outData = rep->GetCurrentData(outPrediction);
+   for(Int_t i=0;i<outPrediction.size();i++)
+   {
+     outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+     //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar ));
+   }
+   outputFileOsc4 -> Close();
 
- TFile* outputFileOsc5 = new TFile("outputFigVar5.root","RECREATE");
- dmVar = 1 ;
- stVar = 0.01 ;
- rep->getParVar(2)->setVal(stVar);
- rep->getParVar(6)->setVal(dmVar);
- outPrediction = rep->GetCurrentPrediction();
- outData = rep->GetCurrentData();
- for(Int_t i=0;i<outPrediction.size();i++)
- {
-   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
-   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
- }
- outputFileOsc5 -> Close();
+   TFile* outputFileOsc5 = new TFile("outputFigVar5.root","RECREATE");
+   dmVar = 0.01 ;
+   stVar = 0.01 ;
+   rep->getParVar(2)->setVal(stVar);
+   rep->getParVar(6)->setVal(dmVar);
+   outPrediction = rep->GetCurrentPrediction();
+   outData = rep->GetCurrentData(outPrediction);
+   for(Int_t i=0;i<outPrediction.size();i++)
+   {
+     outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+     //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   }
+   outputFileOsc5 -> Close();
 
- TFile* outputFileOsc6 = new TFile("outputFigVar6.root","RECREATE");
- dmVar = 10 ;
- stVar = 0.01 ;
- rep->getParVar(2)->setVal(stVar);
- rep->getParVar(6)->setVal(dmVar); 
- outPrediction = rep->GetCurrentPrediction();
- outData = rep->GetCurrentData();
- for(Int_t i=0;i<outPrediction.size();i++)
- {
-   outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
-   //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   TFile* outputFileOsc6 = new TFile("outputFigVar6.root","RECREATE");
+   dmVar = 1 ;
+   stVar = 0.01 ;
+   rep->getParVar(2)->setVal(stVar);
+   rep->getParVar(6)->setVal(dmVar); 
+   outPrediction = rep->GetCurrentPrediction();
+   outData = rep->GetCurrentData(outPrediction);
+   for(Int_t i=0;i<outPrediction.size();i++)
+   {
+     outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+     //outData[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
+   }
+   outputFileOsc6 -> Close();
  }
- outputFileOsc6 -> Close();
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*/
 
  ofstream outText;
- if (rep->GetEqualIso())
-   outText.open(Form("result/scan2Dnew_%s_fission_ISO_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
- else
-   outText.open(Form("result/scan2Dnew_%s_fission_%d_%d.txt",argv[3], atoi(argv[1]), atoi(argv[2]) ));
+ outText.open(Form("result/scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%d_%d.txt",argv[3], rep->GetEqualIso(), rep->GetSysts(), atoi(argv[1]), atoi(argv[2]) ));
 
  double iDM = atof(argv[1]);
  double iST = atof(argv[2]);
@@ -390,10 +393,10 @@ using namespace std;
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
         //rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
         //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 5.*iDM*2/100.)));
-	rep->getParVar(2)->setVal(iST/200.);
-	rep->getParVar(6)->setVal(iDM/200.);
+	rep->getParVar(2)->setVal(iST/125.);
+	rep->getParVar(6)->setVal(iDM/125.);
 	rep->getParVar(2)->setConstant(true);
- 	rep->getParVar(6)->setConstant(false);
+ 	rep->getParVar(6)->setConstant(true);
 	rep->getParVar(7)->setConstant(true);
 	rep->getParVar(8)->setConstant(true);
  	RooMinuit m(*fcn);
@@ -459,10 +462,7 @@ using namespace std;
  //cout<<"errors are "<<bb<<" "<<dd<<endl;
 
  //for(Int_t i=0;i<11;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
-
  //int aa = (atof(argv[5])+0.000001)*100;
-
  //cout<<atoi(argv[2])<<" "<<aa<<" "<<dd<<endl; 
-
  //  }
  }
