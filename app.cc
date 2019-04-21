@@ -187,7 +187,7 @@ using namespace std;
  rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
  rep->getParVar(45)->setConstant(true);  // 8.75 - 9
-*/
+
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(false);  // 0.75 - 1
  rep->getParVar(14)->setConstant(false);  // 1 - 1.25
@@ -222,8 +222,8 @@ using namespace std;
  rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(false);  // 8.5 - 8.75
  rep->getParVar(45)->setConstant(true);  // 8.75 - 9
+*/
 
-/*
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(true);  // 0.75 - 1
  rep->getParVar(14)->setConstant(true);  // 1 - 1.25
@@ -258,7 +258,7 @@ using namespace std;
  rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
  rep->getParVar(45)->setConstant(true);  // 8.75 - 9
-*/
+
 
  // energy scales for four exp.
  rep->getParVar(45)->setConstant(true);  
@@ -278,20 +278,24 @@ using namespace std;
  //rep->setTime(atof(argv[5]));
 
  std::cout<<"------------  Getting current spectra "<<std::endl;
- std::vector<TH1D*> outPrediction = rep->GetCurrentPrediction();
+ std::vector<TH1D*> outPrediction = tempPredList; // rep->GetCurrentPrediction();
  std::vector<TH1D*> outData = rep->GetCurrentData(outPrediction);
  std::cout<<"------------  Have got current spectra "<<std::endl;
 
+ // save the un-oscillated standard prediction and data spectra
  TFile* outputFile = new TFile("outputFigs.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)
  {
    outPrediction[i]->Write(Form("outPrediction[%d]",i));
-   outData[i]->Write(Form("outData[%d]",i));
+   if(i<5) outData[i]->Write(Form("outData[%d]",i));
  }
+ cfMatrix->Write("cfMatrix");
  outputFile -> Close();
+ //exit(1);
  std::cout<<"first thing saved "<<std::endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ // variations of the predicted spectra with different oscillation parameters
  if(true){
 	 
    TFile* outputFileOsc = new TFile("outputFigVar1.root","RECREATE"); 
@@ -300,7 +304,7 @@ using namespace std;
    rep->getParVar(2)->setVal(stVar);
    rep->getParVar(6)->setVal(dmVar); 
    outPrediction = rep->GetCurrentPrediction();
-   outData = rep->GetCurrentData(outPrediction);
+   //outData = rep->GetCurrentData(outPrediction);
    for(Int_t i=0;i<outPrediction.size();i++)
    {
      cout<<"-----------dmVar-------------- "<<dmVar<<endl;
@@ -315,7 +319,7 @@ using namespace std;
    rep->getParVar(2)->setVal(stVar);
    rep->getParVar(6)->setVal(dmVar); 
    outPrediction = rep->GetCurrentPrediction();
-   outData = rep->GetCurrentData(outPrediction);
+   //outData = rep->GetCurrentData(outPrediction);
    for(Int_t i=0;i<outPrediction.size();i++)
    {
      outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar, stVar));
@@ -329,7 +333,7 @@ using namespace std;
    rep->getParVar(2)->setVal(stVar);
    rep->getParVar(6)->setVal(dmVar); 
    outPrediction = rep->GetCurrentPrediction();
-   outData = rep->GetCurrentData(outPrediction);
+   //outData = rep->GetCurrentData(outPrediction);
    for(Int_t i=0;i<outPrediction.size();i++)
    {
      outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
@@ -343,7 +347,7 @@ using namespace std;
    rep->getParVar(2)->setVal(stVar);
    rep->getParVar(6)->setVal(dmVar); 
    outPrediction = rep->GetCurrentPrediction();
-   outData = rep->GetCurrentData(outPrediction);
+   //outData = rep->GetCurrentData(outPrediction);
    for(Int_t i=0;i<outPrediction.size();i++)
    {
      outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
@@ -357,7 +361,7 @@ using namespace std;
    rep->getParVar(2)->setVal(stVar);
    rep->getParVar(6)->setVal(dmVar);
    outPrediction = rep->GetCurrentPrediction();
-   outData = rep->GetCurrentData(outPrediction);
+   //outData = rep->GetCurrentData(outPrediction);
    for(Int_t i=0;i<outPrediction.size();i++)
    {
      outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
@@ -371,7 +375,7 @@ using namespace std;
    rep->getParVar(2)->setVal(stVar);
    rep->getParVar(6)->setVal(dmVar); 
    outPrediction = rep->GetCurrentPrediction();
-   outData = rep->GetCurrentData(outPrediction);
+   //outData = rep->GetCurrentData(outPrediction);
    for(Int_t i=0;i<outPrediction.size();i++)
    {
      outPrediction[i]->Write(Form("outOsc[%d]_dm%f_st%f",i,dmVar,stVar));
@@ -395,10 +399,13 @@ using namespace std;
         //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 5.*iDM*2/100.)));
 	rep->getParVar(2)->setVal(iST/125.);
 	rep->getParVar(6)->setVal(iDM/125.);
-	rep->getParVar(2)->setConstant(true);
- 	rep->getParVar(6)->setConstant(true);
+	rep->getParVar(2)->setConstant(false);
+ 	rep->getParVar(6)->setConstant(false);
 	rep->getParVar(7)->setConstant(true);
 	rep->getParVar(8)->setConstant(true);
+
+	//rep->prepareData(rep->preparePrediction(rep->getPullList(), false));
+
  	RooMinuit m(*fcn);
  	m.setStrategy(2);
  	Double_t callsEDM[2] = {10500., 1.e-6};
