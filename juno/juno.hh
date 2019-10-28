@@ -105,7 +105,8 @@ using namespace RooFit;
 
     Double_t FillEv(RooListProxy* _pulls) const;
 
-    void Fillup(RooListProxy* _pulls);
+    //void Fillup(RooListProxy* _pulls) const;
+    void Fillup(RooListProxy* _pulls, bool vec) const;
 
     Double_t ExtraPull(RooListProxy* _pulls) const;
 
@@ -115,6 +116,7 @@ using namespace RooFit;
 
     void SetLbins(int Lbins);
     void SetEbins(int Ebins);
+    void Set1Dbins(int bins);
     void SetAO(double ao);
     void SetT12(double t12);
     void SetDAYS(double _days);
@@ -131,6 +133,11 @@ using namespace RooFit;
     double GetDM41();
     double GetTHETA();
 
+    bool SetStatGaus(bool gaus);
+    bool ifDo1D(bool vec);
+    bool ifDoEScale(bool vec);
+    bool ifPreEScale(bool vec);
+    
     RooRealVar Par1 ;
     RooRealVar Par2 ;
     RooRealVar Par3 ;
@@ -253,6 +260,7 @@ using namespace RooFit;
 
     int L_bins;
     int E_bins;
+    int A1D_bins;
     double Ao;
     double T_12;
     double days;
@@ -266,10 +274,25 @@ using namespace RooFit;
     double sourceDis;
     double lSmear;
     double eSmear;
+    
+    bool doGaussian;
+    bool doLikelihood;
+    bool do1D;
+    bool doEScale;
+    bool preEScale;
 
     TMatrixD* obsLE2Dm;
     TMatrixD* predLE2Dm;
     TMatrixD* predLE2Dorign;
+
+    TMatrixD* obsLE1Dm;
+    TMatrixD* predLE1Dm;
+    TMatrixD* predLE1Dorign;
+
+    TMatrixD* hereShift;
+
+    TMatrixD* GetPreEScaleShift() { return hereShift;}
+    bool GetPreEScale(){ return preEScale; }
 
     //  private:
    

@@ -25,6 +25,7 @@ using namespace std;
 
  rep->SetLbins(100);
  rep->SetEbins(100);
+ rep->Set1Dbins(150);
  rep->SetAO(100*3.7e13);
  rep->SetT12(284.91);
  rep->SetDAYS(450);
@@ -35,7 +36,12 @@ using namespace std;
  rep->SetNMC(1e7);
  rep->SetSourceDis(2.3);
  rep->SetLSmear(0.12);
- rep->SetESmear(0.05);
+ rep->SetESmear(0.08);
+ rep->SetStatGaus(true);
+
+ rep->ifDo1D(true);
+ rep->ifDoEScale(false);
+ rep->ifPreEScale(true);
 
  for(int iii=0;iii<1;iii++){
  for(int jjj=0;jjj<1;jjj++){
@@ -58,8 +64,8 @@ using namespace std;
 
  vecInput1 ->SetBinContent(1, 0);
  vecInput1 ->SetBinContent(2, 0); //TMath::ASin(TMath::Sqrt(0.95))/2.);
- vecInput1 ->SetBinContent(3, 0.015); //0.1);
- vecInput1 ->SetBinContent(4,-1.5);
+ vecInput1 ->SetBinContent(3, 0); //0.1);
+ vecInput1 ->SetBinContent(4, 0);
  vecInput1 ->SetBinContent(5,0.000075);
  vecInput1 ->SetBinContent(6, 0 ); //0.00238);
  vecInput1 ->SetBinContent(7, 0 ); //0.00244);
@@ -68,10 +74,10 @@ using namespace std;
  vecInput1 ->SetBinContent(10,1);
  vecInput1 ->SetBinContent(11,1);
 
- vecInput2 ->SetBinContent(1, 0.02);
- vecInput2 ->SetBinContent(2, 0.02); //2);
- vecInput2 ->SetBinContent(3,0.015);
- vecInput2 ->SetBinContent(4,2);
+ vecInput2 ->SetBinContent(1, 0.01);
+ vecInput2 ->SetBinContent(2, 0.01); //2);
+ vecInput2 ->SetBinContent(3, 0.01);
+ vecInput2 ->SetBinContent(4, 0.01);
  vecInput2 ->SetBinContent(5,0.0000018);
  vecInput2 ->SetBinContent(6, 100); //0.0001);
  vecInput2 ->SetBinContent(7, 100); //0.00009);
@@ -83,7 +89,7 @@ using namespace std;
  rep ->setPull(vecInput1);
  rep ->setPullUnc(vecInput2);
 
- rep->Fillup(rep->getPullList());
+ rep->Fillup(rep->getPullList(), rep->GetPreEScale() );
  TFile* outputFile = new TFile("outputTest1.root","RECREATE");
 
  TMatrixD* temp1 = rep->GetCurrentPredLE();
@@ -92,6 +98,8 @@ using namespace std;
  temp2 ->Write("obsLE");
  TMatrixD* temp3 = rep->GetCurrentPredOrig();
  temp3->Write("predOrig");
+ TMatrixD* shiftt = rep->GetPreEScaleShift();
+ shiftt->Write("hereShift");
  outputFile->Close();
 
  rep ->FillEv(rep->getPullList());
@@ -105,14 +113,14 @@ using namespace std;
 
  rep->getParVar(0)->setConstant(false);
  rep->getParVar(1)->setConstant(false);
- rep->getParVar(2)->setConstant(true);
+ rep->getParVar(2)->setConstant(false);
 
  std::cout<<"first thing saved "<<std::endl;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  ofstream outText;
- outText.open(Form("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/juno/result/scan2Dnew_jinping8.2_log_%s_%f_%f.txt",argv[3], iDM, iST ));
+ outText.open(Form("/gpfs/projects/McGrewGroup/gyang/REACTOR-related/juno/result/scan2Dnew_jinping8.2_1D_preEScale_log_%s_%f_%f.txt",argv[3], iDM, iST ));
 
  //double iDM = atof(argv[1]);
  //double iST = atof(argv[2]);

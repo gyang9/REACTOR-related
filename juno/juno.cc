@@ -30,8 +30,8 @@ using namespace std;
   _pulls     = new RooListProxy("_pulls","_pulls",this);
   RooRealVar* Par1 = new RooRealVar("par1","par1",0,-100,100);
   RooRealVar* Par2 = new RooRealVar("par2","par2",0,-100,100); // TMath::ASin(TMath::Sqrt(0.95))/2.,0,100);
-  RooRealVar* Par3 = new RooRealVar("par3","par3",0.015,-100,100);
-  RooRealVar* Par4 = new RooRealVar("par4","par4",-1.5,-10,10);
+  RooRealVar* Par3 = new RooRealVar("par3","par3",0,-100,100);
+  RooRealVar* Par4 = new RooRealVar("par4","par4",0,-100,100);
   RooRealVar* Par5 = new RooRealVar("par5","par5",0.000075,-10,10);
   RooRealVar* Par6 = new RooRealVar("par6","par6",0,0,10); // 0.00238,-10,10);
   RooRealVar* Par7 = new RooRealVar("par7","par7",0,0,10);
@@ -70,6 +70,12 @@ using namespace std;
   obsLE2Dm = new TMatrixD(400,400);
   predLE2Dm = new TMatrixD(400,400);
   predLE2Dorign = new TMatrixD(400,400);
+
+  obsLE1Dm = new TMatrixD(400,400);
+  predLE1Dm = new TMatrixD(400,400);
+  predLE1Dorign = new TMatrixD(400,400);
+
+  hereShift = new TMatrixD(400,400);
 };
 
 Sterile ::~Sterile ()
@@ -124,7 +130,7 @@ RooListProxy* Sterile::getPullList() const
 // need to set up L_bins, E_bins, Ao, T_12, days, fract, Np, efficiency, Radius, Nmc
 // need to input dm41, theta, 
 
-void Sterile::Fillup( RooListProxy* _pulls ) 
+void Sterile::Fillup( RooListProxy* _pulls, bool preEScale ) const
 {
 
   double total_flux=Ao/TMath::Log(2)*T_12*24*3600*(1-TMath::Exp(-TMath::Log(2)*days/(T_12)))*fract*Np*efficiency;//may be frac is not needed here
@@ -142,8 +148,8 @@ void Sterile::Fillup( RooListProxy* _pulls )
   //IBD cross-section
   TF1 *xsec=new TF1("xsec","1e-47*sqrt(pow(x-1.29,2)-0.511*0.511)*(x-1.29)*pow(x,-0.07056+0.02018*log(x)-0.001953*pow(log(x),3))",1.801, 3.);
 
-  //double correction_f=4./3.*TMath::Pi()*pow(Radius,3)*shape->Integral(1.801,3.);
-  double correction_f = TMath::Power((2*Radius),3) *shape->Integral(1.801,3.);
+  double correction_f=4./3.*TMath::Pi()*pow(Radius,3)*shape->Integral(1.801,3.);
+  //double correction_f = TMath::Power((2*Radius),3) *shape->Integral(1.801,3.);
 
   TF1 *probb=new TF1("probb","(1-[1]*sin(1.27*[0]*x)*sin(1.27*[0]*x))",0., 12.);
 
@@ -154,7 +160,22 @@ void Sterile::Fillup( RooListProxy* _pulls )
   TH2D* predLE2D = new TH2D("","",L_bins,2,Radius*2+4,E_bins,1.8,3);
   TH2D* predOrig = new TH2D("","",L_bins,2,Radius*2+4,E_bins,1.8,3);
 
-  TRandom2 *W=new TRandom2();
+  TH1D* obsLE1D = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+  TH1D* predLE1D = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+  TH1D* predOrig1D = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+
+  TH1D* obsLE1D_temp[7];
+  TH1D* predLE1D_temp[7];
+  TH1D* predOrig1D_temp[7];
+
+  for(Int_t iter=0; iter<7; iter++){
+    obsLE1D_temp[iter] = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+    predLE1D_temp[iter] = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+    predOrig1D_temp[iter] = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+  }
+
+  gRandom->SetSeed(11111);
+  TRandom3 *W=new TRandom3(*((TRandom3*) gRandom));
 
   //generation non-oscillation rate
   for(int i=0; i<Nmc; i++)
@@ -175,8 +196,30 @@ void Sterile::Fillup( RooListProxy* _pulls )
       double LSvalue = gRandom->Gaus(1,lSmear)*sqrt(x*x+y*y+z*z);
       double ESvalue = gRandom->Gaus(1,eSmear/TMath::Sqrt(energy))*energy;
 
+      if(doEScale){
+        LSvalue = gRandom->Gaus(1,lSmear)*sqrt(x*x+y*y+z*z);
+        ESvalue = gRandom->Gaus(1,(eSmear+ ((RooAbsReal*)_pulls->at(2))->getVal() )/TMath::Sqrt(energy))*energy * (1+ ((RooAbsReal*)_pulls->at(3))->getVal());
+      }
+
       double wNom = 1./(4.*TMath::Pi()*TMath::Power(Lvalue,2))*xsec->Eval(Evalue)*total_flux*correction_f/(Nmc*((4./3.*TMath::Pi()*pow(Radius,3)))/TMath::Power(2*Radius,3) * (shape->Integral(1.8,3)/shape->Integral(0,3)));
       double wSmr = 1./(4.*TMath::Pi()*TMath::Power(LSvalue,2))*xsec->Eval(ESvalue)*total_flux*correction_f/(Nmc*((4./3.*TMath::Pi()*pow(Radius,3)))/TMath::Power(2*Radius,3) * (shape->Integral(1.8,3)/shape->Integral(0,3)));
+
+      if(do1D == true){
+        obsLE1D->Fill(LSvalue/ESvalue, wNom * probb->Eval(Lvalue/Evalue));
+        predLE1D->Fill(LSvalue/ESvalue, wNom );
+        predOrig1D->Fill(Lvalue/Evalue, wNom );
+
+        if(preEScale){
+          for(int iter=0;iter<7;iter++){
+            //obsLE1D_temp[iter]->Fill(LSvalue/ESvalue, wNom * probb->Eval(Lvalue/Evalue));
+            predLE1D_temp[iter]->Fill(LSvalue / (ESvalue*(1 + /*(-0.03+iter*0.01)/TMath::Sqrt(energy)) +*/ (-0.03+0.01*iter) )), wNom );
+            //predOrig1D_temp[iter]->Fill(Lvalue/Evalue, wNom );
+	  }
+	}
+      }
+
+      if(preEScale && !do1D) {std::cout<<"you can't do preEScale with 2D together, exit "<<std::endl; exit(1);}
+      if(preEScale && doEScale) {std::cout<<"you can't do preEScale with and EScale together, exit "<<std::endl; exit(1);}
 
       obsLE2D->Fill(LSvalue, ESvalue, wNom * probb->Eval(Lvalue/Evalue));
       predLE2D->Fill(LSvalue, ESvalue, wNom );
@@ -205,13 +248,35 @@ void Sterile::Fillup( RooListProxy* _pulls )
     }
   }
   std::cout<<"integral of obsLE2D and predLE2D "<<obsLE2D->Integral()<<" "<<predLE2D->Integral()<<std::endl;
+
+  if(do1D == true){
+    for(Int_t i=0;i<obsLE1D->GetNbinsX();i++){
+      (*obsLE1Dm)(i,0) = obsLE1D->GetBinContent(i+1);
+    }
+    for(Int_t i=0;i<predLE1D->GetNbinsX();i++){
+      (*predLE1Dm)(i,0) = predLE1D->GetBinContent(i+1);
+      (*predLE1Dorign)(i,0) = predOrig1D->GetBinContent(i+1);
+    }
+  }
+
+  if(preEScale){
+    for(int iter=0;iter<7;iter++){
+      for(int jter=0;jter<predLE1D->GetNbinsX();jter++)
+        (*hereShift)(iter, jter) = predLE1D_temp[iter]->GetBinContent(jter+1) - predLE1D->GetBinContent(jter+1);
+    }
+  }
+
 }
 
-
+//////////////////////////////////////////////////////////////////////
 Double_t Sterile::FillEv( RooListProxy* _pulls ) const
 {
-  TH2D* obsLE2D = new TH2D("","",L_bins,2,Radius*2+2,E_bins,1.8,3);
-  TH2D* predLE2D = new TH2D("","",L_bins,2,Radius*2+2,E_bins,1.8,3);
+  TH2D* obsLE2D = new TH2D("","",L_bins,2,Radius*2+4,E_bins,1.8,3);
+  TH2D* predLE2D = new TH2D("","",L_bins,2,Radius*2+4,E_bins,1.8,3);
+
+  TH1D* obsLE1D = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+  TH1D* predLE1D = new TH1D("","",A1D_bins, 2./3. ,(Radius*2+4)/1.8);
+
 
   for(Int_t i=0;i<obsLE2D->GetNbinsX();i++){
     for(Int_t j=0;j<obsLE2D->GetNbinsY();j++){
@@ -230,13 +295,35 @@ Double_t Sterile::FillEv( RooListProxy* _pulls ) const
     }
   }
 
+  if(do1D == true){
+    for(Int_t j=0;j<obsLE1D->GetNbinsX();j++){
+      obsLE1D->SetBinContent(j+1, (*obsLE1Dm)(j,0) );
+    }
+    std::cout<<"doing 1D "<<endl;
+    for(Int_t j=0;j<predLE1D->GetNbinsX();j++){
+      if (preEScale) predLE1D->SetBinContent(j+1, ((*predLE1Dm)(j,0) + (*hereShift)(4,j) * ((((RooAbsReal*)_pulls->at(2))->getVal() - (*pullCV)[2])/(*pullUnc)[2]) )  *(1+((RooAbsReal*)_pulls->at(0))->getVal())*(1+((RooAbsReal*)_pulls->at(1))->getVal()) );
+      else predLE1D->SetBinContent(j+1, (*predLE1Dm)(j,0)*(1+((RooAbsReal*)_pulls->at(0))->getVal())*(1+((RooAbsReal*)_pulls->at(1))->getVal()) );
+    }
+  }
+
   std::cout<<"recheck integral of obsLE2D and predLE2D "<<obsLE2D->Integral()<<" "<<predLE2D->Integral()<<std::endl;  
 
   double chii = 0;
-  for(int i=0; i<L_bins; i++){
-    for(int j=0; j<E_bins; j++){
-      if (obsLE2D->GetBinContent(i+1,j+1)>0){
-        chii += TMath::Power(predLE2D->GetBinContent(i+1,j+1)-obsLE2D->GetBinContent(i+1,j+1),2) / predLE2D->GetBinContent(i+1,j+1);
+  if(do1D == false){
+    for(int i=0; i<L_bins; i++){
+      for(int j=0; j<E_bins; j++){
+        if (obsLE2D->GetBinContent(i+1,j+1)>0){
+          if (doGaussian) chii += TMath::Power(predLE2D->GetBinContent(i+1,j+1)-obsLE2D->GetBinContent(i+1,j+1),2) / predLE2D->GetBinContent(i+1,j+1);
+	  if (doLikelihood) chii += 2*(predLE2D->GetBinContent(i+1,j+1)-obsLE2D->GetBinContent(i+1,j+1)+obsLE2D->GetBinContent(i+1,j+1)*TMath::Log(TMath::Abs(obsLE2D->GetBinContent(i+1,j+1)/predLE2D->GetBinContent(i+1,j+1))));
+        }
+      }
+    }
+  }
+  else{
+    for(int i=0; i<A1D_bins; i++){
+      if(predLE1D->GetBinContent(i+1) > 0){
+        if (doGaussian) chii += TMath::Power(predLE1D->GetBinContent(i+1)-obsLE1D->GetBinContent(i+1),2) / predLE1D->GetBinContent(i+1);
+        if (doLikelihood) chii += 2*(predLE1D->GetBinContent(i+1)-obsLE1D->GetBinContent(i+1)+obsLE1D->GetBinContent(i+1)*TMath::Log(TMath::Abs(obsLE1D->GetBinContent(i+1)/predLE1D->GetBinContent(i+1))));
       }
     }
   }
@@ -248,6 +335,7 @@ Double_t Sterile::FillEv( RooListProxy* _pulls ) const
 Double_t Sterile ::evaluate() const
 {
   Double_t matPart = this->FillEv(_pulls);
+  if(doEScale) this->Fillup(_pulls, false);
 
   Double_t extraPull = this -> ExtraPull (_pulls);
   Double_t tot = matPart + extraPull; //If needed, add pull terms here.
@@ -277,6 +365,9 @@ void Sterile::SetLbins(int Lbins){
 }
 void Sterile::SetEbins(int Ebins){
   E_bins = Ebins;
+}
+void Sterile::Set1Dbins(int bins){
+  A1D_bins = bins;
 }
 void Sterile::SetAO(double ao){
   Ao = ao;
@@ -325,6 +416,26 @@ double Sterile::GetTHETA(){
   return theta;
 }
 
+bool Sterile::SetStatGaus(bool gaus){
+  if(gaus) {
+    doGaussian = true;
+    doLikelihood = false;
+  }
+  if(!gaus) {
+    doGaussian = false;
+    doLikelihood = true;
+  }
 
+}
 
+bool Sterile::ifDo1D(bool vec){
+  do1D = vec;
+}
+
+bool Sterile::ifDoEScale(bool vec){
+  doEScale = vec;
+}
+bool Sterile::ifPreEScale(bool vec){
+  preEScale = vec;
+}
 
