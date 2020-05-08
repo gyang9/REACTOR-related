@@ -39,40 +39,40 @@ using namespace std;
   RooRealVar* Par10 = new RooRealVar("numuSel","par10",1,0.,100);
   RooRealVar* Par11 = new RooRealVar("nueSel","par11",1,0.,100);
 
-  RooRealVar* Par12 = new RooRealVar("reactorVar1","par12",1,-10,10) ;
-  RooRealVar* Par13 = new RooRealVar("reactorVar2","par13",1,-10,10) ;
-  RooRealVar* Par14 = new RooRealVar("reactorVar3","par14",1,-10,10) ;
-  RooRealVar* Par15 = new RooRealVar("reactorVar4","par15",1,-10,10) ;
-  RooRealVar* Par16 = new RooRealVar("reactorVar5","par16",1,-10,10) ;
-  RooRealVar* Par17 = new RooRealVar("reactorVar6","par17",1,-10,10) ;
-  RooRealVar* Par18 = new RooRealVar("reactorVar7","par18",1,-10,10) ;
-  RooRealVar* Par19 = new RooRealVar("reactorVar8","par19",1,-10,10) ;
-  RooRealVar* Par20 = new RooRealVar("reactorVar9","par20",1,-10,10) ;
-  RooRealVar* Par21 = new RooRealVar("reactorVar10","par21",1,-10,10) ;
-  RooRealVar* Par22 = new RooRealVar("reactorVar11","par22",1,-10,10) ;
-  RooRealVar* Par23 = new RooRealVar("reactorVar12","par23",1,-10,10) ;
-  RooRealVar* Par24 = new RooRealVar("reactorVar13","par24",1,-10,10) ;
-  RooRealVar* Par25 = new RooRealVar("reactorVar14","par25",1,-10,10) ;
-  RooRealVar* Par26 = new RooRealVar("reactorVar15","par26",1,-10,10) ;
-  RooRealVar* Par27 = new RooRealVar("reactorVar16","par27",1,-10,10) ;
-  RooRealVar* Par28 = new RooRealVar("reactorVar17","par28",1,-10,10) ;
-  RooRealVar* Par29 = new RooRealVar("reactorVar18","par29",1,-10,10) ;
-  RooRealVar* Par30 = new RooRealVar("reactorVar19","par30",1,-10,10) ;
-  RooRealVar* Par31 = new RooRealVar("reactorVar20","par31",1,-10,10) ;
-  RooRealVar* Par32 = new RooRealVar("reactorVar21","par32",1,-10,10) ;
-  RooRealVar* Par33 = new RooRealVar("reactorVar22","par33",1,-10,10) ;
-  RooRealVar* Par34 = new RooRealVar("reactorVar23","par34",1,-10,10) ;
-  RooRealVar* Par35 = new RooRealVar("reactorVar24","par35",1,-10,10) ;
-  RooRealVar* Par36 = new RooRealVar("reactorVar25","par36",1,-10,10) ;
-  RooRealVar* Par37 = new RooRealVar("reactorVar26","par37",1,-10,10) ;
-  RooRealVar* Par38 = new RooRealVar("reactorVar27","par38",1,-10,10) ;
-  RooRealVar* Par39 = new RooRealVar("reactorVar28","par39",1,-10,10) ;
-  RooRealVar* Par40 = new RooRealVar("reactorVar29","par40",1,-10,10) ;
-  RooRealVar* Par41 = new RooRealVar("reactorVar30","par41",1,-10,10) ;
-  RooRealVar* Par42 = new RooRealVar("reactorVar31","par42",1,-10,10) ;
-  RooRealVar* Par43 = new RooRealVar("reactorVar32","par43",1,-10,10) ;
-  RooRealVar* Par44 = new RooRealVar("reactorVar33","par44",1,-10,10) ;
-  RooRealVar* Par45 = new RooRealVar("reactorVar34","par45",1,-10,10) ;
+  RooRealVar* Par12 = new RooRealVar("reactorVar1","par12",1,0,10) ;//it was `-10, 10'
+  RooRealVar* Par13 = new RooRealVar("reactorVar2","par13",1,0,10) ;
+  RooRealVar* Par14 = new RooRealVar("reactorVar3","par14",1,0,10) ;
+  RooRealVar* Par15 = new RooRealVar("reactorVar4","par15",1,0,10) ;
+  RooRealVar* Par16 = new RooRealVar("reactorVar5","par16",1,0,10) ;
+  RooRealVar* Par17 = new RooRealVar("reactorVar6","par17",1,0,10) ;
+  RooRealVar* Par18 = new RooRealVar("reactorVar7","par18",1,0,10) ;
+  RooRealVar* Par19 = new RooRealVar("reactorVar8","par19",1,0,10) ;
+  RooRealVar* Par20 = new RooRealVar("reactorVar9","par20",1,0,10) ;
+  RooRealVar* Par21 = new RooRealVar("reactorVar10","par21",1,0,10) ;
+  RooRealVar* Par22 = new RooRealVar("reactorVar11","par22",1,0,10) ;
+  RooRealVar* Par23 = new RooRealVar("reactorVar12","par23",1,0,10) ;
+  RooRealVar* Par24 = new RooRealVar("reactorVar13","par24",1,0,10) ;
+  RooRealVar* Par25 = new RooRealVar("reactorVar14","par25",1,0,10) ;
+  RooRealVar* Par26 = new RooRealVar("reactorVar15","par26",1,0,10) ;
+  RooRealVar* Par27 = new RooRealVar("reactorVar16","par27",1,0,10) ;
+  RooRealVar* Par28 = new RooRealVar("reactorVar17","par28",1,0,10) ;
+  RooRealVar* Par29 = new RooRealVar("reactorVar18","par29",1,0,10) ;
+  RooRealVar* Par30 = new RooRealVar("reactorVar19","par30",1,0,10) ;
+  RooRealVar* Par31 = new RooRealVar("reactorVar20","par31",1,0,10) ;
+  RooRealVar* Par32 = new RooRealVar("reactorVar21","par32",1,0,10) ;
+  RooRealVar* Par33 = new RooRealVar("reactorVar22","par33",1,0,10) ;
+  RooRealVar* Par34 = new RooRealVar("reactorVar23","par34",1,0,10) ;
+  RooRealVar* Par35 = new RooRealVar("reactorVar24","par35",1,0,10) ;
+  RooRealVar* Par36 = new RooRealVar("reactorVar25","par36",1,0,10) ;
+  RooRealVar* Par37 = new RooRealVar("reactorVar26","par37",1,0,10) ;
+  RooRealVar* Par38 = new RooRealVar("reactorVar27","par38",1,0,10) ;
+  RooRealVar* Par39 = new RooRealVar("reactorVar28","par39",1,0,10) ;
+  RooRealVar* Par40 = new RooRealVar("reactorVar29","par40",1,0,10) ;
+  RooRealVar* Par41 = new RooRealVar("reactorVar30","par41",1,0,10) ;
+  RooRealVar* Par42 = new RooRealVar("reactorVar31","par42",1,0,10) ;
+  RooRealVar* Par43 = new RooRealVar("reactorVar32","par43",1,0,10) ;
+  RooRealVar* Par44 = new RooRealVar("reactorVar33","par44",1,0,10) ;
+  RooRealVar* Par45 = new RooRealVar("reactorVar34","par45",1,0,10) ;
 
   RooRealVar* Par46 = new RooRealVar("EscaleVar1DC", "par45",1,-10,10);
   RooRealVar* Par47 = new RooRealVar("EscaleVar2DC", "par47",1,-10,10);
@@ -218,7 +218,7 @@ using namespace std;
 Sterile ::~Sterile ()
 {;}
 
-
+//=========================================================================================================================================================================1. Sterile========
 TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
 {
 
@@ -295,6 +295,8 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
       (*fracMatPROS)(0,0) = fracTH2PROS->GetBinContent(1,1);
       (*fracMatPROS)(1,1) = fracTH2PROS->GetBinContent(1,1);
 
+//==========================================================================================================================================================2.Matrix==================
+
       // Reactor flux error vector from DYB paper : arXiv. 1607.05378
       double errlist_all[100]={0.042,0.03,0.025,0.022,0.021,0.019,0.017,0.015,0.015,0.0155,
     	  		       0.017,0.018,0.02,0.022,0.025,0.029,0.033,0.035,0.037,0.041,
@@ -309,7 +311,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
       {
           (*errList)[i] = errlist_all[i];
       }
-
+      //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       for(Int_t i = 0; i< nBins; i++)
       {
         for(Int_t j =0 ;j<nBins; j++) 
@@ -358,7 +360,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
         }
       }
 
-      std::cout<<"Doing PROSPECT matrix setup "<<std::endl;
+      //std::cout<<"DC1_Doing PROSPECT matrix setup "<<std::endl;
       for(Int_t i = nBins*4; i< nBins*5; i++)
       {
         for(Int_t j = nBins*4 ;j< nBins*5; j++)
@@ -368,20 +370,22 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
         }
       }
   }
-
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   for(Int_t i = 0; i< nBins*5 ; i++)
   {
     (*outMat)(i,i) += (*fVec)[i] ;
     if((*outMat)(i,i) == 0) (*outMat)(i,i) += 0.0000000001;
   }
 
-std::cout<<"matrix sum "<<outMat ->Sum()<<std::endl;
+//std::cout<<"DC2_matrix sum "<<outMat ->Sum()<<std::endl;
 return outMat ;
 }
 
-Double_t Sterile::surv_Prob(Double_t E, RooListProxy* _pulls, Double_t L) const
+//============================================================================================================================================3. making Matrix using error List======
+
+Double_t Sterile::surv_Prob(Double_t E, RooListProxy* _pulls, Double_t L) const //survival probability. energy, pulls(theta, mass_differance, CP angle) length.
 {
-  Double_t delta_21 = ((RooAbsReal*)_pulls->at(4))->getVal()* (L/E)*1.27 ;
+  Double_t delta_21 = ((RooAbsReal*)_pulls->at(4))->getVal()* (L/E)*1.27 ;//the angle theta that used for Oscillation Probabiltiy
   Double_t delta_32 = ((RooAbsReal*)_pulls->at(5))->getVal()* (L/E)*1.27 ;
   Double_t delta_31 = ((RooAbsReal*)_pulls->at(6))->getVal()* (L/E)*1.27 ;
 
@@ -391,16 +395,16 @@ Double_t Sterile::surv_Prob(Double_t E, RooListProxy* _pulls, Double_t L) const
   return prob;       
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//============================================================================================================================================4. Survival Probaability
 
 Double_t Sterile ::FillEv( RooListProxy* _pulls ) const 
 {
 
-   std::cout<<"in FillEv() "<<std::endl;
+   //std::cout<<"DC3_in FillEv() "<<std::endl;
    int nBins = _nBins;
 
    std::vector<TH1D*> tempPredList = this->preparePrediction(_pulls, true);
-   std::cout<<"filled in new pediction "<<std::endl;
+   //std::cout<<"DC4_filled in new pediction "<<std::endl;
    //std::vector<TH1D*> tempDataList = this->prepareData();
    TH1D* predDC = tempPredList[0];
    TH1D* predDYB = tempPredList[1];
@@ -417,6 +421,8 @@ Double_t Sterile ::FillEv( RooListProxy* _pulls ) const
      tempVec[i] = new TH1D("","",100,0,10);
      tempDat[i] = new TH1D("","",100,0,10);
    }
+   //-----------------------------------------------------------------------------------------------------------------------------------tempPredList----------------------------------
+
 /*
    for(Int_t i=0;i<nBins;i++){  
 
@@ -467,6 +473,7 @@ Double_t Sterile ::FillEv( RooListProxy* _pulls ) const
         tempDat[4] -> SetBinContent(i+1, (*fData)[4 * nBins + i]);
    }
    //std::cout<<"data ready also "<<std::endl;
+   //--------------------------------------------------------------------------------------------------------------------------------Data------------------------------------
 
    // scale to same total rate, doing shape only analysis 
    double scaling1 = tempDat[0]->Integral() / tempVec[0]->Integral();
@@ -484,38 +491,38 @@ Double_t Sterile ::FillEv( RooListProxy* _pulls ) const
    }
 
    if (singleExp.Contains("DC")){
-     std::cout<<"Adding DC "<<std::endl;
+     //std::cout<<"DC5_Adding DC "<<std::endl;
      for(Int_t i=0;i<nBins;i++){
         (*fData)[i]             = dataDC->GetBinContent(i+1)   - (*fVec)[i] * scaling1  ;
      }
    }
    if (singleExp.Contains("DYB")){
-     std::cout<<"Adding DYB "<<std::endl;
+     //std::cout<<"DC6_Adding DYB "<<std::endl;
      for(Int_t i=0;i<nBins;i++){
         (*fData)[nBins + i]     = dataDYB->GetBinContent(i+1)  - (*fVec)[nBins + i] * scaling2;
      }
    }
    if (singleExp.Contains("RENO")){
-     std::cout<<"Adding RENO "<<std::endl;
+     //std::cout<<"DC7_Adding RENO "<<std::endl;
      for(Int_t i=0;i<nBins;i++){
         (*fData)[2 * nBins + i] = dataRENO->GetBinContent(i+1) - (*fVec)[2 * nBins + i] * scaling3 ;
      }
    }
    if (singleExp.Contains("NEOS")){
-     std::cout<<"Adding NEOS "<<std::endl;
+     //std::cout<<"DC8_Adding NEOS "<<std::endl;
      for(Int_t i=0;i<nBins;i++){
         (*fData)[3 * nBins + i] = dataNEOS->GetBinContent(i+1) - (*fVec)[3 * nBins + i] * scaling4;
      }
    }
    if (singleExp.Contains("PROS")){
-     std::cout<<"Adding PROSPECT "<<std::endl;
+     //std::cout<<"DC9_Adding PROSPECT "<<std::endl;
      for(Int_t i=0;i<nBins;i++){
         (*fData)[4 * nBins + i] = dataPROS->GetBinContent(i+1) - (*fVec)[4 * nBins + i] * scaling5;
      }
    }
    if (singleExp.Contains("ALL")){
      for(Int_t i=0;i<nBins;i++){ 
-     std::cout<<"Adding ALL at one time "<<std::endl;
+     //std::cout<<"DC10_Adding ALL at one time "<<std::endl;
         (*fData)[i]             = TMath::Abs( dataDC->GetBinContent(i+1)   - (*fVec)[i] * scaling1  );
         (*fData)[nBins + i]     = TMath::Abs( dataDYB->GetBinContent(i+1)  - (*fVec)[nBins + i] * scaling2 );
 	(*fData)[2 * nBins + i] = TMath::Abs( dataRENO->GetBinContent(i+1) - (*fVec)[2 * nBins + i] * scaling3 );
@@ -526,46 +533,58 @@ Double_t Sterile ::FillEv( RooListProxy* _pulls ) const
      }
    }
 
-   std::cout<<"preparing matrix "<<std::endl;
-
+   //std::cout<<"DC11_preparing matrix "<<std::endl;
+   //--------------------------------------------------------------------------------------------------------------------making matrix using data-----------------------------------------
    TMatrixD* covMat = this->prepareCovMatrix(nBins , fVec);
-
+    /*
+    TFile* outputFile3 = new TFile("outputFigs3.root","RECREATE");// NEW######
+    TH2D * covMat2D = new TH2D("TMatrixD","",covMat->GetNcols(),covMat->GetColLwb(),1+covMat->GetColUpb(),covMat->GetNrows(),covMat->GetRowLwb(),1+covMat->GetRowUpb());
+    for(int i = covMat->GetColLwb(); i<1+covMat->GetColUpb(); i++)
+    {
+         for(int j = covMat->GetRowLwb(); j<1+covMat->GetRowUpb(); j++)
+         {
+                 covMat2D->SetBinContent(i,j,(*covMat)(i,j));
+         }
+    }
+    covMat2D->Write("covMatrix2D");
+    outputFile3 -> Close();
+    */
    covMat->Invert();
 
    TVectorD mulVec(*fData);
    mulVec *= (*covMat);
 
    Double_t currentResult = TMath::Abs(mulVec*(*fData));
-   std::cout<<"chi2 sans pull "<<currentResult<<std::endl;
-
+   //std::cout<<"DC12_chi2 sans pull "<<currentResult<<std::endl;
+  
    return (Double_t) currentResult ; 
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//================================================================================================================================================5. Fill the Ev, Prediction===============
 Double_t Sterile ::evaluate() const
 { 
 
-Double_t matPart = this->FillEv(_pulls);
+Double_t matPart = this->FillEv(_pulls);//original FillEv is matPart
 
-Double_t extraPull = this -> ExtraPull (_pulls);
+Double_t extraPull = this -> ExtraPull (_pulls);//same variable extraPull
 Double_t tot = matPart + extraPull; //If needed, add pull terms here.
 
 return tot;
 
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Double_t Sterile ::ExtraPull (RooListProxy* _pulls) const
 {
 Double_t pullAdd = 0;
 for(Int_t i=0;i<11;i++){
  pullAdd += TMath::Power(( ((RooAbsReal*)_pulls->at(i))->getVal() - (*pullCV)[i] ),2) / TMath::Power( (*pullUnc)[i],2) ;
     }
- std::cout<<"extra pull penalty: "<<pullAdd<<std::endl;
+ //std::cout<<"DC13_extra pull penalty: "<<pullAdd<<std::endl;
  return pullAdd;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////=====================6. original FillEv + extraPall=========
 
 TF1* Sterile:: GetIBDXsecFormula() const
 {
@@ -581,7 +600,7 @@ TGraph* Sterile:: GetIBDXsecPoints() const
   return IBDXsec;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////======================7. IBDXsec ========================
 
 std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)  
 {
@@ -614,9 +633,10 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
   else
           meuller241 = new TGraph(modelList.at(3), "%lg %lg %*lg", "");
 
-
   TGraph* IBDXsec = new TGraph(fileLocation+"/data/IBDXsec.dat");
   //TF1* IBDXsec = new TF1("IBDXsec","0.0952*(x-0.8)*( sqrt((x-0.8)*(x-0.8)-0.5*0.5))" ,1.8,10);
+
+  //---------------------------------------------------------------------------------------------------------------------------------------------7.1 prediction using meuller model------  
 
   // at peak, DC 15,000  DYB 80,000  RENO 1,200  NEOS 24,750  ; with factor = 5,000, peaked with 1,400, thus scaling as following: 
   double rateFactorDC = 5000 * (15./1.); // 5000 * (15./1.4);
@@ -631,7 +651,10 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
   TH1D* predNEOS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predPROS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
 
-  std::cout<<"entered into preparePrediction "<<std::endl;
+  std::cout<<"DC14_entered into preparePrediction "<<std::endl;
+
+  //---------------------------------------------------------------------------------------------------------------------------------------------7.2 making prediction graph frame------ 
+
   for(Int_t i=0;i<33;i++){
     if((binEdge[i]+binEdge[i+1])/2.>1.8){
     //std::cout<<"bin edge and fission fraction "<<i<<" "<<binEdge[i]<<" "<<fissionFraction[i]<<" "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
@@ -659,7 +682,7 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
 
       //std::cout<<"oscillation probability "<<oscDC<<" "<<oscDYB<<" "<<oscRENO<<" "<<oscNEOS<<std::endl;
       predDC -> SetBinContent( i+1,  oscDC *  rateFactorDC * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
-      std::cout<<"predDC value in GetFlux "<<predDC->GetBinContent(i+1)<<std::endl;
+      std::cout<<"DC15_predDC value in GetFlux "<<predDC->GetBinContent(i+1)<<std::endl;
 
       predDYB -> SetBinContent( i+1, oscDYB * rateFactorDYB * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
 
@@ -672,7 +695,7 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
     }
   }
 
-  std::cout<<"in the middle of getFluxPrediction "<<std::endl;
+  std::cout<<"DC16_in the middle of getFluxPrediction "<<std::endl;
   std::vector<TH1D*> predictionListF;
   predictionListF.push_back(predDC);
   predictionListF.push_back(predDYB);
@@ -683,12 +706,12 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
   return predictionListF;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////--------------------7.3 Fill prediction graph--------------------------
 
 std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) const
 {
 	
-  std::cout<<"in preparePrediction fMatrix integral "<<fMatrix->GetNcols()<<" "<<fMatrix->GetNrows()<<std::endl;
+  //std::cout<<"DC17_in preparePrediction fMatrix integral "<<fMatrix->GetNcols()<<" "<<fMatrix->GetNrows()<<std::endl;
 
   TGraph* meuller235;
   TGraph* meuller238;
@@ -727,14 +750,14 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
   double rateFactorNEOS = 5000 * (24.75/1.); // 5000 * (24.75/1.4);
   double rateFactorPROS = 5000 * (2/1.) * (2.5/2.0); // 5000 * (2/1.4) * (2.5/2.0); // based on rateFactorDYB
 
-  std::cout<<"important binning check in preparePrediction; "<<_nBins<<" "<<binEdge[0]<<" "<<binEdge[_nBins]<<std::endl;
+  //std::cout<<"DC18_important binning check in preparePrediction; "<<_nBins<<" "<<binEdge[0]<<" "<<binEdge[_nBins]<<std::endl;
   TH1D* predDC = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predDYB = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predRENO = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predNEOS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predPROS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
 
-  std::cout<<"entered into preparePrediction "<<std::endl;
+  //std::cout<<"DC19_entered into preparePrediction "<<std::endl;
   for(Int_t i=0;i<33;i++){
     if((binEdge[i]+binEdge[i+1])/2.>1.8){
     //std::cout<<"bin edge and fission fraction "<<i<<" "<<binEdge[i]<<" "<<fissionFraction[i]<<" "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
@@ -798,15 +821,16 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
       }
     }
   }
+//===================================================================================================================================================================7.4 prediction graph again====== 
 
-  std::cout<<"beginning of folding "<<std::endl;
+  //std::cout<<"DC20_beginning of folding "<<std::endl;
   TH1D* fpredDC   = this->folding(predDC);
   TH1D* fpredDYB  = this->folding(predDYB);
   TH1D* fpredRENO = this->folding(predRENO);
   TH1D* fpredNEOS = this->folding(predNEOS);
   TH1D* fpredPROS = this->folding(predPROS);
 
-  std::cout<<"in the middle of preparePrediction "<<std::endl;
+  //std::cout<<"DC21_in the middle of preparePrediction "<<std::endl;
   std::vector<TH1D*> predictionList;
   predictionList.clear();
 /*
@@ -815,24 +839,24 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
   predictionList.push_back(predRENO);
   predictionList.push_back(predNEOS);
 */
-  std::cout<<"pushing back "<<std::endl;
+  //std::cout<<"DC22_pushing back "<<std::endl;
   predictionList.push_back(fpredDC);
   predictionList.push_back(fpredDYB);
   predictionList.push_back(fpredRENO);
   predictionList.push_back(fpredNEOS);
   predictionList.push_back(fpredPROS);
 
-  std::cout<<"pushed back"<<std::endl;
+  //std::cout<<"DC23_pushed back"<<std::endl;
   // seems pushing back the prompt energy spectrum
   return predictionList;
 
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////==============================7.5 print prediction with folding===
 
 
-std::vector<TH1D*> Sterile:: prepareData(std::vector<TH1D*> tempPredList) const 
+std::vector<TH1D*> Sterile:: prepareData(std::vector<TH1D*> tempPredList) const// 
 {
 
   //dataDC = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
@@ -859,7 +883,7 @@ std::vector<TH1D*> Sterile:: prepareData(std::vector<TH1D*> tempPredList) const
     dataRENO -> SetBinContent(i+1,  predRENO->GetBinContent(i+1)  * gradataRENO->Eval(predRENO->GetBinCenter(i+1)) );
     dataNEOS -> SetBinContent(i+1,  predNEOS->GetBinContent(i+1)  * gradataNEOS->Eval(predNEOS->GetBinCenter(i+1)) );
     dataPROS -> SetBinContent(i+1,  predPROS->GetBinContent(i+1)  * gradataPROS->Eval(predPROS->GetBinCenter(i+1)) );
-    std::cout<<predPROS->GetBinContent(i+1)<<" "<<predPROS->GetBinContent(i+1)  * gradataPROS->Eval(predPROS->GetBinCenter(i+1))<<std::endl;
+    //std::cout<<"DC23.5 "<<predPROS->GetBinContent(i+1)<<" "<<predPROS->GetBinContent(i+1)  * gradataPROS->Eval(predPROS->GetBinCenter(i+1))<<std::endl;
   }
 
   std::vector<TH1D*> dataList;
@@ -873,6 +897,7 @@ std::vector<TH1D*> Sterile:: prepareData(std::vector<TH1D*> tempPredList) const
 
 }
 
+//===========================================================================================================================================================8. prepareData ========================
 
 Double_t Sterile ::getPar(int i) {
 (((RooAbsReal*)_pulls->at(i))->getVal());
@@ -1055,14 +1080,16 @@ bool Sterile::GetSysts()
 return inSyst;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////==========================================9. making short function in Sterile variable============
+
 TMatrixD* Sterile:: ConversionMatrix(TString inputFile, TString inputTree)
 {
 TFile f(inputFile);
 TTree* t = (TTree*)f.Get(inputTree);
 //   double binEdge[100];
 //   Int_t  _nBins;
-std::cout<<_nBins<<std::endl;
+//std::cout<<"DC24_ "<<_nBins<<std::endl;
+
 fHist = new TH2D("","",_nBins,binEdge,_nBins,binEdge);
 TH2D* cfHist = new TH2D("","",_nBins,0.5,0.5+_nBins*0.25,_nBins,0.5,0.5+_nBins*0.25);
 //TH2D* fHist = new TH2D("","",34,0.5,9,34,0.5,9);
@@ -1088,7 +1115,7 @@ for(Int_t i=0;i<fHist->GetNbinsX();i++){
   for(Int_t j=0;j<fHist->GetNbinsY();j++){
      summ += fHist->GetBinContent(i+1,j+1);
   }
-  std::cout<<summ<<std::endl;
+  //std::cout<<"DC25_ "<<summ<<std::endl;
   for(Int_t j=0;j<fHist->GetNbinsY();j++){
      if(summ>0) fHist->SetBinContent(i+1,j+1,fHist->GetBinContent(i+1,j+1)/summ);
      (*fMatrix)(j,i) = fHist->GetBinContent(i+1,j+1);
@@ -1102,21 +1129,22 @@ for(Int_t i=0;i<fHist->GetNbinsY();i++){
   for(Int_t j=0;j<fHist->GetNbinsX();j++){
      summ += fHist->GetBinContent(j+1,i+1);
   }
-  std::cout<<summ<<std::endl;
+  //std::cout<<"DC26_ "<<summ<<std::endl;
   for(Int_t j=0;j<fHist->GetNbinsX();j++){
      if(summ>0) fHist->SetBinContent(j+1,i+1,fHist->GetBinContent(j+1,i+1)/summ);
      (*unfoldingMatrix)(i,j) = fHist->GetBinContent(j+1,i+1);
   }
 }
 
-std::cout<<"fHist integral "<<fHist->Integral()<<std::endl;
+//std::cout<<"DC27_fHist integral "<<fHist->Integral()<<std::endl;
 
 t->Delete();
 f.Close();
 return cfMatrix;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////===================================================10. making  a lot of graph=========
+
 TH1D* Sterile:: folding(TH1D* input) const{
 TH1D* output(input);
 for(Int_t i=0;i<uMatrix->GetNrows();i++){	
@@ -1126,6 +1154,6 @@ for(Int_t i=0;i<uMatrix->GetNrows();i++){
   }	  
   output->SetBinContent(i+1,sum);
 }
-std::cout<<"folded "<<std::endl;
+//std::cout<<"DC28_folded "<<std::endl;
 return output;
 }
