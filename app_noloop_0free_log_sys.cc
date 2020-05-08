@@ -37,8 +37,8 @@ using namespace std;
  vecInput1 ->SetBinContent(5,0.000075);
  vecInput1 ->SetBinContent(6, 0 ); //0.00238);
  vecInput1 ->SetBinContent(7, 0 ); //0.00244);
- vecInput1 ->SetBinContent(8,1);
- vecInput1 ->SetBinContent(9,1);
+ vecInput1 ->SetBinContent(8,1);//energy scale
+ vecInput1 ->SetBinContent(9,1);//energy scale
  vecInput1 ->SetBinContent(10,1);
  vecInput1 ->SetBinContent(11,1);
 
@@ -48,11 +48,11 @@ using namespace std;
  vecInput2 ->SetBinContent(4,2);
  vecInput2 ->SetBinContent(5,0.0000018);
  vecInput2 ->SetBinContent(6, 100); //0.0001);
- vecInput2 ->SetBinContent(7, 100); //0.00009);
+ vecInput2 ->SetBinContent(7, 100); //0.00009;
  //vecInput2 ->SetBinContent(8,0.009);
  //vecInput2 ->SetBinContent(9,0.03);
- vecInput2 ->SetBinContent(8, 100);
- vecInput2 ->SetBinContent(9, 100);
+ vecInput2 ->SetBinContent(8, 100);//energy scale error
+ vecInput2 ->SetBinContent(9, 100);//energy scale error
  vecInput2 ->SetBinContent(10,0.04); 
  vecInput2 ->SetBinContent(11,0.027);
 
@@ -128,9 +128,9 @@ using namespace std;
 
  // ******************************** Important setup here *************************************
  // *******************************************************************************************
- rep->fitSingleExp(Form("%s",argv[4]));
+ rep->fitSingleExp(Form("%s",argv[3]));
  rep->ifEqualIso(false);
- rep->setSysts(false);
+ rep->setSysts(true);
  // *******************************************************************************************
  // ******************************************************************************************* 
 
@@ -234,7 +234,7 @@ using namespace std;
  rep->getParVar(17)->setConstant(true);  // 1.75 - 2
  rep->getParVar(18)->setConstant(true);  // 2 - 2.25
  rep->getParVar(19)->setConstant(true);  // 2.25 - 2.5
- rep->getParVar(20)->setConstant(false);  // 2.5 - 2.75
+ rep->getParVar(20)->setConstant(true);  // 2.5 - 2.75
  rep->getParVar(21)->setConstant(true);  // 2.75 - 3
  rep->getParVar(22)->setConstant(true);  // 3 - 3.25
  rep->getParVar(23)->setConstant(true);  // 3.25 - 3.5
@@ -249,16 +249,16 @@ using namespace std;
  rep->getParVar(32)->setConstant(true);  // 5.5 - 5.75
  rep->getParVar(33)->setConstant(true);  // 5.75 - 6
  rep->getParVar(34)->setConstant(true);  // 6 - 6.25
- rep->getParVar(35)->setConstant(false);  // 6.25 - 6.5
- rep->getParVar(36)->setConstant(false);  // 6.5 - 6.75
- rep->getParVar(37)->setConstant(false);  // 6.75 - 7
- rep->getParVar(38)->setConstant(false);  // 7 - 7.25
- rep->getParVar(39)->setConstant(false);  // 7.25 - 7.5
- rep->getParVar(40)->setConstant(false);  // 7.5 - 7.75
- rep->getParVar(41)->setConstant(false);  // 7.75 - 8
- rep->getParVar(42)->setConstant(false);  // 8 - 8.25
- rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
- rep->getParVar(44)->setConstant(false);  // 8.5 - 8.75
+ rep->getParVar(35)->setConstant(true);  // 6.25 - 6.5
+ rep->getParVar(36)->setConstant(true);  // 6.5 - 6.75
+ rep->getParVar(37)->setConstant(true);  // 6.75 - 7
+ rep->getParVar(38)->setConstant(true);  // 7 - 7.25
+ rep->getParVar(39)->setConstant(true);  // 7.25 - 7.5
+ rep->getParVar(40)->setConstant(true);  // 7.5 - 7.75//negative error
+ rep->getParVar(41)->setConstant(true);  // 7.75 - 8
+ rep->getParVar(42)->setConstant(true);  // 8 - 8.25
+ rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
+ rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
  //rep->getParVar(45)->setConstant(true);  // 8.75 - 9
 
 
@@ -269,8 +269,8 @@ using namespace std;
  rep->getParVar(48)->setConstant(true);  
  rep->getParVar(49)->setConstant(true);  
  rep->getParVar(50)->setConstant(true);  
- rep->getParVar(51)->setConstant(true);  
- rep->getParVar(52)->setConstant(true);
+ rep->getParVar(51)->setConstant(true);//NEOS  
+ rep->getParVar(52)->setConstant(true);//NEOS
  rep->getParVar(53)->setConstant(true);
  rep->getParVar(54)->setConstant(true);
 
@@ -298,7 +298,7 @@ using namespace std;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  // variations of the predicted spectra with different oscillation parameters
- if(true){
+ if(false){
 	 
    TFile* outputFileOsc = new TFile("outputFigVar1.root","RECREATE"); 
    float dmVar = 0.001 ;
@@ -388,24 +388,24 @@ using namespace std;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  ofstream outText;
- outText.open(Form("./scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s_%s.txt",argv[4], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2], argv[3]) );
+ outText.open(Form("./scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s.txt",argv[3], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2]) );
 
  double iDM = atof(argv[1]);
- //double iST = atof(argv[2]);
- double iSTfrom = atof(argv[2]);
- double iSTto = atof(argv[3]);
+ double iST = atof(argv[2]);
+// double iSTfrom = atof(argv[2]);
+// double iSTto = atof(argv[3]);
   
- while( iSTfrom < iSTto )
- {
+ //while( iSTfrom < iSTto )
+ //{
  //for(Int_t iDM=6;iDM<21;iDM++)
  //{
  //    for(Int_t iST=0;iST<21;iST++)
  //    {
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
-        //rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
-        //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 3.*iDM*2/100.)));
-	rep->getParVar(2)->setVal(iSTfrom/80.);
-	rep->getParVar(6)->setVal(iDM/80.);
+        rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
+        rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 3.*iDM*2/100.)));
+	//rep->getParVar(2)->setVal(iST/80.);
+	//rep->getParVar(6)->setVal(iDM/80.);
 	rep->getParVar(2)->setConstant(true);
  	rep->getParVar(6)->setConstant(true);
 	rep->getParVar(7)->setConstant(true);
@@ -437,11 +437,11 @@ using namespace std;
         //status =  1 : covariance only approximate
         //status =  2 : full matrix but forced pos def
         //status =  3 : full accurate matrix
-	outText<<iDM<<" "<<iSTfrom<<" "<<bestFit<<std::endl;
+	outText<<iDM<<" "<<iST<<" "<<bestFit<<std::endl;
 //     }
 // }
-	iSTfrom++;
- }
+//	iSTfrom++;
+// }
 
  //////////////////////	
  //inline Int_t status() const 
@@ -471,7 +471,7 @@ using namespace std;
  //std::cout<<atoi(argv[1])<<" "<<atoi(argv[2])<<" "<<bestFit<<std::endl;
 
  //std::cout<<"result list: "<<std::endl;
- //std::cout<<"chi2: "<<bestFit <<std::endl;
+ std::cout<<"chi2: "<<bestFit <<std::endl;
 
  double bb =  rep->getParVar(2)->getAsymErrorLo();
  double dd =  rep->getParVar(2)->getAsymErrorHi();
