@@ -341,6 +341,10 @@ using namespace RooFit;
 
     void setFileLocation(TString fileL);
 
+    void ifEShiftHist(bool eshifthist);
+    void setEShiftHist(TString file);
+    bool getIfEShiftHist();
+
     TH2D* fHist;
     TMatrixD* fMatrix;
     TMatrixD* uMatrix;
@@ -405,6 +409,10 @@ using namespace RooFit;
     bool inSyst;
     bool equalIso;
     TString fileLocation;
+
+    bool ifEHist ;
+    TString EHistFile ;
+    TVectorD* vecEscale;    
 
     TH1D* dataDC;
     TH1D* dataDYB;

@@ -17,6 +17,7 @@
 #include <TCanvas.h>
 #include <TLegend.h>
 #include <TFrame.h>
+#include <TFile.h>
 
 using namespace std;
 
@@ -29,15 +30,15 @@ using namespace std;
   _pulls     = new RooListProxy("_pulls","_pulls",this);
   RooRealVar* Par1 = new RooRealVar("s12","par1",TMath::ASin(TMath::Sqrt(0.85))/2.,0,100);
   RooRealVar* Par2 = new RooRealVar("s23","par2",0,0,100); // TMath::ASin(TMath::Sqrt(0.95))/2.,0,100);
-  RooRealVar* Par3 = new RooRealVar("s14","par3",0.1,0,100);
+  RooRealVar* Par3 = new RooRealVar("s14","par3",0,0,100);
   RooRealVar* Par4 = new RooRealVar("delta","par4",-1.5,-10,10);
   RooRealVar* Par5 = new RooRealVar("dm21","par5",0.000075,-10,10);
   RooRealVar* Par6 = new RooRealVar("dm32","par6",0,0,10); // 0.00238,-10,10);
-  RooRealVar* Par7 = new RooRealVar("dm41","par7",0.00244,0,10);
+  RooRealVar* Par7 = new RooRealVar("dm41","par7",0,0,10);
   RooRealVar* Par8 = new RooRealVar("numuX","par8",1,0.,100);
   RooRealVar* Par9 = new RooRealVar("nueX","par9",1,0.,100);
   RooRealVar* Par10 = new RooRealVar("numuSel","par10",1,0.,100);
-  RooRealVar* Par11 = new RooRealVar("nueSel","par11",1,0.,100);
+  RooRealVar* Par11 = new RooRealVar("esscalehist","par11",0,-100.,100);
 
   RooRealVar* Par12 = new RooRealVar("reactorVar1","par12",1,0,10) ;//it was `-10, 10'
   RooRealVar* Par13 = new RooRealVar("reactorVar2","par13",1,0,10) ;
@@ -74,7 +75,7 @@ using namespace std;
   RooRealVar* Par44 = new RooRealVar("reactorVar33","par44",1,0,10) ;
   RooRealVar* Par45 = new RooRealVar("reactorVar34","par45",1,0,10) ;
 
-  RooRealVar* Par46 = new RooRealVar("EscaleVar1DC", "par45",1,-10,10);
+  RooRealVar* Par46 = new RooRealVar("EscaleVar1DC", "par46",1,-10,10);
   RooRealVar* Par47 = new RooRealVar("EscaleVar2DC", "par47",1,-10,10);
   RooRealVar* Par48 = new RooRealVar("EscaleVar3DYB", "par48",1,-10,10);
   RooRealVar* Par49 = new RooRealVar("EscaleVar4DYB", "par49",1,-10,10);
@@ -360,6 +361,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
         }
       }
 
+      //std::cout<<"Doing PROSPECT matrix setup "<<std::endl;
       //std::cout<<"DC1_Doing PROSPECT matrix setup "<<std::endl;
       for(Int_t i = nBins*4; i< nBins*5; i++)
       {
@@ -377,6 +379,7 @@ TMatrixD* Sterile::prepareCovMatrix(Int_t nBins, TVectorD* fVec) const
     if((*outMat)(i,i) == 0) (*outMat)(i,i) += 0.0000000001;
   }
 
+//std::cout<<"matrix sum "<<outMat ->Sum()<<std::endl;
 //std::cout<<"DC2_matrix sum "<<outMat ->Sum()<<std::endl;
 return outMat ;
 }
@@ -400,11 +403,12 @@ Double_t Sterile::surv_Prob(Double_t E, RooListProxy* _pulls, Double_t L) const 
 Double_t Sterile ::FillEv( RooListProxy* _pulls ) const 
 {
 
-   //std::cout<<"DC3_in FillEv() "<<std::endl;
+   //std::cout<<"in FillEv() "<<std::endl;
    int nBins = _nBins;
 
    std::vector<TH1D*> tempPredList = this->preparePrediction(_pulls, true);
-   //std::cout<<"DC4_filled in new pediction "<<std::endl;
+   //std::cout<<"filled in new pediction "<<std::endl;
+
    //std::vector<TH1D*> tempDataList = this->prepareData();
    TH1D* predDC = tempPredList[0];
    TH1D* predDYB = tempPredList[1];
@@ -651,7 +655,6 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
   TH1D* predNEOS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predPROS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
 
-  std::cout<<"DC14_entered into preparePrediction "<<std::endl;
 
   //---------------------------------------------------------------------------------------------------------------------------------------------7.2 making prediction graph frame------ 
 
@@ -682,7 +685,7 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
 
       //std::cout<<"oscillation probability "<<oscDC<<" "<<oscDYB<<" "<<oscRENO<<" "<<oscNEOS<<std::endl;
       predDC -> SetBinContent( i+1,  oscDC *  rateFactorDC * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[0] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[1] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[2] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[3] ));
-      std::cout<<"DC15_predDC value in GetFlux "<<predDC->GetBinContent(i+1)<<std::endl;
+      //std::cout<<"predDC value in GetFlux "<<predDC->GetBinContent(i+1)<<std::endl;
 
       predDYB -> SetBinContent( i+1, oscDYB * rateFactorDYB * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[4] *  ((RooAbsReal*)_pulls->at(i+12))->getVal() + meuller238->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[5] + meuller239->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[6] + meuller241->Eval((binEdge[i]+binEdge[i+1])/2.) * fissionFraction[7] ));
 
@@ -695,7 +698,6 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
     }
   }
 
-  std::cout<<"DC16_in the middle of getFluxPrediction "<<std::endl;
   std::vector<TH1D*> predictionListF;
   predictionListF.push_back(predDC);
   predictionListF.push_back(predDYB);
@@ -711,8 +713,6 @@ std::vector<TH1D*> Sterile:: GetFluxPrediction(RooListProxy* _pulls, bool Iosc)
 std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) const
 {
 	
-  //std::cout<<"DC17_in preparePrediction fMatrix integral "<<fMatrix->GetNcols()<<" "<<fMatrix->GetNrows()<<std::endl;
-
   TGraph* meuller235;
   TGraph* meuller238;
   TGraph* meuller239;
@@ -750,16 +750,15 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
   double rateFactorNEOS = 5000 * (24.75/1.); // 5000 * (24.75/1.4);
   double rateFactorPROS = 5000 * (2/1.) * (2.5/2.0); // 5000 * (2/1.4) * (2.5/2.0); // based on rateFactorDYB
 
-  //std::cout<<"DC18_important binning check in preparePrediction; "<<_nBins<<" "<<binEdge[0]<<" "<<binEdge[_nBins]<<std::endl;
   TH1D* predDC = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predDYB = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predRENO = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predNEOS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
   TH1D* predPROS = new TH1D("","",_nBins,binEdge[0],binEdge[_nBins]);
 
-  //std::cout<<"DC19_entered into preparePrediction "<<std::endl;
   for(Int_t i=0;i<33;i++){
     if((binEdge[i]+binEdge[i+1])/2.>1.8){
+    //if((binEdge[i]+binEdge[i+1])/2.>0.){
     //std::cout<<"bin edge and fission fraction "<<i<<" "<<binEdge[i]<<" "<<fissionFraction[i]<<" "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
     //std::cout<<"fission rates: "<<meuller235->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller238->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller239->Eval((binEdge[i]+binEdge[i+1])/2.)<<" "<<meuller241->Eval((binEdge[i]+binEdge[i+1])/2.)<<std::endl;
 
@@ -817,20 +816,37 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
         //std::cout<<"predNEOS value in preparePrediction "<<predNEOS->GetBinContent(i+1)<<" "<<dataNEOS->GetBinContent(i+1)<<std::endl;
 
         predPROS -> SetBinContent( i+1, oscPROS * IBDXsec->Eval((binEdge[i]+binEdge[i+1])/2.) * rateFactorPROS * (meuller235->Eval((binEdge[i]+binEdge[i+1])/2.) * 1. /*all coming from 235U for PROSPECT*/ * ((RooAbsReal*)_pulls->at(i+12))->getVal()  ));
-        //std::cout<<"predPROS value in preparePrediction "<<predPROS->GetBinContent(i+1)<<" "<<dataPROS->GetBinContent(i+1)<<std::endl;
+        //std::cout<<"E "<<(binEdge[i]+binEdge[i+1])/2.<<" predPROS value in preparePrediction "<<predPROS->GetBinContent(i+1)<<" "<<dataPROS->GetBinContent(i+1)<<"   -- fission pull value: "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
       }
     }
   }
 //===================================================================================================================================================================7.4 prediction graph again====== 
 
-  //std::cout<<"DC20_beginning of folding "<<std::endl;
+  std::cout<<"************* before folding "<<predPROS->Integral()<<std::endl;
   TH1D* fpredDC   = this->folding(predDC);
   TH1D* fpredDYB  = this->folding(predDYB);
   TH1D* fpredRENO = this->folding(predRENO);
   TH1D* fpredNEOS = this->folding(predNEOS);
   TH1D* fpredPROS = this->folding(predPROS);
 
-  //std::cout<<"DC21_in the middle of preparePrediction "<<std::endl;
+  if(ifEHist == true){
+    for(int iii = 0 ; iii< fpredNEOS->GetNbinsX(); iii++){
+      std::cout<<"------------------- "<<(*vecEscale)(iii)<<" "<<((RooAbsReal*)_pulls->at(10))->getVal()<<std::endl;
+      fpredNEOS->SetBinContent( iii+1, fpredNEOS->GetBinContent(iii+1) * (1 + (*vecEscale)(iii) * ((RooAbsReal*)_pulls->at(10))->getVal()) );   
+    }    
+  }
+
+/*
+  for(Int_t i=0;i<33;i++){
+    std::cout<<"E "<<(binEdge[i]+binEdge[i+1])/2.<<" predPROS value in preparePrediction "<<predPROS->GetBinContent(i+1)<<" "<<dataPROS->GetBinContent(i+1)<<"   -- fission pull value: "<<((RooAbsReal*)_pulls->at(i+12))->getVal()<<std::endl;
+  }
+*/
+  //TH1D* fpredDC(predDC);
+  //TH1D* fpredDYB(predDYB);
+  //TH1D* fpredRENO(predRENO);
+  //TH1D* fpredNEOS(predNEOS);
+
+  //std::cout<<"in the middle of preparePrediction "<<std::endl;
   std::vector<TH1D*> predictionList;
   predictionList.clear();
 /*
@@ -839,14 +855,15 @@ std::vector<TH1D*> Sterile:: preparePrediction(RooListProxy* _pulls, bool Iosc) 
   predictionList.push_back(predRENO);
   predictionList.push_back(predNEOS);
 */
-  //std::cout<<"DC22_pushing back "<<std::endl;
   predictionList.push_back(fpredDC);
   predictionList.push_back(fpredDYB);
   predictionList.push_back(fpredRENO);
   predictionList.push_back(fpredNEOS);
   predictionList.push_back(fpredPROS);
 
-  //std::cout<<"DC23_pushed back"<<std::endl;
+  //std::cout<<"************* before folding "<<predPROS->Integral()<<std::endl;
+  //TH1D* temp(predPROS);
+  //TH1D* fpredPROS = this->folding(temp);
   // seems pushing back the prompt energy spectrum
   return predictionList;
 
@@ -1080,6 +1097,26 @@ bool Sterile::GetSysts()
 return inSyst;
 }
 
+void Sterile::ifEShiftHist(bool eshifthist)
+{
+ifEHist = eshifthist;
+}
+
+bool Sterile::getIfEShiftHist()
+{
+return ifEHist ;
+}
+
+void Sterile::setEShiftHist(TString file)
+{
+TFile eshift(file);
+std::cout<<"taking escale file "<<file<<std::endl;
+TH1D* histEscale = (TH1D*)eshift.Get("Escalefraction");
+vecEscale = new TVectorD(histEscale->GetNbinsX());
+for(int i=0;i<histEscale->GetNbinsX();i++)
+  (*vecEscale)[i] = histEscale->GetBinContent(i+1);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////==========================================9. making short function in Sterile variable============
 
 TMatrixD* Sterile:: ConversionMatrix(TString inputFile, TString inputTree)
@@ -1088,7 +1125,6 @@ TFile f(inputFile);
 TTree* t = (TTree*)f.Get(inputTree);
 //   double binEdge[100];
 //   Int_t  _nBins;
-//std::cout<<"DC24_ "<<_nBins<<std::endl;
 
 fHist = new TH2D("","",_nBins,binEdge,_nBins,binEdge);
 TH2D* cfHist = new TH2D("","",_nBins,0.5,0.5+_nBins*0.25,_nBins,0.5,0.5+_nBins*0.25);
@@ -1115,7 +1151,6 @@ for(Int_t i=0;i<fHist->GetNbinsX();i++){
   for(Int_t j=0;j<fHist->GetNbinsY();j++){
      summ += fHist->GetBinContent(i+1,j+1);
   }
-  //std::cout<<"DC25_ "<<summ<<std::endl;
   for(Int_t j=0;j<fHist->GetNbinsY();j++){
      if(summ>0) fHist->SetBinContent(i+1,j+1,fHist->GetBinContent(i+1,j+1)/summ);
      (*fMatrix)(j,i) = fHist->GetBinContent(i+1,j+1);
@@ -1129,21 +1164,17 @@ for(Int_t i=0;i<fHist->GetNbinsY();i++){
   for(Int_t j=0;j<fHist->GetNbinsX();j++){
      summ += fHist->GetBinContent(j+1,i+1);
   }
-  //std::cout<<"DC26_ "<<summ<<std::endl;
   for(Int_t j=0;j<fHist->GetNbinsX();j++){
      if(summ>0) fHist->SetBinContent(j+1,i+1,fHist->GetBinContent(j+1,i+1)/summ);
      (*unfoldingMatrix)(i,j) = fHist->GetBinContent(j+1,i+1);
   }
 }
 
-//std::cout<<"DC27_fHist integral "<<fHist->Integral()<<std::endl;
 
 t->Delete();
 f.Close();
 return cfMatrix;
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////===================================================10. making  a lot of graph=========
 
 TH1D* Sterile:: folding(TH1D* input) const{
 TH1D* output(input);
@@ -1154,6 +1185,6 @@ for(Int_t i=0;i<uMatrix->GetNrows();i++){
   }	  
   output->SetBinContent(i+1,sum);
 }
-//std::cout<<"DC28_folded "<<std::endl;
+//std::cout<<"folded "<<std::endl;
 return output;
 }

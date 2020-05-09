@@ -41,6 +41,7 @@ using namespace std;
  vecInput1 ->SetBinContent(9,1);
  vecInput1 ->SetBinContent(10,1);
  vecInput1 ->SetBinContent(11,1);
+ vecInput1 ->SetBinContent(11,0);
 
  vecInput2 ->SetBinContent(1,TMath::ASin(TMath::Sqrt(0.85+0.021))/2.-TMath::ASin(TMath::Sqrt(0.85))/2.);
  vecInput2 ->SetBinContent(2, 100); //2);
@@ -54,7 +55,7 @@ using namespace std;
  vecInput2 ->SetBinContent(8, 100);
  vecInput2 ->SetBinContent(9, 100);
  vecInput2 ->SetBinContent(10,0.04); 
- vecInput2 ->SetBinContent(11,0.027);
+ vecInput2 ->SetBinContent(11,1);
 
  std::cout<<"'ve set some inputs "<<std::endl;
 
@@ -65,6 +66,7 @@ using namespace std;
    binHist->SetBinContent(i+1, 0.5 + 0.25*i);
  }
 
+ //TString fileLocation = "/gpfs/projects/McGrewGroup/gyang/REACTOR-related/";
  TString fileLocation = "./";
  rep->setFileLocation(fileLocation);
 
@@ -101,8 +103,9 @@ using namespace std;
  mList.push_back(r241);
 
  rep->SetModelList(mList);
-
  //rep->preparePrediction(rep->getPullList(), false);
+ rep->ifEShiftHist(false);
+
  std::vector<TH1D*> tempPredList = rep->preparePrediction(rep->getPullList(), false);
  rep->prepareData(rep->preparePrediction(rep->getPullList(), false));
 
@@ -131,6 +134,9 @@ using namespace std;
  rep->fitSingleExp(Form("%s",argv[4]));
  rep->ifEqualIso(false);
  rep->setSysts(false);
+
+ rep->ifEShiftHist(true);
+ rep->setEShiftHist("Escalefraction.root");
  // *******************************************************************************************
  // ******************************************************************************************* 
 
@@ -152,8 +158,12 @@ using namespace std;
  rep->getParVar(7)->setConstant(true);
  rep->getParVar(8)->setConstant(true);
  rep->getParVar(9)->setConstant(true);
- rep->getParVar(10)->setConstant(true);
- rep->getParVar(11)->setConstant(true);
+ //rep->getParVar(10)->setConstant(true);
+ if (!rep->getIfEShiftHist())
+   rep->getParVar(10)->setConstant(true);
+ else
+   rep->getParVar(10)->setConstant(false);
+
 /*
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(true);  // 0.75 - 1
@@ -189,43 +199,7 @@ using namespace std;
  rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
  rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
  rep->getParVar(45)->setConstant(true);  // 8.75 - 9
-
- rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
- rep->getParVar(13)->setConstant(false);  // 0.75 - 1
- rep->getParVar(14)->setConstant(false);  // 1 - 1.25
- rep->getParVar(15)->setConstant(false);  // 1.25 - 1.5
- rep->getParVar(16)->setConstant(false);  // 1.5 - 1.75
- rep->getParVar(17)->setConstant(false);  // 1.75 - 2
- rep->getParVar(18)->setConstant(false);  // 2 - 2.25
- rep->getParVar(19)->setConstant(false);  // 2.25 - 2.5
- rep->getParVar(20)->setConstant(false);  // 2.5 - 2.75
- rep->getParVar(21)->setConstant(false);  // 2.75 - 3
- rep->getParVar(22)->setConstant(false);  // 3 - 3.25
- rep->getParVar(23)->setConstant(false);  // 3.25 - 3.5
- rep->getParVar(24)->setConstant(false);  // 3.5 - 3.75
- rep->getParVar(25)->setConstant(false);  // 3.75 - 4
- rep->getParVar(26)->setConstant(false);  // 4 - 4.25
- rep->getParVar(27)->setConstant(false);  // 4.25 - 4.5
- rep->getParVar(28)->setConstant(false);  // 4.5 - 4.75
- rep->getParVar(29)->setConstant(false);  // 4.75 - 5
- rep->getParVar(30)->setConstant(false);  // 5 - 5.25
- rep->getParVar(31)->setConstant(false);  // 5.25 - 5.5
- rep->getParVar(32)->setConstant(false);  // 5.5 - 5.75
- rep->getParVar(33)->setConstant(false);  // 5.75 - 6
- rep->getParVar(34)->setConstant(false);  // 6 - 6.25
- rep->getParVar(35)->setConstant(false);  // 6.25 - 6.5
- rep->getParVar(36)->setConstant(false);  // 6.5 - 6.75
- rep->getParVar(37)->setConstant(false);  // 6.75 - 7
- rep->getParVar(38)->setConstant(false);  // 7 - 7.25
- rep->getParVar(39)->setConstant(false);  // 7.25 - 7.5
- rep->getParVar(40)->setConstant(false);  // 7.5 - 7.75
- rep->getParVar(41)->setConstant(false);  // 7.75 - 8
- rep->getParVar(42)->setConstant(false);  // 8 - 8.25
- rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
- rep->getParVar(44)->setConstant(false);  // 8.5 - 8.75
- rep->getParVar(45)->setConstant(true);  // 8.75 - 9
 */
-
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
  rep->getParVar(13)->setConstant(true);  // 0.75 - 1
  rep->getParVar(14)->setConstant(true);  // 1 - 1.25
@@ -234,6 +208,43 @@ using namespace std;
  rep->getParVar(17)->setConstant(true);  // 1.75 - 2
  rep->getParVar(18)->setConstant(true);  // 2 - 2.25
  rep->getParVar(19)->setConstant(true);  // 2.25 - 2.5
+ rep->getParVar(20)->setConstant(true);  // 2.5 - 2.75
+ rep->getParVar(21)->setConstant(true);  // 2.75 - 3
+ rep->getParVar(22)->setConstant(true);  // 3 - 3.25
+ rep->getParVar(23)->setConstant(true);  // 3.25 - 3.5
+ rep->getParVar(24)->setConstant(true);  // 3.5 - 3.75
+ rep->getParVar(25)->setConstant(true);  // 3.75 - 4
+ rep->getParVar(26)->setConstant(true);  // 4 - 4.25
+ rep->getParVar(27)->setConstant(true);  // 4.25 - 4.5
+ rep->getParVar(28)->setConstant(true);  // 4.5 - 4.75
+ rep->getParVar(29)->setConstant(true);  // 4.75 - 5
+ rep->getParVar(30)->setConstant(true);  // 5 - 5.25
+ rep->getParVar(31)->setConstant(true);  // 5.25 - 5.5
+ rep->getParVar(32)->setConstant(true);  // 5.5 - 5.75
+ rep->getParVar(33)->setConstant(true);  // 5.75 - 6
+ rep->getParVar(34)->setConstant(true);  // 6 - 6.25
+ rep->getParVar(35)->setConstant(true);  // 6.25 - 6.5
+ rep->getParVar(36)->setConstant(true);  // 6.5 - 6.75
+ rep->getParVar(37)->setConstant(true);  // 6.75 - 7
+ rep->getParVar(38)->setConstant(true);  // 7 - 7.25
+ rep->getParVar(39)->setConstant(true);  // 7.25 - 7.5
+ rep->getParVar(40)->setConstant(true);  // 7.5 - 7.75
+ rep->getParVar(41)->setConstant(true);  // 7.75 - 8
+ rep->getParVar(42)->setConstant(false);  // 8 - 8.25
+ rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
+ rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
+ rep->getParVar(45)->setConstant(true);  // 8.75 - 9
+
+/*
+ rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
+ rep->getParVar(13)->setConstant(true);  // 0.75 - 1
+ rep->getParVar(14)->setConstant(true);  // 1 - 1.25
+ rep->getParVar(15)->setConstant(true);  // 1.25 - 1.5
+ rep->getParVar(16)->setConstant(true);  // 1.5 - 1.75
+ rep->getParVar(17)->setConstant(true);  // 1.75 - 2
+ rep->getParVar(18)->setConstant(true);  // 2 - 2.25
+ rep->getParVar(19)->setConstant(true);  // 2.25 - 2.5
+ rep->getParVar(20)->setConstant(true);  // 2.5 - 2.75
  rep->getParVar(20)->setConstant(false);  // 2.5 - 2.75
  rep->getParVar(21)->setConstant(true);  // 2.75 - 3
  rep->getParVar(22)->setConstant(true);  // 3 - 3.25
@@ -249,18 +260,18 @@ using namespace std;
  rep->getParVar(32)->setConstant(true);  // 5.5 - 5.75
  rep->getParVar(33)->setConstant(true);  // 5.75 - 6
  rep->getParVar(34)->setConstant(true);  // 6 - 6.25
- rep->getParVar(35)->setConstant(false);  // 6.25 - 6.5
- rep->getParVar(36)->setConstant(false);  // 6.5 - 6.75
- rep->getParVar(37)->setConstant(false);  // 6.75 - 7
- rep->getParVar(38)->setConstant(false);  // 7 - 7.25
- rep->getParVar(39)->setConstant(false);  // 7.25 - 7.5
- rep->getParVar(40)->setConstant(false);  // 7.5 - 7.75
- rep->getParVar(41)->setConstant(false);  // 7.75 - 8
- rep->getParVar(42)->setConstant(false);  // 8 - 8.25
- rep->getParVar(43)->setConstant(false);  // 8.25 - 8.5
- rep->getParVar(44)->setConstant(false);  // 8.5 - 8.75
- //rep->getParVar(45)->setConstant(true);  // 8.75 - 9
-
+ rep->getParVar(35)->setConstant(true);  // 6.25 - 6.5
+ rep->getParVar(36)->setConstant(true);  // 6.5 - 6.75
+ rep->getParVar(37)->setConstant(true);  // 6.75 - 7
+ rep->getParVar(38)->setConstant(true);  // 7 - 7.25
+ rep->getParVar(39)->setConstant(true);  // 7.25 - 7.5
+ rep->getParVar(40)->setConstant(true);  // 7.5 - 7.75
+ rep->getParVar(41)->setConstant(true);  // 7.75 - 8
+ rep->getParVar(42)->setConstant(true);  // 8 - 8.25
+ rep->getParVar(43)->setConstant(true);  // 8.25 - 8.5
+ rep->getParVar(44)->setConstant(true);  // 8.5 - 8.75
+ rep->getParVar(45)->setConstant(true);  // 8.75 - 9
+*/
 
  // energy scales for four exp.
  rep->getParVar(45)->setConstant(true);  
@@ -388,14 +399,15 @@ using namespace std;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  ofstream outText;
- outText.open(Form("./scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s_%s.txt",argv[4], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2], argv[3]) );
+ outText.open(Form(fileLocation+"result/scan2Dnew_%s_fissionFixBump_ISO%d_SYST%d_%d_%d.txt",argv[3], rep->GetEqualIso(), rep->GetSysts(), atoi(argv[1]), atoi(argv[2]) ));
+ //outText.open(Form("./scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s_%s.txt",argv[4], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2], argv[3]) );
 
  double iDM = atof(argv[1]);
- //double iST = atof(argv[2]);
- double iSTfrom = atof(argv[2]);
- double iSTto = atof(argv[3]);
+ double iST = atof(argv[2]);
+// double iSTfrom = atof(argv[2]);
+// double iSTto = atof(argv[3]);
   
- while( iSTfrom < iSTto )
+ //while( iSTfrom < iSTto )
  {
  //for(Int_t iDM=6;iDM<21;iDM++)
  //{
@@ -403,8 +415,8 @@ using namespace std;
  //    {
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
         //rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
-        //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 3.*iDM*2/100.)));
-	rep->getParVar(2)->setVal(iSTfrom/80.);
+        //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 5.*iDM*2/100.)));
+	rep->getParVar(2)->setVal(iST/80.);
 	rep->getParVar(6)->setVal(iDM/80.);
 	rep->getParVar(2)->setConstant(true);
  	rep->getParVar(6)->setConstant(true);
@@ -437,10 +449,10 @@ using namespace std;
         //status =  1 : covariance only approximate
         //status =  2 : full matrix but forced pos def
         //status =  3 : full accurate matrix
-	outText<<iDM<<" "<<iSTfrom<<" "<<bestFit<<std::endl;
+	//outText<<iDM<<" "<<iSTfrom<<" "<<bestFit<<std::endl;
 //     }
 // }
-	iSTfrom++;
+	//iSTfrom++;
  }
 
  //////////////////////	
