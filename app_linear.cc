@@ -301,7 +301,7 @@ using namespace std;
  std::cout<<"------------  Have got current spectra "<<std::endl;
 
  // save the un-oscillated standard prediction and data spectra
- TFile* outputFile = new TFile("outputFigs.root","RECREATE");
+ TFile* outputFile = new TFile("straight_outputFigs.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)
  {
    outPrediction[i]->Write(Form("outPrediction[%d]",i));
@@ -404,7 +404,7 @@ using namespace std;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  ofstream outText;
- outText.open(Form("./scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s.txt",argv[3], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2]) );
+ outText.open(Form("./straight_scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s.txt",argv[3], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2]) );
  //outText.open(Form(fileLocation+"scan2Dnew_%s_fissionFixBump_ISO%d_SYST%d_%d_%d.txt",argv[3], rep->GetEqualIso(), rep->GetSysts(), atoi(argv[1]), atoi(argv[2]) ));
  //outText.open(Form("./scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s_%s.txt",argv[4], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2], argv[3]) );
 
@@ -420,10 +420,10 @@ using namespace std;
  //    for(Int_t iST=0;iST<21;iST++)
  //    {
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
-        rep->getParVar(2)->setVal(TMath::  Power(10.,(-2.3982*iST/100.))  );//ds
-        rep->getParVar(6)->setVal(TMath::  Power(10.,(-1.097 + 1.8755*iDM/100.))  );//dm
-	//rep->getParVar(2)->setVal(iST*0.02);
-        //rep->getParVar(6)->setVal(iDM*0.4);
+        //rep->getParVar(2)->setVal(iST);//ds
+        //rep->getParVar(6)->setVal(iDM);//dm
+	rep->getParVar(2)->setVal(iST*0.02);
+        rep->getParVar(6)->setVal(iDM*0.4);
         //rep->getParVar(2)->setVal(iST);
 	//rep->getParVar(6)->setVal(iDM);
 	rep->getParVar(2)->setConstant(true);
@@ -440,7 +440,7 @@ using namespace std;
  	Int_t irf = 0;
 
  	gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
- 	m.migrad();//call the evaluate function
+ 	m.migrad();
  	//m.hesse();
  	//m.minos(); 
  	res = m.save();
@@ -482,7 +482,7 @@ using namespace std;
  //std::cout<<"list of reactor pulls : "<<std::endl;
  //for(Int_t i=18;i<41;i++){std::cout<<" "<<rep->getPar(i)<<std::endl;}
 
- TFile* outputFile2 = new TFile("outputFigs2.root","RECREATE");
+ TFile* outputFile2 = new TFile("straight_outputFigs2.root","RECREATE");
  for(Int_t i=0;i<outPrediction.size();i++)
  {
    outPrediction[i]->Write(Form("outFit[%d]",i));	 

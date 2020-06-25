@@ -43,8 +43,8 @@ using namespace std;
  vecInput1 ->SetBinContent(8,1);
  vecInput1 ->SetBinContent(9,1);
  vecInput1 ->SetBinContent(10,1);
- //vecInput1 ->SetBinContent(11,1);//wrong
- vecInput1 ->SetBinContent(11,0);//right
+ vecInput1 ->SetBinContent(11,1);//old
+ vecInput1 ->SetBinContent(11,0);//new
 
  vecInput2 ->SetBinContent(1,TMath::ASin(TMath::Sqrt(0.85+0.021))/2.-TMath::ASin(TMath::Sqrt(0.85))/2.);
  vecInput2 ->SetBinContent(2, 100); //2);
@@ -58,18 +58,31 @@ using namespace std;
  vecInput2 ->SetBinContent(8, 100);
  vecInput2 ->SetBinContent(9, 100);
  vecInput2 ->SetBinContent(10,0.04); 
- vecInput2 ->SetBinContent(11,1);//right
- // vecInput2 ->SetBinContent(11,0.027);//wrong
+ vecInput2 ->SetBinContent(11,1);//old
+ //vecInput2 ->SetBinContent(11,0.027);//new
 
  std::cout<<"'ve set some inputs "<<std::endl;
 
  // binned from 0.5-9 MeV with bin width of 0.25 MeV
+ /* 
  int nBins = 30;
  TH1D* binHist = new TH1D("","",nBins+1,0,nBins+1);
  for(Int_t i=0;i<nBins+1;i++){
    binHist->SetBinContent(i+1, 0.5 + 0.25*i);
  }
-
+ */
+ 
+ int newBin = 60; //60bins
+ double binWidth =0.125/2.; //60bins
+ 
+ int nBins = 30;
+ //std::cout<<"check point7 ###########################################################################################################################"<<std::endl;
+ 
+ TH1D* binHist = new TH1D("","",nBins+1,0,nBins+1);
+ for(Int_t i=0;i<nBins+1;i++){
+   binHist->SetBinContent(i+1, 0.5 + 0.125*i);
+ }
+ 
  //TString fileLocation = "/gpfs/projects/McGrewGroup/gyang/REACTOR-related/";
  TString fileLocation = "./";
  rep->setFileLocation(fileLocation);
@@ -121,9 +134,9 @@ using namespace std;
  rep->setTime(6);
 
  std::cout<<"ended up with setting us basic stuff "<<std::endl;
-
+ //std::cout<<"check point16 no problem ###########################################################################################################################"<<std::endl;
  rep->FillEv(rep->getPullList());
-
+ //std::cout<<"check point15 no problem ###########################################################################################################################"<<std::endl;
  std::cout<<"'ve set some more & more inputs "<<std::endl;
 
  RooArgList list("list");
@@ -143,6 +156,8 @@ using namespace std;
  rep->setEShiftHist("Escalefraction.root");
  // *******************************************************************************************
  // ******************************************************************************************* 
+
+ //std::cout<<"check point14 no problem ###########################################################################################################################"<<std::endl;
 
  rep->setBaselineDYB(560.0);
  rep->setBaselineDC(400.0);
@@ -167,6 +182,7 @@ using namespace std;
    rep->getParVar(10)->setConstant(true);
  else
    rep->getParVar(10)->setConstant(false);
+ //std::cout<<"check point13 no problem ###########################################################################################################################"<<std::endl;
 
 /*
  rep->getParVar(12)->setConstant(true);  // 0.5 - 0.75
@@ -312,6 +328,9 @@ using namespace std;
  //exit(1);
  std::cout<<"first thing saved "<<std::endl;
 
+ //std::cout<<"check point12 no problem ###########################################################################################################################"<<std::endl;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  // variations of the predicted spectra with different oscillation parameters
  if(false){
@@ -401,6 +420,9 @@ using namespace std;
    }
    outputFileOsc6 -> Close();
  }
+
+//std::cout<<"check point11 no problem ###########################################################################################################################"<<std::endl;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  ofstream outText;
@@ -408,8 +430,8 @@ using namespace std;
  //outText.open(Form(fileLocation+"scan2Dnew_%s_fissionFixBump_ISO%d_SYST%d_%d_%d.txt",argv[3], rep->GetEqualIso(), rep->GetSysts(), atoi(argv[1]), atoi(argv[2]) ));
  //outText.open(Form("./scan2Dnew_%s_fissionFree_ISO%d_SYST%d_%s_%s_%s.txt",argv[4], rep->GetEqualIso(), rep->GetSysts(), argv[1], argv[2], argv[3]) );
 
- double iDM = atof(argv[2]);//May,23,2020//dm
- double iST = atof(argv[1]);//May,23,2020//ds
+ double iDM = atof(argv[2]);//May,23,2020
+ double iST = atof(argv[1]);//May,23,2020
 // double iSTfrom = atof(argv[2]);
 // double iSTto = atof(argv[3]);
   
@@ -420,27 +442,28 @@ using namespace std;
  //    for(Int_t iST=0;iST<21;iST++)
  //    {
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
-        rep->getParVar(2)->setVal(TMath::  Power(10.,(-2.3982*iST/100.))  );//ds
-        rep->getParVar(6)->setVal(TMath::  Power(10.,(-1.097 + 1.8755*iDM/100.))  );//dm
+        //rep->getParVar(2)->setVal(TMath::Power(10.,(-3.*iST*2/100.)));
+        //rep->getParVar(6)->setVal(TMath::Power(10,(-2 + 3.*iDM*2/100.)));
 	//rep->getParVar(2)->setVal(iST*0.02);
         //rep->getParVar(6)->setVal(iDM*0.4);
-        //rep->getParVar(2)->setVal(iST);
-	//rep->getParVar(6)->setVal(iDM);
+        rep->getParVar(2)->setVal(iST);
+	rep->getParVar(6)->setVal(iDM);
 	rep->getParVar(2)->setConstant(true);
  	rep->getParVar(6)->setConstant(true);
 	rep->getParVar(7)->setConstant(true);
 	rep->getParVar(8)->setConstant(true);
 
 	//rep->prepareData(rep->preparePrediction(rep->getPullList(), false));
-        //double scaling4 = rep->getScaling4();//June,3,2020 before the fitting
-        //std::cout<<" &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& scaling4 in app : "<< scaling4 << std::endl;
+        
+        //THIS BLOCK IS FITTING
+        /*
  	RooMinuit m(*fcn);
  	m.setStrategy(2);
  	Double_t callsEDM[2] = {10500., 1.e-6};
  	Int_t irf = 0;
 
  	gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
- 	m.migrad();//call the evaluate function
+ 	m.migrad();
  	//m.hesse();
  	//m.minos(); 
  	res = m.save();
@@ -458,8 +481,8 @@ using namespace std;
         //status =  1 : covariance only approximate
         //status =  2 : full matrix but forced pos def
         //status =  3 : full accurate matrix
-        double scaling4 = rep->getScaling4();//June,3,2020 after the fitting
-	outText<<iDM<<" "<<iST<<" "<<bestFit<<" "<<res->status()<<" "<<res->covQual()<<" "<<scaling4<<std::endl;
+	outText<<iDM<<" "<<iST<<" "<<bestFit<<" "<<res->status()<<" "<<res->covQual()<<std::endl;
+        */
 //     }
 // }
 	//iSTfrom++;
@@ -474,6 +497,7 @@ using namespace std;
  /////////////////////
 
  outPrediction = rep->GetCurrentPrediction();
+ //std::cout<<"check point10 no problem ###########################################################################################################################"<<std::endl;
  //rep->GetWonseokCurrentPrediction();//May,20,2020
 
  //outData = rep->GetCurrentData(outPrediction);
@@ -489,13 +513,14 @@ using namespace std;
  }
 
  //outputFile2->Close();//May,20,2020
+ //std::cout<<"check point9 no problem ###########################################################################################################################"<<std::endl;
 
  std::cout<<"size of output prediction list "<<outPrediction.size()<<std::endl;
  std::cout<<"size of output data list "<<outData.size()<<std::endl;
  //std::cout<<atoi(argv[1])<<" "<<atoi(argv[2])<<" "<<bestFit<<std::endl;
 
  //std::cout<<"result list: "<<std::endl;
- std::cout<<"chi2: "<<bestFit <<std::endl;
+ //std::cout<<"chi2: "<<bestFit <<std::endl;
 
  double bb =  rep->getParVar(2)->getAsymErrorLo();
  double dd =  rep->getParVar(2)->getAsymErrorHi();
@@ -505,6 +530,8 @@ using namespace std;
  
  
  TH1D* scaledOscPred = new TH1D("scaledOscPred","", 30 ,0.5, 8);
+ //TH1D* scaledOscPred = new TH1D("scaledOscPred","", 60, 0.5, 8);//60bins
+ //std::cout<<"check point8 no problem ###########################################################################################################################"<<std::endl;
  for(Int_t i=0;i< scaledOscPred->GetNbinsX();i++)
  {
  	scaledOscPred->SetBinContent(i+1,(*outVec)[i]);

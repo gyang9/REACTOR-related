@@ -1,0 +1,1187 @@
+
+[1mRooFit v3.60 -- Developed by Wouter Verkerke and David Kirkby[0m 
+                Copyright (C) 2000-2013 NIKHEF, University of California & Stanford University
+                All rights reserved, please read http://roofit.sourceforge.net/license.txt
+
+start to run 
+'ve set some inputs 
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+ predNEOS TEST in preparePrediction equalIso=1 1181.91###########################################
+ predNEOS TEST in preparePrediction equalIso=1 6389.77###########################################
+ predNEOS TEST in preparePrediction equalIso=1 14067###########################################
+ predNEOS TEST in preparePrediction equalIso=1 18901.9###########################################
+ predNEOS TEST in preparePrediction equalIso=1 22086###########################################
+ predNEOS TEST in preparePrediction equalIso=1 24590.7###########################################
+ predNEOS TEST in preparePrediction equalIso=1 26190.9###########################################
+ predNEOS TEST in preparePrediction equalIso=1 25998.6###########################################
+ predNEOS TEST in preparePrediction equalIso=1 24548###########################################
+ predNEOS TEST in preparePrediction equalIso=1 23560.9###########################################
+ predNEOS TEST in preparePrediction equalIso=1 22408.7###########################################
+ predNEOS TEST in preparePrediction equalIso=1 20311.4###########################################
+ predNEOS TEST in preparePrediction equalIso=1 18143.1###########################################
+ predNEOS TEST in preparePrediction equalIso=1 16129.7###########################################
+ predNEOS TEST in preparePrediction equalIso=1 13824.8###########################################
+ predNEOS TEST in preparePrediction equalIso=1 11684.6###########################################
+ predNEOS TEST in preparePrediction equalIso=1 9862.62###########################################
+ predNEOS TEST in preparePrediction equalIso=1 8092.2###########################################
+ predNEOS TEST in preparePrediction equalIso=1 6719.66###########################################
+ predNEOS TEST in preparePrediction equalIso=1 5589.19###########################################
+ predNEOS TEST in preparePrediction equalIso=1 4439.74###########################################
+ predNEOS TEST in preparePrediction equalIso=1 3217.74###########################################
+ predNEOS TEST in preparePrediction equalIso=1 2171.65###########################################
+ predNEOS TEST in preparePrediction equalIso=1 1452.09###########################################
+ predNEOS TEST in preparePrediction equalIso=1 913.358###########################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11872.9
+ i : 7 outputFig4.root : 19460.5
+ i : 8 outputFig4.root : 23728.5
+ i : 9 outputFig4.root : 25342
+ i : 10 outputFig4.root : 25362.4
+ i : 11 outputFig4.root : 24406.1
+ i : 12 outputFig4.root : 22673.3
+ i : 13 outputFig4.root : 20244.9
+ i : 14 outputFig4.root : 17316.1
+ i : 15 outputFig4.root : 14240
+ i : 16 outputFig4.root : 11404
+ i : 17 outputFig4.root : 9045.61
+ i : 18 outputFig4.root : 7142.61
+ i : 19 outputFig4.root : 5474.36
+ i : 20 outputFig4.root : 3857.65
+ i : 21 outputFig4.root : 2402.85
+ i : 22 outputFig4.root : 1419.24
+ i : 23 outputFig4.root : 320.677
+ i : 24 outputFig4.root : -5456
+ i : 25 outputFig4.root : -30906.3
+ i : 26 outputFig4.root : -113133
+ i : 27 outputFig4.root : -330611
+ i : 28 outputFig4.root : -832983
+ i : 29 outputFig4.root : -1.88498e+06
+ i : 30 outputFig4.root : -3.92878e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+ predNEOS TEST in preparePrediction equalIso=1 1181.91###########################################
+ predNEOS TEST in preparePrediction equalIso=1 6389.77###########################################
+ predNEOS TEST in preparePrediction equalIso=1 14067###########################################
+ predNEOS TEST in preparePrediction equalIso=1 18901.9###########################################
+ predNEOS TEST in preparePrediction equalIso=1 22086###########################################
+ predNEOS TEST in preparePrediction equalIso=1 24590.7###########################################
+ predNEOS TEST in preparePrediction equalIso=1 26190.9###########################################
+ predNEOS TEST in preparePrediction equalIso=1 25998.6###########################################
+ predNEOS TEST in preparePrediction equalIso=1 24548###########################################
+ predNEOS TEST in preparePrediction equalIso=1 23560.9###########################################
+ predNEOS TEST in preparePrediction equalIso=1 22408.7###########################################
+ predNEOS TEST in preparePrediction equalIso=1 20311.4###########################################
+ predNEOS TEST in preparePrediction equalIso=1 18143.1###########################################
+ predNEOS TEST in preparePrediction equalIso=1 16129.7###########################################
+ predNEOS TEST in preparePrediction equalIso=1 13824.8###########################################
+ predNEOS TEST in preparePrediction equalIso=1 11684.6###########################################
+ predNEOS TEST in preparePrediction equalIso=1 9862.62###########################################
+ predNEOS TEST in preparePrediction equalIso=1 8092.2###########################################
+ predNEOS TEST in preparePrediction equalIso=1 6719.66###########################################
+ predNEOS TEST in preparePrediction equalIso=1 5589.19###########################################
+ predNEOS TEST in preparePrediction equalIso=1 4439.74###########################################
+ predNEOS TEST in preparePrediction equalIso=1 3217.74###########################################
+ predNEOS TEST in preparePrediction equalIso=1 2171.65###########################################
+ predNEOS TEST in preparePrediction equalIso=1 1452.09###########################################
+ predNEOS TEST in preparePrediction equalIso=1 913.358###########################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11872.9
+ i : 7 outputFig4.root : 19460.5
+ i : 8 outputFig4.root : 23728.5
+ i : 9 outputFig4.root : 25342
+ i : 10 outputFig4.root : 25362.4
+ i : 11 outputFig4.root : 24406.1
+ i : 12 outputFig4.root : 22673.3
+ i : 13 outputFig4.root : 20244.9
+ i : 14 outputFig4.root : 17316.1
+ i : 15 outputFig4.root : 14240
+ i : 16 outputFig4.root : 11404
+ i : 17 outputFig4.root : 9045.61
+ i : 18 outputFig4.root : 7142.61
+ i : 19 outputFig4.root : 5474.36
+ i : 20 outputFig4.root : 3857.65
+ i : 21 outputFig4.root : 2402.85
+ i : 22 outputFig4.root : 1419.24
+ i : 23 outputFig4.root : 320.677
+ i : 24 outputFig4.root : -5456
+ i : 25 outputFig4.root : -30906.3
+ i : 26 outputFig4.root : -113133
+ i : 27 outputFig4.root : -330611
+ i : 28 outputFig4.root : -832983
+ i : 29 outputFig4.root : -1.88498e+06
+ i : 30 outputFig4.root : -3.92878e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+ended up with setting us basic stuff 
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+ predNEOS TEST in preparePrediction equalIso=1 0###########################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      98.6233
+NDf                       =           15
+p0                        =  2.83709e+06   +/-   235343      
+p1                        = -6.37063e+06   +/-   542937      
+p2                        =  6.05098e+06   +/-   537099      
+p3                        = -3.21475e+06   +/-   299365      
+p4                        =  1.06188e+06   +/-   103774      
+p5                        =      -227175   +/-   23246.2     
+p6                        =      31554.8   +/-   3372.01     
+p7                        =     -2748.97   +/-   306.06      
+p8                        =      136.509   +/-   15.8046     
+p9                        =     -2.94855   +/-   0.354445    
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 1402.5
+ i : 7 outputFig4.root : 6301.9
+ i : 8 outputFig4.root : 13091.3
+ i : 9 outputFig4.root : 18782.2
+ i : 10 outputFig4.root : 22579.3
+ i : 11 outputFig4.root : 24660.5
+ i : 12 outputFig4.root : 25487.1
+ i : 13 outputFig4.root : 25473.5
+ i : 14 outputFig4.root : 24879.6
+ i : 15 outputFig4.root : 23826.3
+ i : 16 outputFig4.root : 22361.3
+ i : 17 outputFig4.root : 20526.8
+ i : 18 outputFig4.root : 18404.1
+ i : 19 outputFig4.root : 16123.8
+ i : 20 outputFig4.root : 13846.1
+ i : 21 outputFig4.root : 11722.1
+ i : 22 outputFig4.root : 9852.13
+ i : 23 outputFig4.root : 8259.07
+ i : 24 outputFig4.root : 6888.26
+ i : 25 outputFig4.root : 5640.89
+ i : 26 outputFig4.root : 4433.93
+ i : 27 outputFig4.root : 3264.7
+ i : 28 outputFig4.root : 2238.12
+ i : 29 outputFig4.root : 1490.71
+ i : 30 outputFig4.root : 917.31
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+'ve set some more & more inputs 
+sprintf(formula, s, @0); @0
+ i : 0(*vecEscale)[i] : 0.0910384
+ i : 1(*vecEscale)[i] : 0.0910384
+ i : 2(*vecEscale)[i] : 0.29579
+ i : 3(*vecEscale)[i] : 0.29579
+ i : 4(*vecEscale)[i] : 0.188692
+ i : 5(*vecEscale)[i] : 0.188692
+ i : 6(*vecEscale)[i] : 0.155277
+ i : 7(*vecEscale)[i] : 0.155277
+ i : 8(*vecEscale)[i] : 0.121584
+ i : 9(*vecEscale)[i] : 0.121584
+ i : 10(*vecEscale)[i] : 0.0947688
+ i : 11(*vecEscale)[i] : 0.0947688
+ i : 12(*vecEscale)[i] : 0.0937712
+ i : 13(*vecEscale)[i] : 0.0937712
+ i : 14(*vecEscale)[i] : 0.0793095
+ i : 15(*vecEscale)[i] : 0.0793095
+ i : 16(*vecEscale)[i] : 0.0413521
+ i : 17(*vecEscale)[i] : 0.0413521
+ i : 18(*vecEscale)[i] : 0.0275115
+ i : 19(*vecEscale)[i] : 0.0275115
+ i : 20(*vecEscale)[i] : 0.0356159
+ i : 21(*vecEscale)[i] : 0.0356159
+ i : 22(*vecEscale)[i] : -0.00924733
+ i : 23(*vecEscale)[i] : -0.00924733
+ i : 24(*vecEscale)[i] : -0.00236186
+ i : 25(*vecEscale)[i] : -0.00236186
+ i : 26(*vecEscale)[i] : -0.0182372
+ i : 27(*vecEscale)[i] : -0.0182372
+ i : 28(*vecEscale)[i] : -0.0422249
+ i : 29(*vecEscale)[i] : -0.0422249
+ i : 30(*vecEscale)[i] : -0.0413673
+ i : 31(*vecEscale)[i] : -0.0413673
+ i : 32(*vecEscale)[i] : -0.0759688
+ i : 33(*vecEscale)[i] : -0.0759688
+ i : 34(*vecEscale)[i] : 0
+ i : 35(*vecEscale)[i] : 0
+ i : 36(*vecEscale)[i] : 0
+ i : 37(*vecEscale)[i] : 0
+ i : 38(*vecEscale)[i] : 0
+ i : 39(*vecEscale)[i] : 0
+ i : 40(*vecEscale)[i] : 0
+ i : 41(*vecEscale)[i] : 0
+ i : 42(*vecEscale)[i] : 0
+ i : 43(*vecEscale)[i] : 0
+ i : 44(*vecEscale)[i] : 0
+ i : 45(*vecEscale)[i] : 0
+ i : 46(*vecEscale)[i] : 0
+ i : 47(*vecEscale)[i] : 0
+ i : 48(*vecEscale)[i] : 0
+ i : 49(*vecEscale)[i] : 0
+ i : 50(*vecEscale)[i] : 0
+ i : 51(*vecEscale)[i] : 0
+ i : 52(*vecEscale)[i] : 0
+ i : 53(*vecEscale)[i] : 0
+ i : 54(*vecEscale)[i] : 0
+ i : 55(*vecEscale)[i] : 0
+ i : 56(*vecEscale)[i] : 0
+ i : 57(*vecEscale)[i] : 0
+ i : 58(*vecEscale)[i] : 0
+ i : 59(*vecEscale)[i] : 0
+ i : 60(*vecEscale)[i] : 0
+ i : 61(*vecEscale)[i] : 0
+ i : 62(*vecEscale)[i] : 0
+ i : 63(*vecEscale)[i] : 0
+------------  Getting current spectra 
+------------  Have got current spectra 
+first thing saved 
+[#1] INFO:Minization -- RooFormulaVar::defaultErrorLevel(fit) WARNING: Formula contains neither RooNLLVar nor RooChi2Var server, using default level of 1.0
+ **********
+ **    9 **SET STR           2
+ **********
+ NOW USING STRATEGY  2: MAKE SURE MINIMUM TRUE, ERRORS CORRECT  
+ **********
+ **   10 **MIGRAD    1.05e+04       1e-06
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = 0,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+ START MIGRAD MINIMIZATION.  STRATEGY  2.  CONVERGENCE WHEN EDM .LT. 1.00e-09
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = 0.0442957,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = -0.0442957,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = 1.05474,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = -1.05474,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = 0.219634,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = -0.219634,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = 0.0439971,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = -0.0439971,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189
+ i : 7 outputFig4.root : 18756.5
+ i : 8 outputFig4.root : 21713.9
+ i : 9 outputFig4.root : 24979.6
+ i : 10 outputFig4.root : 24616.2
+ i : 11 outputFig4.root : 22263
+ i : 12 outputFig4.root : 20646.5
+ i : 13 outputFig4.root : 19294.1
+ i : 14 outputFig4.root : 17144.1
+ i : 15 outputFig4.root : 14209.5
+ i : 16 outputFig4.root : 11177.8
+ i : 17 outputFig4.root : 8606.38
+ i : 18 outputFig4.root : 6604.75
+ i : 19 outputFig4.root : 4965.87
+ i : 20 outputFig4.root : 3473.81
+ i : 21 outputFig4.root : 2170.86
+ i : 22 outputFig4.root : 1296.36
+ i : 23 outputFig4.root : 295.109
+ i : 24 outputFig4.root : -5162.77
+ i : 25 outputFig4.root : -29677.1
+ i : 26 outputFig4.root : -110071
+ i : 27 outputFig4.root : -325110
+ i : 28 outputFig4.root : -825648
+ i : 29 outputFig4.root : -1.87825e+06
+ i : 30 outputFig4.root : -3.92577e+06
+ i : 31 outputFig4.root : 0
+ i : 32 outputFig4.root : 0
+ i : 33 outputFig4.root : 0
+ i : 34 outputFig4.root : 0
+ i : 35 outputFig4.root : 0
+ i : 36 outputFig4.root : 0
+ i : 37 outputFig4.root : 0
+ i : 38 outputFig4.root : 0
+ i : 39 outputFig4.root : 0
+check point4.1 ###########################################################################################################################
+check point4.2 ###########################################################################################################################
+check point4.5 ###########################################################################################################################
+check point5 ###########################################################################################################################
+check point6 ###########################################################################################################################
+check point7 ###########################################################################################################################
+check point8 ###########################################################################################################################
+check point9 ###########################################################################################################################
+check point10 ###########################################################################################################################
+check point11 ###########################################################################################################################
+check point12 ###########################################################################################################################
+check point12.1 ###########################################################################################################################
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(_rep) evaluation error, 
+ origin       : RooAbsReal::_rep[ _pulls=(s12,s23,s14,delta,dm21,dm32,dm41,numuX,nueX,numuSel,esscalehist,reactorVar1,reactorVar2,reactorVar3,reactorVar4,reactorVar5,reactorVar6,reactorVar7,reactorVar8,reactorVar9,reactorVar10,reactorVar11,reactorVar12,reactorVar13,reactorVar14,reactorVar15,reactorVar16,reactorVar17,reactorVar18,reactorVar19,reactorVar20,reactorVar21,reactorVar22,reactorVar23,reactorVar24,reactorVar25,reactorVar26,reactorVar27,reactorVar28,reactorVar29,reactorVar30,reactorVar31,reactorVar32,reactorVar33,reactorVar34,EscaleVar1DC,EscaleVar2DC,EscaleVar3DYB,EscaleVar4DYB,EscaleVar5RENO,EscaleVar6RENO,EscaleVar7NEOS,EscaleVar8NEOS,EscaleVar9PROS,EscaleVar10PROS) ]
+ message      : function value is NAN
+ server values: _pulls=(s12 = 0.586548,s23 = 0,s14 = 0.1,delta = -1.5,dm21 = 7.5e-05,dm32 = 0,dm41 = 1,numuX = 1,nueX = 1,numuSel = 1,esscalehist = 0.00879998,reactorVar1 = 1,reactorVar2 = 1,reactorVar3 = 1,reactorVar4 = 1,reactorVar5 = 1,reactorVar6 = 1,reactorVar7 = 1,reactorVar8 = 1,reactorVar9 = 1,reactorVar10 = 1,reactorVar11 = 1,reactorVar12 = 1,reactorVar13 = 1,reactorVar14 = 1,reactorVar15 = 1,reactorVar16 = 1,reactorVar17 = 1,reactorVar18 = 1,reactorVar19 = 1,reactorVar20 = 1,reactorVar21 = 1,reactorVar22 = 1,reactorVar23 = 1,reactorVar24 = 1,reactorVar25 = 1,reactorVar26 = 1,reactorVar27 = 1,reactorVar28 = 1,reactorVar29 = 1,reactorVar30 = 1,reactorVar31 = 1,reactorVar32 = 1,reactorVar33 = 1,reactorVar34 = 1,EscaleVar1DC = 1,EscaleVar2DC = 1,EscaleVar3DYB = 1,EscaleVar4DYB = 1,EscaleVar5RENO = 1,EscaleVar6RENO = 1,EscaleVar7NEOS = 1,EscaleVar8NEOS = 1,EscaleVar9PROS = 1,EscaleVar10PROS = 1)
+[#0] ERROR:Eval -- RooAbsReal::logEvalError(fit) evaluation error, 
+ origin       : RooFormulaVar::fit[ actualVars=(_rep) formula="@0" ]
+ message      : function value is NAN
+ server values: actualVars=(_rep = nan)
+check point0.5 ###########################################################################################################################
+check point1 ###########################################################################################################################
+check point2 ###########################################################################################################################
+check point3 ###########################################################################################################################
+
+****************************************
+Minimizer is Linear
+Chi2                      =      102.846
+NDf                       =           15
+p0                        =  4.40685e+06   +/-   359235      
+p1                        = -1.25206e+07   +/-   1.04895e+06 
+p2                        =  1.51516e+07   +/-   1.31771e+06 
+p3                        = -1.03123e+07   +/-   935562      
+p4                        =  4.37816e+06   +/-   414273      
+p5                        = -1.20662e+06   +/-   118839      
+p6                        =       216304   +/-   22123.3     
+p7                        =     -24358.2   +/-   2581.94     
+p8                        =      1565.75   +/-   171.717     
+p9                        =     -43.8321   +/-   4.96684     
+check point4 ###########################################################################################################################
+ i : 0 outputFig4.root : 0
+ i : 1 outputFig4.root : 0
+ i : 2 outputFig4.root : 0
+ i : 3 outputFig4.root : 0
+ i : 4 outputFig4.root : 0
+ i : 5 outputFig4.root : 0
+ i : 6 outputFig4.root : 11189

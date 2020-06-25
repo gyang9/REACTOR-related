@@ -420,8 +420,8 @@ using namespace std;
  //    for(Int_t iST=0;iST<21;iST++)
  //    {
         // means that s2t14 0.001 - 1 and dm2 0.01 - 10
-        rep->getParVar(2)->setVal(TMath::  Power(10.,(-2.3982*iST/100.))  );//ds
-        rep->getParVar(6)->setVal(TMath::  Power(10.,(-1.097 + 1.8755*iDM/100.))  );//dm
+        rep->getParVar(2)->setVal(TMath::  Power(10.,(-3.*iST*2/100.))  );//ds
+        rep->getParVar(6)->setVal(TMath::  Power(10.,(-2. + 4*iDM*2/100.))  );//dm
 	//rep->getParVar(2)->setVal(iST*0.02);
         //rep->getParVar(6)->setVal(iDM*0.4);
         //rep->getParVar(2)->setVal(iST);
@@ -440,7 +440,7 @@ using namespace std;
  	Int_t irf = 0;
 
  	gMinuit->mnexcm("MIGRAD",callsEDM,2,irf);
- 	m.migrad();//call the evaluate function
+ 	m.migrad();
  	//m.hesse();
  	//m.minos(); 
  	res = m.save();
