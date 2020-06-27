@@ -3,6 +3,7 @@
  *
  *  Author: Guang Yang
  */
+//May,20,2020 : Scaling for Fitted plot
 
 #include <stdio.h>
 #include <iostream>
@@ -152,7 +153,11 @@ using namespace RooFit;
     std::vector<TH1D*> prepareData(std::vector<TH1D*> tempPredLis) const;
     //std::vector<TH1D*> preparePrediction(RooListProxy* _pulls) const;
     std::vector<TH1D*> preparePrediction(RooListProxy* _pulls, bool Iosc ) const;
+    std::vector<double> wonseokPreparePrediction;//(RooListProxy* _pulls, bool Iosc ) const;//May,20,2020
     //std::vector<TH1D*> preparePrediction(RooListProxy* _pulls, std::vector<TString> modelList) const;
+
+    //std::vector<double> histForScale;//May,20,2020
+    //double scalingForNEOS;//May,20,2020
 
     TMatrixD* prepareT2kCovMatrix(TMatrixD* covM_t2k, TVectorD* fVec_t2k) const;
     TMatrixD* prepareT2kCovMatrix(TMatrixD* covM_t2k, TVectorD* fVec_t2k, Int_t nBins) const;
@@ -304,7 +309,11 @@ using namespace RooFit;
     Double_t surv_JUNO(Double_t E, RooListProxy* _pulls, Double_t L) const ;
     Double_t surv_JUNO(Double_t E, TVectorD* parVec, Double_t L) const ;
 
-    Double_t surv_Prob(Double_t E, RooListProxy* _pulls, Double_t L) const ;
+    TF1* fitting_function;//June
+    Double_t surv_Prob(Double_t E, RooListProxy* _pulls, Double_t L, TF1* func ) const ;
+    //Double_t surv_Prob(Double_t E, RooListProxy* _pulls, Double_t L ) const ;
+    //TF1* getFittingFunction();
+    //void setFittingFunction(TF1*);
 
     RooRealVar* getParVar(int i) ;
     RooListProxy* getParVar() ;
@@ -323,7 +332,7 @@ using namespace RooFit;
 
     std::vector<TH1D*> GetCurrentPrediction(); //혹시 이것때문에 출력은 절대 아닐 텐데...
     std::vector<TH1D*> GetCurrentData(std::vector<TH1D*> pred);
-
+    
     TF1* GetIBDXsecFormula() const;
     TGraph* GetIBDXsecPoints() const;
     std::vector<TH1D*> GetFluxPrediction(RooListProxy* _pulls, bool Iosc) ;
@@ -332,7 +341,8 @@ using namespace RooFit;
     TH2D* GetConversionHist() const {return fHist;}
     TMatrixD* GetConversionMatrix() const {return fMatrix;}
     TH1D* folding(TH1D* input) const;
-
+    TVectorD* getTestVec();//May,20,2020
+    Double_t getScaling4();//June,3,2020
     void fitSingleExp(TString input);
 
     void ifEqualIso(bool iso = false);
@@ -399,6 +409,19 @@ using namespace RooFit;
     double fissionFraction[100];
     double binEdge[100];
     Int_t  _nBins;
+    int newBin = 60; //new
+    int newBin_DCDYB = 24; //new
+    int newBin_RENO = 26; //new
+    int newBin_NEOS = 61; //new
+    int newBin_PROS = 29; //new
+    int newBin_total = newBin_DCDYB + newBin_DCDYB + newBin_RENO + newBin_NEOS + newBin_PROS;//new
+    double binWidth = 0.125; //new
+    /*
+    Double_t prob[10000];//May,30,2020 : 1000 oscillation in surv_Prob function
+    double scaling44=123.456;//June,3,2020 : Print out Scaling4
+    double predNEOS2[100];//new
+    Double_t thisE_NEOS;//new
+    */
     TString singleExp;
     double baselineDC;
     double baselineDYB;
@@ -427,7 +450,8 @@ using namespace RooFit;
     std::vector<TString> modelList;
 
     std::vector<TH1D*> dataList;
-
+    TVectorD* testVec = new TVectorD(100);//May,21,2020
+    //double scaling4=123.456;//June,3,2020
     //  private:
    
    virtual  Double_t evaluate() const ;
